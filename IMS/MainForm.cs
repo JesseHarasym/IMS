@@ -38,6 +38,15 @@ namespace IMS
             ProductList = inv.ProductList;
             OrderList = inv.OrderList;
 
+
+            //check for clearance and low inventory and set notification panel alert messages accordingly
+            inv.CheckForClearance();
+            List<string> alertMessages = inv.AlertLowInventory();
+            lbNotifications.DataSource = alertMessages;
+
+            int totalNotifications = alertMessages.Count;
+            txtNotification.Text = $"Notification Center: {totalNotifications} new notifications waiting for you as of {DateTime.Now.Date.ToString("D")}";
+
             //bind the inventory lists and add to their respective tables
             var productData = new BindingList<Products>(inv.ProductList);
             dataGridInventory.DataSource = productData;
@@ -155,15 +164,6 @@ namespace IMS
                 btnSeeAllPreOrders.Text = "See All Pre-Orders";
                 btnHideTest.Text = "Hide";
                 boxSearch.Items.Add("Inventory");
-
-                //only load notification data if the admin panel is showing
-                var inv = new Inventory(ProductList, OrderList);
-                inv.CheckForClearance();
-                List<string> alertMessages = inv.AlertLowInventory();
-                lbNotifications.DataSource = alertMessages;
-
-                int totalNotifications = alertMessages.Count;
-                txtNotification.Text = $"Notification Center: {totalNotifications} new notifications waiting for you as of {DateTime.Now.Date.ToString("D")}";
             }
         }
     }
