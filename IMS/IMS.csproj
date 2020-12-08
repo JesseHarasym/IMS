@@ -72,6 +72,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserContorl\ucModifyOrder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserContorl\ucModifyOrder.Designer.cs">
+      <DependentUpon>ucModifyOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserContorl\ucPlaceOrdercs.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserContorl\ucPlaceOrdercs.Designer.cs">
+      <DependentUpon>ucPlaceOrdercs.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

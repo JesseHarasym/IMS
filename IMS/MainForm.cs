@@ -8,6 +8,7 @@ using VideoGameInventoryApp.Classes;
 
 namespace IMS
 {
+    //heya fucka you budday
     //BASICS:
     //Inventory, Orders, Products and LoadDatabase are classes currently built.
 
