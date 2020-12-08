@@ -38,7 +38,6 @@ namespace IMS
             ProductList = inv.ProductList;
             OrderList = inv.OrderList;
 
-
             //check for clearance and low inventory and set notification panel alert messages accordingly
             inv.CheckForClearance();
             List<string> alertMessages = inv.AlertLowInventory();

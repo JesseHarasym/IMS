@@ -40,21 +40,21 @@
             this.btnHideTest = new System.Windows.Forms.Button();
             this.pnlUser = new System.Windows.Forms.Panel();
             this.dataGridOrders = new System.Windows.Forms.DataGridView();
-            this.btnLogin = new System.Windows.Forms.Button();
-            this.btnLogout = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.btnModifyOrders = new System.Windows.Forms.Button();
-            this.btnDeleteOrders = new System.Windows.Forms.Button();
-            this.btnAddOrder = new System.Windows.Forms.Button();
-            this.btnSeeAllPreOrders = new System.Windows.Forms.Button();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.lblTable = new System.Windows.Forms.Label();
-            this.lblSearch = new System.Windows.Forms.Label();
-            this.boxSearch = new System.Windows.Forms.ComboBox();
-            this.pnlSearch = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.pnlSearch = new System.Windows.Forms.Panel();
+            this.boxSearch = new System.Windows.Forms.ComboBox();
+            this.lblSearch = new System.Windows.Forms.Label();
+            this.lblTable = new System.Windows.Forms.Label();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnLogout = new System.Windows.Forms.Button();
+            this.btnSeeAllPreOrders = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnAddOrder = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.btnDeleteOrders = new System.Windows.Forms.Button();
+            this.btnModifyOrders = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInventory)).BeginInit();
             this.pnlAdmin.SuspendLayout();
             this.pnlUser.SuspendLayout();
@@ -164,6 +164,7 @@
             // pnlAdmin
             // 
             this.pnlAdmin.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlAdmin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlAdmin.Controls.Add(this.txtNotification);
             this.pnlAdmin.Controls.Add(this.lbNotifications);
             this.pnlAdmin.Controls.Add(this.btnReset);
@@ -195,6 +196,7 @@
             // 
             // pnlUser
             // 
+            this.pnlUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlUser.Controls.Add(this.btnHideTest);
             this.pnlUser.Controls.Add(this.dataGridOrders);
             this.pnlUser.Controls.Add(this.button1);
@@ -222,6 +224,20 @@
             this.dataGridOrders.Size = new System.Drawing.Size(643, 213);
             this.dataGridOrders.TabIndex = 1;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.SlateBlue;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button1.Location = new System.Drawing.Point(590, 215);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 34);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "Reset";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.btnResetOrders_Click);
+            // 
             // btnLogin
             // 
             this.btnLogin.BackColor = System.Drawing.Color.DarkBlue;
@@ -234,149 +250,6 @@
             this.btnLogin.TabIndex = 8;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = false;
-            // 
-            // btnLogout
-            // 
-            this.btnLogout.BackColor = System.Drawing.Color.DarkBlue;
-            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogout.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnLogout.Location = new System.Drawing.Point(59, 34);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(98, 38);
-            this.btnLogout.TabIndex = 9;
-            this.btnLogout.Text = "Logout";
-            this.btnLogout.UseVisualStyleBackColor = false;
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(209, 53);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(305, 29);
-            this.textBox1.TabIndex = 10;
-            this.textBox1.Text = " Users Type:          Not Logged In";
-            // 
-            // textBox2
-            // 
-            this.textBox2.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(209, 18);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(305, 29);
-            this.textBox2.TabIndex = 11;
-            this.textBox2.Text = " Users Name:        Not Logged In";
-            // 
-            // btnModifyOrders
-            // 
-            this.btnModifyOrders.BackColor = System.Drawing.SystemColors.GrayText;
-            this.btnModifyOrders.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnModifyOrders.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModifyOrders.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnModifyOrders.Location = new System.Drawing.Point(131, 215);
-            this.btnModifyOrders.Name = "btnModifyOrders";
-            this.btnModifyOrders.Size = new System.Drawing.Size(114, 34);
-            this.btnModifyOrders.TabIndex = 15;
-            this.btnModifyOrders.Text = "Modify Order";
-            this.btnModifyOrders.UseVisualStyleBackColor = false;
-            // 
-            // btnDeleteOrders
-            // 
-            this.btnDeleteOrders.BackColor = System.Drawing.SystemColors.GrayText;
-            this.btnDeleteOrders.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDeleteOrders.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteOrders.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnDeleteOrders.Location = new System.Drawing.Point(251, 215);
-            this.btnDeleteOrders.Name = "btnDeleteOrders";
-            this.btnDeleteOrders.Size = new System.Drawing.Size(109, 34);
-            this.btnDeleteOrders.TabIndex = 16;
-            this.btnDeleteOrders.Text = "Delete Order";
-            this.btnDeleteOrders.UseVisualStyleBackColor = false;
-            // 
-            // btnAddOrder
-            // 
-            this.btnAddOrder.BackColor = System.Drawing.SystemColors.GrayText;
-            this.btnAddOrder.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAddOrder.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddOrder.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnAddOrder.Location = new System.Drawing.Point(22, 215);
-            this.btnAddOrder.Name = "btnAddOrder";
-            this.btnAddOrder.Size = new System.Drawing.Size(103, 34);
-            this.btnAddOrder.TabIndex = 17;
-            this.btnAddOrder.Text = "Add Order";
-            this.btnAddOrder.UseVisualStyleBackColor = false;
-            // 
-            // btnSeeAllPreOrders
-            // 
-            this.btnSeeAllPreOrders.BackColor = System.Drawing.Color.SlateBlue;
-            this.btnSeeAllPreOrders.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSeeAllPreOrders.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSeeAllPreOrders.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnSeeAllPreOrders.Location = new System.Drawing.Point(431, 215);
-            this.btnSeeAllPreOrders.Name = "btnSeeAllPreOrders";
-            this.btnSeeAllPreOrders.Size = new System.Drawing.Size(153, 34);
-            this.btnSeeAllPreOrders.TabIndex = 20;
-            this.btnSeeAllPreOrders.Text = "See All Pre-Orders";
-            this.btnSeeAllPreOrders.UseVisualStyleBackColor = false;
-            this.btnSeeAllPreOrders.Click += new System.EventHandler(this.btnSeeAllPreOrders_Click);
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(228, 46);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(239, 29);
-            this.txtSearch.TabIndex = 7;
-            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.BackColor = System.Drawing.Color.DarkBlue;
-            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnSearch.Location = new System.Drawing.Point(487, 26);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(99, 35);
-            this.btnSearch.TabIndex = 3;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = false;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // lblTable
-            // 
-            this.lblTable.AutoSize = true;
-            this.lblTable.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTable.Location = new System.Drawing.Point(67, 14);
-            this.lblTable.Name = "lblTable";
-            this.lblTable.Size = new System.Drawing.Size(235, 21);
-            this.lblTable.TabIndex = 5;
-            this.lblTable.Text = "Choose Table To Search From:";
-            // 
-            // lblSearch
-            // 
-            this.lblSearch.AutoSize = true;
-            this.lblSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSearch.Location = new System.Drawing.Point(67, 49);
-            this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(155, 21);
-            this.lblSearch.TabIndex = 18;
-            this.lblSearch.Text = "Enter Search Word:";
-            // 
-            // boxSearch
-            // 
-            this.boxSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.boxSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.boxSearch.FormattingEnabled = true;
-            this.boxSearch.Location = new System.Drawing.Point(304, 11);
-            this.boxSearch.Name = "boxSearch";
-            this.boxSearch.Size = new System.Drawing.Size(163, 29);
-            this.boxSearch.TabIndex = 6;
             // 
             // pnlSearch
             // 
@@ -392,19 +265,148 @@
             this.pnlSearch.Size = new System.Drawing.Size(642, 84);
             this.pnlSearch.TabIndex = 21;
             // 
-            // button1
+            // boxSearch
             // 
-            this.button1.BackColor = System.Drawing.Color.SlateBlue;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(590, 215);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 34);
-            this.button1.TabIndex = 24;
-            this.button1.Text = "Reset";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.btnResetOrders_Click);
+            this.boxSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.boxSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.boxSearch.FormattingEnabled = true;
+            this.boxSearch.Location = new System.Drawing.Point(304, 11);
+            this.boxSearch.Name = "boxSearch";
+            this.boxSearch.Size = new System.Drawing.Size(163, 29);
+            this.boxSearch.TabIndex = 6;
+            // 
+            // lblSearch
+            // 
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSearch.Location = new System.Drawing.Point(67, 49);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(155, 21);
+            this.lblSearch.TabIndex = 18;
+            this.lblSearch.Text = "Enter Search Word:";
+            // 
+            // lblTable
+            // 
+            this.lblTable.AutoSize = true;
+            this.lblTable.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTable.Location = new System.Drawing.Point(67, 14);
+            this.lblTable.Name = "lblTable";
+            this.lblTable.Size = new System.Drawing.Size(235, 21);
+            this.lblTable.TabIndex = 5;
+            this.lblTable.Text = "Choose Table To Search From:";
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.Color.DarkBlue;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnSearch.Location = new System.Drawing.Point(487, 26);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(99, 35);
+            this.btnSearch.TabIndex = 3;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.Location = new System.Drawing.Point(228, 46);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(239, 29);
+            this.txtSearch.TabIndex = 7;
+            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.BackColor = System.Drawing.Color.DarkBlue;
+            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogout.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnLogout.Location = new System.Drawing.Point(59, 34);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(98, 38);
+            this.btnLogout.TabIndex = 9;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = false;
+            // 
+            // btnSeeAllPreOrders
+            // 
+            this.btnSeeAllPreOrders.BackColor = System.Drawing.Color.SlateBlue;
+            this.btnSeeAllPreOrders.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSeeAllPreOrders.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSeeAllPreOrders.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnSeeAllPreOrders.Location = new System.Drawing.Point(431, 215);
+            this.btnSeeAllPreOrders.Name = "btnSeeAllPreOrders";
+            this.btnSeeAllPreOrders.Size = new System.Drawing.Size(153, 34);
+            this.btnSeeAllPreOrders.TabIndex = 20;
+            this.btnSeeAllPreOrders.Text = "See All Pre-Orders";
+            this.btnSeeAllPreOrders.UseVisualStyleBackColor = false;
+            this.btnSeeAllPreOrders.Click += new System.EventHandler(this.btnSeeAllPreOrders_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(209, 53);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(305, 29);
+            this.textBox1.TabIndex = 10;
+            this.textBox1.Text = " Users Type:          Not Logged In";
+            // 
+            // btnAddOrder
+            // 
+            this.btnAddOrder.BackColor = System.Drawing.SystemColors.GrayText;
+            this.btnAddOrder.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAddOrder.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddOrder.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnAddOrder.Location = new System.Drawing.Point(22, 215);
+            this.btnAddOrder.Name = "btnAddOrder";
+            this.btnAddOrder.Size = new System.Drawing.Size(103, 34);
+            this.btnAddOrder.TabIndex = 17;
+            this.btnAddOrder.Text = "Add Order";
+            this.btnAddOrder.UseVisualStyleBackColor = false;
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Location = new System.Drawing.Point(209, 18);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(305, 29);
+            this.textBox2.TabIndex = 11;
+            this.textBox2.Text = " Users Name:        Not Logged In";
+            // 
+            // btnDeleteOrders
+            // 
+            this.btnDeleteOrders.BackColor = System.Drawing.SystemColors.GrayText;
+            this.btnDeleteOrders.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDeleteOrders.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteOrders.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnDeleteOrders.Location = new System.Drawing.Point(251, 215);
+            this.btnDeleteOrders.Name = "btnDeleteOrders";
+            this.btnDeleteOrders.Size = new System.Drawing.Size(109, 34);
+            this.btnDeleteOrders.TabIndex = 16;
+            this.btnDeleteOrders.Text = "Delete Order";
+            this.btnDeleteOrders.UseVisualStyleBackColor = false;
+            // 
+            // btnModifyOrders
+            // 
+            this.btnModifyOrders.BackColor = System.Drawing.SystemColors.GrayText;
+            this.btnModifyOrders.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnModifyOrders.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModifyOrders.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnModifyOrders.Location = new System.Drawing.Point(131, 215);
+            this.btnModifyOrders.Name = "btnModifyOrders";
+            this.btnModifyOrders.Size = new System.Drawing.Size(114, 34);
+            this.btnModifyOrders.TabIndex = 15;
+            this.btnModifyOrders.Text = "Modify Order";
+            this.btnModifyOrders.UseVisualStyleBackColor = false;
             // 
             // MainForm
             // 
