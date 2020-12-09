@@ -9,7 +9,7 @@ namespace IMS.Classes
     class LoadDatabase
     {
         string connectionString =
-            @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jghar\source\repos\IMS\IMS\Database\IMS_Database.mdf;Integrated Security=True";
+            @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Dk_ab\Dropbox\BVC\SODV 2202 - OoP\Project OOP\IMS\Database\IMS_Database.mdf;Integrated Security=True";
 
         public List<Products> GetGameInformation()
         {

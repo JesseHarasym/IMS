@@ -39,6 +39,7 @@
             this.pnlAdmin = new System.Windows.Forms.Panel();
             this.btnHideTest = new System.Windows.Forms.Button();
             this.pnlUser = new System.Windows.Forms.Panel();
+            this.btnCreateUser = new System.Windows.Forms.Button();
             this.dataGridOrders = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
@@ -50,11 +51,13 @@
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnLogout = new System.Windows.Forms.Button();
             this.btnSeeAllPreOrders = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtAccessLevel = new System.Windows.Forms.TextBox();
             this.btnAddOrder = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtUserName = new System.Windows.Forms.TextBox();
             this.btnDeleteOrders = new System.Windows.Forms.Button();
             this.btnModifyOrders = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInventory)).BeginInit();
             this.pnlAdmin.SuspendLayout();
             this.pnlUser.SuspendLayout();
@@ -197,6 +200,9 @@
             // pnlUser
             // 
             this.pnlUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlUser.Controls.Add(this.label2);
+            this.pnlUser.Controls.Add(this.label1);
+            this.pnlUser.Controls.Add(this.btnCreateUser);
             this.pnlUser.Controls.Add(this.btnHideTest);
             this.pnlUser.Controls.Add(this.dataGridOrders);
             this.pnlUser.Controls.Add(this.button1);
@@ -204,9 +210,9 @@
             this.pnlUser.Controls.Add(this.pnlSearch);
             this.pnlUser.Controls.Add(this.btnLogout);
             this.pnlUser.Controls.Add(this.btnSeeAllPreOrders);
-            this.pnlUser.Controls.Add(this.textBox1);
+            this.pnlUser.Controls.Add(this.txtAccessLevel);
             this.pnlUser.Controls.Add(this.btnAddOrder);
-            this.pnlUser.Controls.Add(this.textBox2);
+            this.pnlUser.Controls.Add(this.txtUserName);
             this.pnlUser.Controls.Add(this.btnDeleteOrders);
             this.pnlUser.Controls.Add(this.btnModifyOrders);
             this.pnlUser.Dock = System.Windows.Forms.DockStyle.Left;
@@ -214,6 +220,20 @@
             this.pnlUser.Name = "pnlUser";
             this.pnlUser.Size = new System.Drawing.Size(686, 502);
             this.pnlUser.TabIndex = 24;
+            // 
+            // btnCreateUser
+            // 
+            this.btnCreateUser.BackColor = System.Drawing.Color.DarkBlue;
+            this.btnCreateUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCreateUser.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreateUser.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnCreateUser.Location = new System.Drawing.Point(501, 19);
+            this.btnCreateUser.Name = "btnCreateUser";
+            this.btnCreateUser.Size = new System.Drawing.Size(98, 57);
+            this.btnCreateUser.TabIndex = 27;
+            this.btnCreateUser.Text = "Create User";
+            this.btnCreateUser.UseVisualStyleBackColor = false;
+            this.btnCreateUser.Click += new System.EventHandler(this.btnCreateUser_Click);
             // 
             // dataGridOrders
             // 
@@ -244,12 +264,13 @@
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnLogin.Location = new System.Drawing.Point(59, 34);
+            this.btnLogin.Location = new System.Drawing.Point(49, 11);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(98, 38);
             this.btnLogin.TabIndex = 8;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // pnlSearch
             // 
@@ -324,7 +345,7 @@
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnLogout.Location = new System.Drawing.Point(59, 34);
+            this.btnLogout.Location = new System.Drawing.Point(49, 58);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(98, 38);
             this.btnLogout.TabIndex = 9;
@@ -345,17 +366,17 @@
             this.btnSeeAllPreOrders.UseVisualStyleBackColor = false;
             this.btnSeeAllPreOrders.Click += new System.EventHandler(this.btnSeeAllPreOrders_Click);
             // 
-            // textBox1
+            // txtAccessLevel
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(209, 53);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(305, 29);
-            this.textBox1.TabIndex = 10;
-            this.textBox1.Text = " Users Type:          Not Logged In";
+            this.txtAccessLevel.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtAccessLevel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtAccessLevel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAccessLevel.Location = new System.Drawing.Point(296, 53);
+            this.txtAccessLevel.Name = "txtAccessLevel";
+            this.txtAccessLevel.ReadOnly = true;
+            this.txtAccessLevel.Size = new System.Drawing.Size(183, 29);
+            this.txtAccessLevel.TabIndex = 10;
+            this.txtAccessLevel.Text = "Not Logged In";
             // 
             // btnAddOrder
             // 
@@ -370,17 +391,17 @@
             this.btnAddOrder.Text = "Add Order";
             this.btnAddOrder.UseVisualStyleBackColor = false;
             // 
-            // textBox2
+            // txtUserName
             // 
-            this.textBox2.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(209, 18);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(305, 29);
-            this.textBox2.TabIndex = 11;
-            this.textBox2.Text = " Users Name:        Not Logged In";
+            this.txtUserName.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtUserName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtUserName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUserName.Location = new System.Drawing.Point(296, 18);
+            this.txtUserName.Name = "txtUserName";
+            this.txtUserName.ReadOnly = true;
+            this.txtUserName.Size = new System.Drawing.Size(183, 29);
+            this.txtUserName.TabIndex = 11;
+            this.txtUserName.Text = "Not Logged In";
             // 
             // btnDeleteOrders
             // 
@@ -407,6 +428,26 @@
             this.btnModifyOrders.TabIndex = 15;
             this.btnModifyOrders.Text = "Modify Order";
             this.btnModifyOrders.UseVisualStyleBackColor = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(169, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(102, 24);
+            this.label1.TabIndex = 28;
+            this.label1.Text = "Username:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(168, 54);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(121, 24);
+            this.label2.TabIndex = 29;
+            this.label2.Text = "Access level:";
             // 
             // MainForm
             // 
@@ -455,8 +496,8 @@
         private System.Windows.Forms.DataGridView dataGridOrders;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button btnLogout;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtAccessLevel;
+        private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.Button btnModifyOrders;
         private System.Windows.Forms.Button btnDeleteOrders;
         private System.Windows.Forms.Button btnAddOrder;
@@ -468,6 +509,9 @@
         private System.Windows.Forms.ComboBox boxSearch;
         private System.Windows.Forms.Panel pnlSearch;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCreateUser;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }
 

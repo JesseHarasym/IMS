@@ -5,10 +5,10 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using VideoGameInventoryApp;
 using VideoGameInventoryApp.Classes;
+using IMS.CustomControls;
 
 namespace IMS
 {
-    //heya fucka you budday
     //BASICS:
     //Inventory, Orders, Products and LoadDatabase are classes currently built.
 
@@ -165,6 +165,32 @@ namespace IMS
                 btnHideTest.Text = "Hide";
                 boxSearch.Items.Add("Inventory");
             }
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            var logInForm = new LogInForm(this);
+            logInForm.Show();
+        }
+
+        private void btnCreateUser_Click(object sender, EventArgs e)
+        {
+            var userForm = new AddUser();
+            userForm.Show();
+        }
+
+        public void SetUserName(string username, string accessLevel)
+        {
+            txtUserName.Text = username;
+            if(accessLevel == "0")
+            {
+                txtAccessLevel.Text = "User";
+            }
+            else
+            {
+                txtAccessLevel.Text = "Admin";
+            }
+            
         }
     }
 }
