@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data;
+﻿using System.Configuration;
 using System.Data.SqlClient;
-using System.Threading.Tasks;
 
 namespace IMS.Classes
 {
@@ -24,9 +19,7 @@ namespace IMS.Classes
         /// Method to add an admin to the Users table in the Database
         public void AddAdminToDatabase()
         {
-            string connectionString =
-            @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Dk_ab\Dropbox\BVC\SODV 2202 - OoP\Project OOP\IMS\Database\IMS_Database.mdf;Integrated Security=True";
-
+            string connectionString = ConfigurationManager.ConnectionStrings["IMS_DatabaseConnectionString"].ConnectionString;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlDataAdapter adapter = new SqlDataAdapter();

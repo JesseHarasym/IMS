@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+using System.Configuration;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Data.SqlClient;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IMS.CustomControls
@@ -25,15 +20,14 @@ namespace IMS.CustomControls
             string nameEntered = txtUserName.Text;
             string passwordEntered = txtPassword.Text;
 
-            string connectionString =
-            @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Dk_ab\Dropbox\BVC\SODV 2202 - OoP\Project OOP\IMS\Database\IMS_Database.mdf;Integrated Security=True";
+            string connectionString = ConfigurationManager.ConnectionStrings["IMS_DatabaseConnectionString"].ConnectionString;
 
             DataTable usersRecords = new DataTable();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 adapter.SelectCommand = new SqlCommand(
-                    "SELECT * FROM Users WHERE Name = '"+ nameEntered +"'", connection);
+                    "SELECT * FROM Users WHERE Name = '" + nameEntered + "'", connection);
                 adapter.Fill(usersRecords);
 
 
@@ -66,7 +60,7 @@ namespace IMS.CustomControls
                 {
                     MessageBox.Show("User not found");
                 }
-                
+
             }
         }
     }
