@@ -27,10 +27,10 @@ namespace IMS.Classes
                 for (int i = 0; i < gameRecords.Rows.Count; i++)
                 {
                     DataRow drow = gameRecords.Rows[i];
-                    string gameID = (drow["Game ID"].ToString());
+                    string gameID = (drow["GameID"].ToString());
                     string title = (drow["Title"].ToString());
                     string quantity = (drow["Quantity"].ToString());
-                    string releaseDate = (drow["Release Date"].ToString());
+                    string releaseDate = (drow["ReleaseDate"].ToString());
                     string description = (drow["Description"].ToString());
                     string console = (drow["Console"].ToString());
                     string tempPrice = (drow["Price"].ToString());
@@ -59,11 +59,11 @@ namespace IMS.Classes
                 for (int i = 0; i < gameRecords.Rows.Count; i++)
                 {
                     DataRow drow = gameRecords.Rows[i];
-                    string orderID = (drow["Order ID"].ToString());
-                    string customerID = (drow["Customer ID"].ToString());
-                    string productIDPurchased = (drow["Product ID Purchased"].ToString());
-                    string tempPrice = (drow["Purchase Price"].ToString());
-                    string purchaseDate = (drow["Purchase Date"].ToString());
+                    string orderID = (drow["OrderID"].ToString());
+                    string customerID = (drow["CustomerID"].ToString());
+                    string productIDPurchased = (drow["ProductIDPurchased"].ToString());
+                    string tempPrice = (drow["PurchasePrice"].ToString());
+                    string purchaseDate = (drow["PurchaseDate"].ToString());
 
                     double purchasePrice = Convert.ToDouble(tempPrice);
                     purchasePrice = Math.Round(purchasePrice, 2);

@@ -12,10 +12,26 @@ namespace VideoGameInventoryApp
         public List<Orders> OrderList = new List<Orders>();
         public List<string> AlertMessages = new List<string>();
 
-        public Inventory(List<Products> productList, List<Orders> orderList)
+        public Inventory(List<Products> productList, List<Orders> orderList, int accessLevel, int customerId)
         {
-            ProductList = productList;
-            OrderList = orderList;
+            getData(productList, orderList, accessLevel, customerId);
+        }
+
+        //only apply data needed for a specific user, if admin give access to everything, otherwise give according to their customerId
+        public void getData(List<Products> productList, List<Orders> orderList, int accessLevel, int customerId)
+        {
+            if (accessLevel == 1)
+            {
+                ProductList = productList;
+                OrderList = orderList;
+            }
+            else
+            {
+                ProductList = productList;
+                OrderList = orderList
+                    .Where(o => o.CustomerID == customerId)
+                    .ToList();
+            }
             AddPreOrderToOrderList();   //load pre order state in orders list when class is created (do this way so today's date can be checked against release date)
         }
 
@@ -75,6 +91,7 @@ namespace VideoGameInventoryApp
                 .ToList());
 
             return preOrderSearch;
+
         }
 
         //function to add comes to pre order list of CheckIfPreOrderInventory() has already determined it as such

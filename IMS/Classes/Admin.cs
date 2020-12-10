@@ -22,8 +22,6 @@ namespace IMS.Classes
             string connectionString = ConfigurationManager.ConnectionStrings["IMS_DatabaseConnectionString"].ConnectionString;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlDataAdapter adapter = new SqlDataAdapter();
-
                 using (SqlCommand cmd = new SqlCommand(
                     $"INSERT INTO Users (Name, Password, PhoneNumber, Info, AccessLevel) " +
                     $"VALUES (@name, @password, @phonenumber, @info, 1)", connection))

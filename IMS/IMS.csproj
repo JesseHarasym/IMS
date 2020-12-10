@@ -70,11 +70,23 @@
     <Compile Include="CustomControls\AddUser.Designer.cs">
       <DependentUpon>AddUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\MainControls\AdminControls.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\MainControls\AdminControls.Designer.cs">
+      <DependentUpon>AdminControls.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\LogInForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CustomControls\LogInForm.Designer.cs">
       <DependentUpon>LogInForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\MainControls\UserControls.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\MainControls\UserControls.Designer.cs">
+      <DependentUpon>UserControls.cs</DependentUpon>
     </Compile>
     <Compile Include="Database\LoadDatabase.cs" />
     <Compile Include="Classes\Orders.cs" />
@@ -90,8 +102,14 @@
     <EmbeddedResource Include="CustomControls\AddUser.resx">
       <DependentUpon>AddUser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\MainControls\AdminControls.resx">
+      <DependentUpon>AdminControls.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\LogInForm.resx">
       <DependentUpon>LogInForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\MainControls\UserControls.resx">
+      <DependentUpon>UserControls.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -119,20 +137,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database\IMS_Database.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Database\IMS_Database_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>IMS_Database.mdf</DependentUpon>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

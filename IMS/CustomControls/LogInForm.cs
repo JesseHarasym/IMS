@@ -11,7 +11,7 @@ namespace IMS.CustomControls
         public MainForm myForm;
         public LogInForm(MainForm _form)
         {
-            this.myForm = _form;
+            myForm = _form;
             InitializeComponent();
         }
 
@@ -30,7 +30,6 @@ namespace IMS.CustomControls
                     "SELECT * FROM Users WHERE Name = '" + nameEntered + "'", connection);
                 adapter.Fill(usersRecords);
 
-
                 try
                 {
                     DataRow dataRow = usersRecords.Rows[0];
@@ -38,18 +37,13 @@ namespace IMS.CustomControls
                     if (dataRow["Password"].ToString() == passwordEntered)
                     {
                         MessageBox.Show("Log in Successful");
-                        if (dataRow["AccessLevel"].ToString() == "1")
-                        {
-                            myForm.SetUserName(nameEntered, "1");
 
-                        }
-                        else
-                        {
-                            myForm.SetUserName(nameEntered, "0");
-                        }
+                        string currentUser = dataRow["Id"].ToString();
+                        string accessLevel = dataRow["AccessLevel"].ToString();
 
-                        this.Close();
+                        myForm.SetUserName(nameEntered, accessLevel, currentUser);
 
+                        Close();
                     }
                     else
                     {
@@ -60,7 +54,6 @@ namespace IMS.CustomControls
                 {
                     MessageBox.Show("User not found");
                 }
-
             }
         }
     }

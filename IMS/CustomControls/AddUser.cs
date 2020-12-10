@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using IMS.Classes;
+using System;
 using System.Windows.Forms;
-using IMS.Classes;
 
 namespace IMS.CustomControls
 {
@@ -37,6 +30,8 @@ namespace IMS.CustomControls
             txtInfo.Text = "";
             checkboxAdmin.Checked = false;
 
+            MessageBox.Show("User created successfuly");
+            Close();
         }
     }
 }
