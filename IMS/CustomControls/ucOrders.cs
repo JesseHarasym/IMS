@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace IMS.UserContorl
+namespace IMS
 {
-    public partial class ucPlaceOrdercs : UserControl
+    public partial class ucOrders : UserControl
     {
-        public ucPlaceOrdercs()
+        public ucOrders()
         {
             InitializeComponent();
         }

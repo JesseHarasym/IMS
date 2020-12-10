@@ -1,7 +1,7 @@
 ﻿
-namespace IMS.UserContorl
+namespace IMS.CustomControls
 {
-    partial class ucModifyOrder
+    partial class ucPlaceOrdercs
     {
         /// <summary> 
         /// Required designer variable.
