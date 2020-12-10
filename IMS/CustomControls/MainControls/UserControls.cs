@@ -19,7 +19,6 @@ namespace IMS.CustomControls
         public UserControls()
         {
             InitializeComponent();
-
         }
 
         public UserControls(int customerId, int accessLevel)

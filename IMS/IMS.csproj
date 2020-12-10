@@ -47,9 +47,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.dll</HintPath>
-    </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -84,19 +82,17 @@
     <Compile Include="CustomControls\LogInForm.Designer.cs">
       <DependentUpon>LogInForm.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="CustomControls\MainControls\UserControls.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="CustomControls\MainControls\UserControls.Designer.cs">
       <DependentUpon>UserControls.cs</DependentUpon>
-=======
+    </Compile>
     <Compile Include="CustomControls\ucPlaceOrdercs.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="CustomControls\ucPlaceOrdercs.Designer.cs">
       <DependentUpon>ucPlaceOrdercs.cs</DependentUpon>
->>>>>>> b47fcacd15ac508fe73ca13b0f3a175bd5603688
     </Compile>
     <Compile Include="Database\LoadDatabase.cs" />
     <Compile Include="Classes\Orders.cs" />
@@ -153,12 +149,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Database\IMS_Database.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Database\IMS_Database_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>IMS_Database.mdf</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
