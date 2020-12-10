@@ -1,7 +1,7 @@
 ﻿
-namespace IMS.UserContorl
+namespace IMS
 {
-    partial class ucPlaceOrdercs
+    partial class ucOrders
     {
         /// <summary> 
         /// Required designer variable.
