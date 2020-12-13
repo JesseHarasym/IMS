@@ -20,17 +20,21 @@ namespace IMS.CustomControls.HelperControls
 
         private void EditProducts_Load(object sender, EventArgs e)
         {
-            txtTitle.Enabled = false;
-            txtQuantity.Enabled = false;
-            txtDescription.Enabled = false;
-            txtReleaseDate.Enabled = false;
-            txtPrice.Enabled = false;
-            txtConsole.Enabled = false;
+            //set all input controls to disabled until user picks a product to edit
+            foreach (Control c in Controls)
+            {
+                if (c is MaskedTextBox)
+                {
+                    c.Enabled = false;
+                }
+            }
 
+            //initial settings for dropdown box
             boxWhichProduct.DropDownStyle = ComboBoxStyle.DropDownList;
             boxWhichProduct.Items.Add("Pick a product");
             boxWhichProduct.SelectedIndex = 0;
 
+            //at each product to dropdown box
             foreach (var p in ProductList)
             {
                 boxWhichProduct.Items.Add($"{p.GameID}: {p.Title}");
@@ -39,7 +43,7 @@ namespace IMS.CustomControls.HelperControls
 
         private void boxWhichProduct_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            if (boxWhichProduct.SelectedIndex != 0)
+            if (boxWhichProduct.SelectedIndex != 0) //if a product is selected
             {
                 string[] productArr = boxWhichProduct.Text.Split(':');
                 string gameId = productArr[0].Trim();
@@ -49,102 +53,109 @@ namespace IMS.CustomControls.HelperControls
                 {
                     if (p.GameID.ToString() == gameId && p.Title == title)
                     {
+                        //fill all textboxes with the product information chosen by the user
                         txtTitle.Text = p.Title;
-                        txtTitle.Enabled = true;
                         txtQuantity.Text = p.Quantity.ToString();
-                        txtQuantity.Enabled = true;
                         txtDescription.Text = p.Description;
-                        txtDescription.Enabled = true;
                         txtReleaseDate.Text = p.ReleaseDate.ToString();
-                        txtReleaseDate.Enabled = true;
                         txtPrice.Text = p.Price.ToString();
-                        txtPrice.Enabled = true;
                         txtConsole.Text = p.Console;
-                        txtConsole.Enabled = true;
+
+                        //make all textboxes so they can now be edited
+                        foreach (Control c in Controls)
+                        {
+                            if (c is MaskedTextBox)
+                            {
+                                c.Enabled = true;
+                            }
+                        }
                     }
                 }
             }
             else
             {
+                //if the user goes back to index 0 of dropdown (no choice) then take away all the filled data
                 txtTitle.Text = "";
-                txtTitle.Enabled = false;
                 txtQuantity.Text = "";
-                txtQuantity.Enabled = false;
                 txtDescription.Text = "";
-                txtDescription.Enabled = false;
                 txtReleaseDate.Text = "";
-                txtReleaseDate.Enabled = false;
                 txtPrice.Text = "";
-                txtPrice.Enabled = false;
                 txtConsole.Text = "";
-                txtConsole.Enabled = false;
+
+                //disable editing to textboxes if no choice selected
+                foreach (Control c in Controls)
+                {
+                    if (c is MaskedTextBox)
+                    {
+                        c.Enabled = false;
+                    }
+                }
             }
         }
 
         private void bttEdit_Click(object sender, EventArgs e)
         {
-            bool success = false;
+            string connectionString = Connection.ConnectionString;
+
+            bool success;
+
             string[] productArr = boxWhichProduct.Text.Split(':');
             string gameId = productArr[0].Trim();
             string title = txtTitle.Text;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                success = UpdateGameInfo(connection, gameId, title);
+                connection.Close();
+            }
+
+            if (success)
+            {
+                AdminControls.AdminSetup();
+                MessageBox.Show($"{gameId}: {title} was edited successfully.");
+                Close();
+            }
+        }
+
+        public bool UpdateGameInfo(SqlConnection connection, string gameId, string title)
+        {
+            bool success = false;
+
             int quantity = Convert.ToInt32(txtQuantity.Text);
             DateTime releaseDate = Convert.ToDateTime(txtReleaseDate.Text);
             string description = txtDescription.Text;
             string console = txtConsole.Text;
             double price = Convert.ToDouble(txtPrice.Text);
 
-            string connectionString = Connection.ConnectionString;
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            //edit data from GameInformation database table
+            using (SqlCommand cmd = new SqlCommand(
+                $"UPDATE GameInformation " +
+                $"SET Title = @title, Quantity = @quantity, ReleaseDate = @releaseDate, Description = @description, Console = @console, Price = @price WHERE GameID = {gameId}",
+                connection))
             {
-                using (SqlCommand cmd = new SqlCommand(
-                    $"UPDATE GameInformation " +
-                    $"SET Title = @title, Quantity = @quantity, ReleaseDate = @releaseDate, Description = @description, Console = @console, Price = @price WHERE GameID = {gameId}", connection))
+                cmd.Parameters.AddWithValue("@title", title);
+                cmd.Parameters.AddWithValue("@quantity", quantity);
+                cmd.Parameters.AddWithValue("@releaseDate", releaseDate);
+                cmd.Parameters.AddWithValue("@description", description);
+                cmd.Parameters.AddWithValue("@console", console);
+                cmd.Parameters.AddWithValue("@price", price);
+
+                try
                 {
-                    cmd.Parameters.AddWithValue("@title", title);
-                    cmd.Parameters.AddWithValue("@quantity", quantity);
-                    cmd.Parameters.AddWithValue("@releaseDate", releaseDate);
-                    cmd.Parameters.AddWithValue("@description", description);
-                    cmd.Parameters.AddWithValue("@console", console);
-                    cmd.Parameters.AddWithValue("@price", price);
-                    connection.Open();
-                    try
-                    {
-                        cmd.ExecuteNonQuery();
-                        success = true;
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("There was an issue updating the new game information " + ex);
-                    }
-
-                    connection.Close();
-
+                    cmd.ExecuteNonQuery();
+                    success = true;
                 }
-
-            }
-
-            if (success)
-            {
-                foreach (var p in ProductList)
+                catch (Exception ex)
                 {
-                    if (p.GameID.ToString() == gameId)
-                    {
-                        p.Title = txtTitle.Text;
-                        p.Quantity = Convert.ToInt32(txtQuantity.Text);
-                        p.ReleaseDate = Convert.ToDateTime(txtReleaseDate.Text);
-                        p.Description = txtDescription.Text;
-                        p.Console = txtConsole.Text;
-                        p.Price = Convert.ToDouble(txtPrice.Text);
-                    }
+                    Console.WriteLine("There was an issue updating the new game information " + ex);
+                    MessageBox.Show("We are not able to update this product at this time.");
                 }
-
-                AdminControls.AddNewInventory(ProductList);
-                MessageBox.Show($"{gameId}: {title} was edited successfully.");
-                Close();
             }
+            return success;
         }
 
+        //handle basic data validation so that quantity can only be numbers
         private void txtQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!int.TryParse(e.KeyChar.ToString(), out var i) && e.KeyChar != (char)Keys.Back)
@@ -153,17 +164,18 @@ namespace IMS.CustomControls.HelperControls
             }
         }
 
+        //handle basic data validation so that price can only be a number with decimal
         private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!int.TryParse(e.KeyChar.ToString(), out var i) && e.KeyChar != '.' && e.KeyChar != (char)Keys.Back)
             {
                 e.Handled = true;
             }
-            else if ((e.KeyChar == '.') && ((sender as MaskedTextBox).Text.IndexOf('.') > -1))
+            else if ((e.KeyChar == '.') && ((sender as MaskedTextBox).Text.IndexOf('.') > -1))  //only allow a single decimal
             {
                 e.Handled = true;
             }
-            else if ((e.KeyChar == '.') && ((sender as MaskedTextBox).Text.Length == 0))
+            else if ((e.KeyChar == '.') && ((sender as MaskedTextBox).Text.Length == 0)) //don't allow first char input to be a decimal
             {
                 e.Handled = true;
             }

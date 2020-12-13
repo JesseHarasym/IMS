@@ -102,7 +102,7 @@
             this.Name = "LogInForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Log in";
+            this.Text = "Log into your account";
             this.ResumeLayout(false);
             this.PerformLayout();
 

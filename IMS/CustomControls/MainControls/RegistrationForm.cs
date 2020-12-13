@@ -6,9 +6,20 @@ namespace IMS.CustomControls
 {
     public partial class RegistrationForm : Form
     {
-        public RegistrationForm()
+        private int AccessLevel;
+        public RegistrationForm(int accessLevel)
         {
             InitializeComponent();
+            AccessLevel = accessLevel;
+        }
+
+        private void RegistrationForm_Load(object sender, EventArgs e)
+        {
+            if (AccessLevel != 1)
+            {
+                checkboxAdmin.Visible = false;
+                lblAccess.Visible = false;
+            }
         }
 
         private void btnAddUser_Click(object sender, EventArgs e)

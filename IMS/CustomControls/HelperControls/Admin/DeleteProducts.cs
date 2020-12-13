@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Windows.Forms;
 using VideoGameInventoryApp.Classes;
 
@@ -21,10 +20,12 @@ namespace IMS.CustomControls.HelperControls.Admin
 
         private void DeleteProducts_Load(object sender, EventArgs e)
         {
+            //setup for initial dropdown box
             boxWhichProduct.DropDownStyle = ComboBoxStyle.DropDownList;
             boxWhichProduct.Items.Add("Pick a product");
             boxWhichProduct.SelectedIndex = 0;
 
+            //add each product to dropdown box
             foreach (var p in ProductList)
             {
                 boxWhichProduct.Items.Add($"{p.GameID}: {p.Title}");
@@ -42,6 +43,7 @@ namespace IMS.CustomControls.HelperControls.Admin
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                //delete data from GameInformation database table
                 using (SqlCommand cmd =
                     new SqlCommand($"DELETE FROM GameInformation " +
                                    $"WHERE GameID = {gameId}", connection))
@@ -55,17 +57,15 @@ namespace IMS.CustomControls.HelperControls.Admin
                     catch (Exception ex)
                     {
                         Console.WriteLine("There was an issue deleting this games information " + ex);
+                        MessageBox.Show("There was an issue while trying to delete this product.");
                     }
                     connection.Close();
                 }
             }
 
-
             if (success)
             {
-                List<Products> productList = ProductList.Where(p => p.GameID.ToString() != gameId).ToList();
-
-                AdminControls.AddNewInventory(productList);
+                AdminControls.AdminSetup(); //function that fills admin panel with newly updated data
                 MessageBox.Show($"{gameId}: {title} was deleted successfully.");
                 Close();
             }

@@ -72,16 +72,9 @@ namespace IMS.CustomControls
             dataGridInventory.DataSource = ProductList;
         }
 
-        public void AddNewInventory(List<Products> productList)
-        {
-            ProductList = productList;
-            AdminSetup();
-            dataGridInventory.DataSource = productList;
-        }
-
         private void btnAddProducts_Click(object sender, EventArgs e)
         {
-            var addProductForm = new AddProducts(this, ProductList);
+            var addProductForm = new AddProducts(this);
             addProductForm.Show();
         }
 

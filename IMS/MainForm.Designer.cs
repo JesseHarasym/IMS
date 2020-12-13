@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.pnlAdmin = new System.Windows.Forms.Panel();
-            this.pnlUser = new System.Windows.Forms.Panel();
-            this.pnlLogIn = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCreateUser = new System.Windows.Forms.Button();
@@ -38,47 +36,19 @@
             this.btnLogout = new System.Windows.Forms.Button();
             this.txtAccessLevel = new System.Windows.Forms.TextBox();
             this.txtUserName = new System.Windows.Forms.TextBox();
+            this.pnlUser = new System.Windows.Forms.Panel();
+            this.pnlLogIn = new System.Windows.Forms.Panel();
             this.pnlLogIn.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlAdmin
             // 
             this.pnlAdmin.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pnlAdmin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlAdmin.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlAdmin.Location = new System.Drawing.Point(688, 0);
+            this.pnlAdmin.Location = new System.Drawing.Point(704, 0);
             this.pnlAdmin.Name = "pnlAdmin";
-            this.pnlAdmin.Size = new System.Drawing.Size(888, 502);
+            this.pnlAdmin.Size = new System.Drawing.Size(888, 473);
             this.pnlAdmin.TabIndex = 25;
             this.pnlAdmin.Visible = false;
-            // 
-            // pnlUser
-            // 
-            this.pnlUser.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pnlUser.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlUser.Location = new System.Drawing.Point(0, 87);
-            this.pnlUser.Name = "pnlUser";
-            this.pnlUser.Size = new System.Drawing.Size(684, 413);
-            this.pnlUser.TabIndex = 30;
-            this.pnlUser.Visible = false;
-            // 
-            // pnlLogIn
-            // 
-            this.pnlLogIn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pnlLogIn.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlLogIn.Controls.Add(this.label2);
-            this.pnlLogIn.Controls.Add(this.label1);
-            this.pnlLogIn.Controls.Add(this.btnCreateUser);
-            this.pnlLogIn.Controls.Add(this.btnLogin);
-            this.pnlLogIn.Controls.Add(this.btnLogout);
-            this.pnlLogIn.Controls.Add(this.txtAccessLevel);
-            this.pnlLogIn.Controls.Add(this.txtUserName);
-            this.pnlLogIn.Controls.Add(this.pnlUser);
-            this.pnlLogIn.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlLogIn.Location = new System.Drawing.Point(0, 0);
-            this.pnlLogIn.Name = "pnlLogIn";
-            this.pnlLogIn.Size = new System.Drawing.Size(686, 502);
-            this.pnlLogIn.TabIndex = 24;
             // 
             // label2
             // 
@@ -166,24 +136,49 @@
             this.txtUserName.TabIndex = 40;
             this.txtUserName.Text = "Not Logged In";
             // 
+            // pnlUser
+            // 
+            this.pnlUser.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlUser.Location = new System.Drawing.Point(0, 100);
+            this.pnlUser.Name = "pnlUser";
+            this.pnlUser.Size = new System.Drawing.Size(706, 373);
+            this.pnlUser.TabIndex = 30;
+            this.pnlUser.Visible = false;
+            // 
+            // pnlLogIn
+            // 
+            this.pnlLogIn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlLogIn.Controls.Add(this.label2);
+            this.pnlLogIn.Controls.Add(this.label1);
+            this.pnlLogIn.Controls.Add(this.btnCreateUser);
+            this.pnlLogIn.Controls.Add(this.btnLogin);
+            this.pnlLogIn.Controls.Add(this.btnLogout);
+            this.pnlLogIn.Controls.Add(this.txtAccessLevel);
+            this.pnlLogIn.Controls.Add(this.txtUserName);
+            this.pnlLogIn.Location = new System.Drawing.Point(0, 3);
+            this.pnlLogIn.MinimumSize = new System.Drawing.Size(688, 88);
+            this.pnlLogIn.Name = "pnlLogIn";
+            this.pnlLogIn.Size = new System.Drawing.Size(706, 97);
+            this.pnlLogIn.TabIndex = 24;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1576, 502);
-            this.Controls.Add(this.pnlAdmin);
+            this.ClientSize = new System.Drawing.Size(1590, 474);
             this.Controls.Add(this.pnlLogIn);
+            this.Controls.Add(this.pnlUser);
+            this.Controls.Add(this.pnlAdmin);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(686, 541);
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inventory Management System";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.pnlLogIn.ResumeLayout(false);
             this.pnlLogIn.PerformLayout();
             this.ResumeLayout(false);
@@ -192,8 +187,6 @@
 
         #endregion
         private System.Windows.Forms.Panel pnlAdmin;
-        private System.Windows.Forms.Panel pnlUser;
-        private System.Windows.Forms.Panel pnlLogIn;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnCreateUser;
@@ -201,6 +194,8 @@
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.TextBox txtAccessLevel;
         private System.Windows.Forms.TextBox txtUserName;
+        private System.Windows.Forms.Panel pnlUser;
+        private System.Windows.Forms.Panel pnlLogIn;
     }
 }
 

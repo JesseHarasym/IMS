@@ -53,7 +53,7 @@
             this.pnlSearch.Controls.Add(this.lblTable);
             this.pnlSearch.Controls.Add(this.btnSearch);
             this.pnlSearch.Controls.Add(this.txtSearch);
-            this.pnlSearch.Location = new System.Drawing.Point(13, 17);
+            this.pnlSearch.Location = new System.Drawing.Point(25, 3);
             this.pnlSearch.Name = "pnlSearch";
             this.pnlSearch.Size = new System.Drawing.Size(642, 84);
             this.pnlSearch.TabIndex = 30;
@@ -116,7 +116,7 @@
             this.btnModifyOrders.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnModifyOrders.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModifyOrders.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnModifyOrders.Location = new System.Drawing.Point(122, 125);
+            this.btnModifyOrders.Location = new System.Drawing.Point(135, 116);
             this.btnModifyOrders.Name = "btnModifyOrders";
             this.btnModifyOrders.Size = new System.Drawing.Size(114, 34);
             this.btnModifyOrders.TabIndex = 26;
@@ -129,7 +129,7 @@
             this.btnDeleteOrders.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDeleteOrders.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteOrders.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnDeleteOrders.Location = new System.Drawing.Point(242, 125);
+            this.btnDeleteOrders.Location = new System.Drawing.Point(255, 116);
             this.btnDeleteOrders.Name = "btnDeleteOrders";
             this.btnDeleteOrders.Size = new System.Drawing.Size(109, 34);
             this.btnDeleteOrders.TabIndex = 27;
@@ -142,7 +142,7 @@
             this.btnAddOrder.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAddOrder.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddOrder.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnAddOrder.Location = new System.Drawing.Point(13, 125);
+            this.btnAddOrder.Location = new System.Drawing.Point(26, 116);
             this.btnAddOrder.Name = "btnAddOrder";
             this.btnAddOrder.Size = new System.Drawing.Size(103, 34);
             this.btnAddOrder.TabIndex = 28;
@@ -156,7 +156,7 @@
             this.btnResetOrders.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnResetOrders.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnResetOrders.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnResetOrders.Location = new System.Drawing.Point(580, 123);
+            this.btnResetOrders.Location = new System.Drawing.Point(593, 116);
             this.btnResetOrders.Name = "btnResetOrders";
             this.btnResetOrders.Size = new System.Drawing.Size(75, 34);
             this.btnResetOrders.TabIndex = 31;
@@ -168,9 +168,9 @@
             // 
             this.dataGridOrders.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dataGridOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridOrders.Location = new System.Drawing.Point(13, 179);
+            this.dataGridOrders.Location = new System.Drawing.Point(25, 168);
             this.dataGridOrders.Name = "dataGridOrders";
-            this.dataGridOrders.Size = new System.Drawing.Size(643, 213);
+            this.dataGridOrders.Size = new System.Drawing.Size(643, 215);
             this.dataGridOrders.TabIndex = 25;
             // 
             // btnSeeAllPreOrders
@@ -179,7 +179,7 @@
             this.btnSeeAllPreOrders.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSeeAllPreOrders.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSeeAllPreOrders.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnSeeAllPreOrders.Location = new System.Drawing.Point(422, 123);
+            this.btnSeeAllPreOrders.Location = new System.Drawing.Point(435, 116);
             this.btnSeeAllPreOrders.Name = "btnSeeAllPreOrders";
             this.btnSeeAllPreOrders.Size = new System.Drawing.Size(153, 34);
             this.btnSeeAllPreOrders.TabIndex = 29;
@@ -200,7 +200,7 @@
             this.Controls.Add(this.dataGridOrders);
             this.Controls.Add(this.btnSeeAllPreOrders);
             this.Name = "UserControls";
-            this.Size = new System.Drawing.Size(684, 413);
+            this.Size = new System.Drawing.Size(695, 408);
             this.Load += new System.EventHandler(this.UserControls_Load);
             this.pnlSearch.ResumeLayout(false);
             this.pnlSearch.PerformLayout();

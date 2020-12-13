@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.checkboxAdmin = new System.Windows.Forms.CheckBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblAccess = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lblEmail = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -52,15 +52,15 @@
             this.checkboxAdmin.Text = "Admin";
             this.checkboxAdmin.UseVisualStyleBackColor = true;
             // 
-            // label6
+            // lblAccess
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(25, 204);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(120, 25);
-            this.label6.TabIndex = 18;
-            this.label6.Text = "Access Level:";
+            this.lblAccess.AutoSize = true;
+            this.lblAccess.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAccess.Location = new System.Drawing.Point(25, 204);
+            this.lblAccess.Name = "lblAccess";
+            this.lblAccess.Size = new System.Drawing.Size(120, 25);
+            this.lblAccess.TabIndex = 18;
+            this.lblAccess.Text = "Access Level:";
             // 
             // label5
             // 
@@ -108,7 +108,7 @@
             this.btnAddUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddUser.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddUser.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnAddUser.Location = new System.Drawing.Point(116, 266);
+            this.btnAddUser.Location = new System.Drawing.Point(105, 249);
             this.btnAddUser.Name = "btnAddUser";
             this.btnAddUser.Size = new System.Drawing.Size(150, 47);
             this.btnAddUser.TabIndex = 13;
@@ -154,13 +154,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(374, 338);
+            this.ClientSize = new System.Drawing.Size(374, 319);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.checkboxAdmin);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.lblAccess);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.lblEmail);
             this.Controls.Add(this.label3);
@@ -171,7 +171,8 @@
             this.Name = "RegistrationForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Users";
+            this.Text = "Register a new user";
+            this.Load += new System.EventHandler(this.RegistrationForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,7 +181,7 @@
         #endregion
 
         private System.Windows.Forms.CheckBox checkboxAdmin;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblAccess;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.Label label3;

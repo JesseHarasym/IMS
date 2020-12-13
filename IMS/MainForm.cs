@@ -1,5 +1,6 @@
 ﻿using IMS.CustomControls;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace IMS
@@ -22,7 +23,7 @@ namespace IMS
 
         private void btnCreateUser_Click(object sender, System.EventArgs e)
         {
-            var userForm = new RegistrationForm();
+            var userForm = new RegistrationForm(AccessLevel);
             userForm.Show();
         }
 
@@ -35,6 +36,7 @@ namespace IMS
 
             if (accessLevel == "0")
             {
+                Size = new Size(706, 535);
                 var userControls = new UserControls(CustomerId, AccessLevel);
 
                 txtAccessLevel.Text = "User";
@@ -51,6 +53,7 @@ namespace IMS
             }
             else if (accessLevel == "1")
             {
+                Size = new Size(1606, 535);
                 var adminControls = new AdminControls(CustomerId, AccessLevel);
                 var userControls = new UserControls(adminControls, CustomerId, AccessLevel);
 
@@ -69,6 +72,8 @@ namespace IMS
 
         private void btnLogout_Click(object sender, System.EventArgs e)
         {
+            Size = new Size(688, 130);
+
             txtAccessLevel.Text = "Not Logged In";
             txtUserName.Text = "Not Logged In";
 
@@ -79,6 +84,11 @@ namespace IMS
             pnlUser.Visible = false;
 
             btnCreateUser.Visible = true;
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            Size = new Size(706, 130);
         }
     }
 }
