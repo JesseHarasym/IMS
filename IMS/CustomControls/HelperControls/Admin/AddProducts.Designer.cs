@@ -193,6 +193,7 @@
             this.MinimizeBox = false;
             this.Name = "AddProducts";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add product to inventory";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -151,6 +151,9 @@
     <EmbeddedResource Include="CustomControls\HelperControls\Admin\EditProducts.resx">
       <DependentUpon>EditProducts.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\HelperControls\Users\AddOrder.resx">
+      <DependentUpon>AddOrder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\HelperControls\Users\EditOrder.resx">
       <DependentUpon>EditOrder.cs</DependentUpon>
     </EmbeddedResource>

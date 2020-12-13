@@ -148,6 +148,7 @@
             this.btnAddOrder.TabIndex = 28;
             this.btnAddOrder.Text = "Add Order";
             this.btnAddOrder.UseVisualStyleBackColor = false;
+            this.btnAddOrder.Click += new System.EventHandler(this.btnAddOrder_Click);
             // 
             // btnResetOrders
             // 

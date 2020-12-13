@@ -205,6 +205,7 @@
             this.MinimizeBox = false;
             this.Name = "EditProducts";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit product in inventory";
             this.Load += new System.EventHandler(this.EditProducts_Load);
             this.ResumeLayout(false);

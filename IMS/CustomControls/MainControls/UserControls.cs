@@ -1,4 +1,5 @@
 ﻿using IMS.Classes;
+using IMS.CustomControls.HelperControls.Users;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -112,6 +113,18 @@ namespace IMS.CustomControls
         private void btnResetOrders_Click(object sender, EventArgs e)
         {
             dataGridOrders.DataSource = OrderList;
+        }
+
+        private void btnAddOrder_Click(object sender, EventArgs e)
+        {
+            var addOrderForm = new AddOrder(this, ProductList, OrderList, CustomerId);
+            addOrderForm.Show();
+        }
+
+        public void AddNewOrder(List<Orders> orderList)
+        {
+            OrderList = orderList;
+            ShowUserInfo();
         }
     }
 }

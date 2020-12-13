@@ -59,11 +59,11 @@ namespace IMS.Classes
                 for (int i = 0; i < gameRecords.Rows.Count; i++)
                 {
                     DataRow drow = gameRecords.Rows[i];
-                    string orderID = (drow["Order ID"].ToString());
-                    string customerID = (drow["Customer ID"].ToString());
-                    string productIDPurchased = (drow["Product ID Purchased"].ToString());
-                    string tempPrice = (drow["Purchase Price"].ToString());
-                    string purchaseDate = (drow["Purchase Date"].ToString());
+                    string orderID = (drow["OrderID"].ToString());
+                    string customerID = (drow["CustomerID"].ToString());
+                    string productIDPurchased = (drow["ProductID"].ToString());
+                    string tempPrice = (drow["OrderPrice"].ToString());
+                    string purchaseDate = (drow["OrderDate"].ToString());
 
                     double purchasePrice = Convert.ToDouble(tempPrice);
                     purchasePrice = Math.Round(purchasePrice, 2);

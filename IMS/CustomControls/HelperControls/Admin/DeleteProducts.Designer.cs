@@ -67,6 +67,7 @@
             this.MinimizeBox = false;
             this.Name = "DeleteProducts";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Delete product in inventory";
             this.Load += new System.EventHandler(this.DeleteProducts_Load);
             this.ResumeLayout(false);
