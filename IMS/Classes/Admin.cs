@@ -1,4 +1,4 @@
-﻿using System.Configuration;
+﻿using IMS.Database;
 using System.Data.SqlClient;
 
 namespace IMS.Classes
@@ -7,29 +7,30 @@ namespace IMS.Classes
     class Admin : Users
     {
         // Constructor for the Admin class
-        public Admin(string _Name, string _Password, string _PhoneNumber, string _Info) :
-            base(_Name, _Password, _PhoneNumber, _Info)
+        public Admin(string _Name, string _Username, string _Password, string _Email) :
+            base(_Name, _Username, _Password, _Email)
         {
             Name = _Name;
+            Username = _Username;
             Password = _Password;
-            PhoneNumber = _PhoneNumber;
-            Info = _Info;
+            Email = _Email;
         }
 
         /// Method to add an admin to the Users table in the Database
         public void AddAdminToDatabase()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["IMS_DatabaseConnectionString"].ConnectionString;
+            string connectionString = Connection.ConnectionString;
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(
-                    $"INSERT INTO Users (Name, Password, PhoneNumber, Info, AccessLevel) " +
-                    $"VALUES (@name, @password, @phonenumber, @info, 1)", connection))
+                    $"INSERT INTO Accounts (Name, Username, Password, Email, AccessLevel) " +
+                    $"VALUES (@name, @username, @password, @email, 1)", connection))
                 {
-                    cmd.Parameters.AddWithValue("@name", this.Name);
-                    cmd.Parameters.AddWithValue("@password", this.Password);
-                    cmd.Parameters.AddWithValue("@phonenumber", this.PhoneNumber);
-                    cmd.Parameters.AddWithValue("@info", this.Info);
+                    cmd.Parameters.AddWithValue("@name", Name);
+                    cmd.Parameters.AddWithValue("@username", Username);
+                    cmd.Parameters.AddWithValue("@password", Password);
+                    cmd.Parameters.AddWithValue("@email", Email);
                     connection.Open();
                     cmd.ExecuteNonQuery();
                     connection.Close();

@@ -1,4 +1,6 @@
 ﻿using IMS.Classes;
+using IMS.CustomControls.HelperControls;
+using IMS.CustomControls.HelperControls.Admin;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -68,6 +70,31 @@ namespace IMS.CustomControls
         private void btnReset_Click(object sender, EventArgs e)
         {
             dataGridInventory.DataSource = ProductList;
+        }
+
+        public void AddNewInventory(List<Products> productList)
+        {
+            ProductList = productList;
+            AdminSetup();
+            dataGridInventory.DataSource = productList;
+        }
+
+        private void btnAddProducts_Click(object sender, EventArgs e)
+        {
+            var addProductForm = new AddProducts(this, ProductList);
+            addProductForm.Show();
+        }
+
+        private void btnEditProducts_Click(object sender, EventArgs e)
+        {
+            var editProductForm = new EditProducts(this, ProductList);
+            editProductForm.Show();
+        }
+
+        private void btnDeleteProducts_Click(object sender, EventArgs e)
+        {
+            var deleteProductForm = new DeleteProducts(this, ProductList);
+            deleteProductForm.Show();
         }
     }
 }

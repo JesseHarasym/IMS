@@ -64,11 +64,41 @@
     <Compile Include="Classes\Admin.cs" />
     <Compile Include="Classes\Inventory.cs" />
     <Compile Include="Classes\Users.cs" />
-    <Compile Include="CustomControls\AddUser.cs">
+    <Compile Include="CustomControls\HelperControls\Admin\AddProducts.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CustomControls\AddUser.Designer.cs">
-      <DependentUpon>AddUser.cs</DependentUpon>
+    <Compile Include="CustomControls\HelperControls\Admin\AddProducts.Designer.cs">
+      <DependentUpon>AddProducts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\HelperControls\Admin\DeleteProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomControls\HelperControls\Admin\DeleteProducts.Designer.cs">
+      <DependentUpon>DeleteProducts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\HelperControls\Admin\EditProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomControls\HelperControls\Admin\EditProducts.Designer.cs">
+      <DependentUpon>EditProducts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\HelperControls\Users\AddOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomControls\HelperControls\Users\AddOrder.Designer.cs">
+      <DependentUpon>AddOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\HelperControls\Users\EditOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomControls\HelperControls\Users\EditOrder.Designer.cs">
+      <DependentUpon>EditOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\MainControls\RegistrationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomControls\MainControls\RegistrationForm.Designer.cs">
+      <DependentUpon>RegistrationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\MainControls\AdminControls.cs">
       <SubType>UserControl</SubType>
@@ -76,11 +106,11 @@
     <Compile Include="CustomControls\MainControls\AdminControls.Designer.cs">
       <DependentUpon>AdminControls.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\LogInForm.cs">
+    <Compile Include="CustomControls\MainControls\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CustomControls\LogInForm.Designer.cs">
-      <DependentUpon>LogInForm.cs</DependentUpon>
+    <Compile Include="CustomControls\MainControls\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\MainControls\UserControls.cs">
       <SubType>UserControl</SubType>
@@ -88,12 +118,13 @@
     <Compile Include="CustomControls\MainControls\UserControls.Designer.cs">
       <DependentUpon>UserControls.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\ucPlaceOrdercs.cs">
+    <Compile Include="CustomControls\Others\ucPlaceOrdercs.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomControls\ucPlaceOrdercs.Designer.cs">
+    <Compile Include="CustomControls\Others\ucPlaceOrdercs.Designer.cs">
       <DependentUpon>ucPlaceOrdercs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Database\Connection.cs" />
     <Compile Include="Database\LoadDatabase.cs" />
     <Compile Include="Classes\Orders.cs" />
     <Compile Include="Classes\Products.cs" />
@@ -105,20 +136,32 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CustomControls\ucOrders.cs">
+    <Compile Include="CustomControls\Others\ucOrders.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomControls\ucOrders.Designer.cs">
+    <Compile Include="CustomControls\Others\ucOrders.Designer.cs">
       <DependentUpon>ucOrders.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="CustomControls\AddUser.resx">
-      <DependentUpon>AddUser.cs</DependentUpon>
+    <EmbeddedResource Include="CustomControls\HelperControls\Admin\AddProducts.resx">
+      <DependentUpon>AddProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\HelperControls\Admin\DeleteProducts.resx">
+      <DependentUpon>DeleteProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\HelperControls\Admin\EditProducts.resx">
+      <DependentUpon>EditProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\HelperControls\Users\EditOrder.resx">
+      <DependentUpon>EditOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\MainControls\RegistrationForm.resx">
+      <DependentUpon>RegistrationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\MainControls\AdminControls.resx">
       <DependentUpon>AdminControls.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\LogInForm.resx">
-      <DependentUpon>LogInForm.cs</DependentUpon>
+    <EmbeddedResource Include="CustomControls\MainControls\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\MainControls\UserControls.resx">
       <DependentUpon>UserControls.cs</DependentUpon>
@@ -149,20 +192,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database\IMS_Database.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Database\IMS_Database_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>IMS_Database.mdf</DependentUpon>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -35,21 +35,21 @@ namespace VideoGameInventoryApp
             AddPreOrderToOrderList();   //load pre order state in orders list when class is created (do this way so today's date can be checked against release date)
         }
 
-        //put a game on clearance if it is greater then 9 months old (needs better formula for determining clearance)
+        //put a game on clearance if it is greater then 9 months old and less then 5 remaining(needs better formula for determining clearance)
         public List<Products> CheckForClearance()
         {
             foreach (var p in ProductList)
             {
                 int months = MonthsSinceRelease(p.ReleaseDate);
 
-                if (months > 9)
+                if (months > 9 & p.Quantity < 15)
                 {
                     //slash price and add alert message for admin panel (may want to consider keeping original price in database as well as write clearance price when changed)
                     double originalPrice = p.Price;
                     p.Price = Math.Round(p.Price / 1.8, 2);
                     p.Clearance = true;
 
-                    AlertMessages.Add($"ALERT: On Clearance - {p.GameID}: {p.Title} has been on the shelf for {months} months. Price slashed to {p.Price} from {originalPrice}.");
+                    AlertMessages.Add($"ALERT: On Clearance - {p.GameID}: {p.Title} has been put on clearance. Price slashed to {p.Price} from {originalPrice}.");
                 }
             }
             return ProductList;

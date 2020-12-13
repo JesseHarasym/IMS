@@ -22,7 +22,7 @@ namespace IMS
 
         private void btnCreateUser_Click(object sender, System.EventArgs e)
         {
-            var userForm = new AddUser();
+            var userForm = new RegistrationForm();
             userForm.Show();
         }
 

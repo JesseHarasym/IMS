@@ -1,6 +1,6 @@
-﻿using System;
+﻿using IMS.Database;
+using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using VideoGameInventoryApp.Classes;
@@ -9,7 +9,7 @@ namespace IMS.Classes
 {
     class LoadDatabase
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["IMS_DatabaseConnectionString"].ConnectionString;
+        string connectionString = Connection.ConnectionString;
 
         public List<Products> GetGameInformation()
         {
@@ -27,10 +27,10 @@ namespace IMS.Classes
                 for (int i = 0; i < gameRecords.Rows.Count; i++)
                 {
                     DataRow drow = gameRecords.Rows[i];
-                    string gameID = (drow["Game ID"].ToString());
+                    string gameID = (drow["GameID"].ToString());
                     string title = (drow["Title"].ToString());
                     string quantity = (drow["Quantity"].ToString());
-                    string releaseDate = (drow["Release Date"].ToString());
+                    string releaseDate = (drow["ReleaseDate"].ToString());
                     string description = (drow["Description"].ToString());
                     string console = (drow["Console"].ToString());
                     string tempPrice = (drow["Price"].ToString());

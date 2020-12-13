@@ -88,6 +88,7 @@
             this.btnAddProducts.TabIndex = 26;
             this.btnAddProducts.Text = "Add Product";
             this.btnAddProducts.UseVisualStyleBackColor = false;
+            this.btnAddProducts.Click += new System.EventHandler(this.btnAddProducts_Click);
             // 
             // dataGridInventory
             // 
@@ -110,6 +111,7 @@
             this.btnEditProducts.TabIndex = 27;
             this.btnEditProducts.Text = "Edit Product";
             this.btnEditProducts.UseVisualStyleBackColor = false;
+            this.btnEditProducts.Click += new System.EventHandler(this.btnEditProducts_Click);
             // 
             // btnPreOrderInv
             // 
@@ -137,6 +139,7 @@
             this.btnDeleteProducts.TabIndex = 28;
             this.btnDeleteProducts.Text = "Delete Product";
             this.btnDeleteProducts.UseVisualStyleBackColor = false;
+            this.btnDeleteProducts.Click += new System.EventHandler(this.btnDeleteProducts_Click);
             // 
             // AdminControls
             // 
