@@ -42,10 +42,5 @@ namespace IMS.Classes
 
             }
         }
-
-        public void Order()
-        {
-
-        }
     }
 }

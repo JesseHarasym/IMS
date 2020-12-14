@@ -1,6 +1,7 @@
 ﻿using IMS.CustomControls;
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace IMS
@@ -19,6 +20,7 @@ namespace IMS
         {
             var logInForm = new LogInForm(this);
             logInForm.Show();
+
         }
 
         private void btnCreateUser_Click(object sender, System.EventArgs e)
@@ -65,8 +67,9 @@ namespace IMS
                 pnlAdmin.Visible = true;
                 pnlUser.Visible = true;
 
-                pnlAdmin.Controls.Add(adminControls);
                 pnlUser.Controls.Add(userControls);
+                pnlAdmin.Controls.Add(adminControls);
+
             }
         }
 
@@ -80,10 +83,18 @@ namespace IMS
             btnLogout.Visible = false;
             btnLogin.Visible = true;
 
-            pnlAdmin.Visible = false;
-            pnlUser.Visible = false;
-
             btnCreateUser.Visible = true;
+
+            //clear controls from user login
+            pnlUser.Controls.Clear();
+            pnlAdmin.Controls.Clear();
+
+            //close any forms that may have been open when attempting to logout
+            Form[] forms = Application.OpenForms.Cast<Form>().ToArray();
+            foreach (Form thisForm in forms)
+            {
+                if (thisForm.Name != "MainForm") thisForm.Close();
+            }
         }
 
         private void MainForm_Load(object sender, EventArgs e)

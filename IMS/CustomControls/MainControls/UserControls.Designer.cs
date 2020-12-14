@@ -34,12 +34,11 @@
             this.lblTable = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
-            this.btnModifyOrders = new System.Windows.Forms.Button();
-            this.btnDeleteOrders = new System.Windows.Forms.Button();
+            this.btnCancelOrders = new System.Windows.Forms.Button();
             this.btnAddOrder = new System.Windows.Forms.Button();
             this.btnResetOrders = new System.Windows.Forms.Button();
             this.dataGridOrders = new System.Windows.Forms.DataGridView();
-            this.btnSeeAllPreOrders = new System.Windows.Forms.Button();
+            this.btnSeeAlllPreOrders = new System.Windows.Forms.Button();
             this.pnlSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridOrders)).BeginInit();
             this.SuspendLayout();
@@ -110,31 +109,18 @@
             this.txtSearch.Size = new System.Drawing.Size(239, 29);
             this.txtSearch.TabIndex = 7;
             // 
-            // btnModifyOrders
+            // btnCancelOrders
             // 
-            this.btnModifyOrders.BackColor = System.Drawing.SystemColors.GrayText;
-            this.btnModifyOrders.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnModifyOrders.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModifyOrders.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnModifyOrders.Location = new System.Drawing.Point(135, 116);
-            this.btnModifyOrders.Name = "btnModifyOrders";
-            this.btnModifyOrders.Size = new System.Drawing.Size(114, 34);
-            this.btnModifyOrders.TabIndex = 26;
-            this.btnModifyOrders.Text = "Modify Order";
-            this.btnModifyOrders.UseVisualStyleBackColor = false;
-            // 
-            // btnDeleteOrders
-            // 
-            this.btnDeleteOrders.BackColor = System.Drawing.SystemColors.GrayText;
-            this.btnDeleteOrders.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDeleteOrders.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteOrders.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnDeleteOrders.Location = new System.Drawing.Point(255, 116);
-            this.btnDeleteOrders.Name = "btnDeleteOrders";
-            this.btnDeleteOrders.Size = new System.Drawing.Size(109, 34);
-            this.btnDeleteOrders.TabIndex = 27;
-            this.btnDeleteOrders.Text = "Delete Order";
-            this.btnDeleteOrders.UseVisualStyleBackColor = false;
+            this.btnCancelOrders.BackColor = System.Drawing.SystemColors.GrayText;
+            this.btnCancelOrders.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCancelOrders.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelOrders.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnCancelOrders.Location = new System.Drawing.Point(150, 116);
+            this.btnCancelOrders.Name = "btnCancelOrders";
+            this.btnCancelOrders.Size = new System.Drawing.Size(109, 34);
+            this.btnCancelOrders.TabIndex = 27;
+            this.btnCancelOrders.Text = "Cancel Order";
+            this.btnCancelOrders.UseVisualStyleBackColor = false;
             // 
             // btnAddOrder
             // 
@@ -144,9 +130,9 @@
             this.btnAddOrder.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnAddOrder.Location = new System.Drawing.Point(26, 116);
             this.btnAddOrder.Name = "btnAddOrder";
-            this.btnAddOrder.Size = new System.Drawing.Size(103, 34);
+            this.btnAddOrder.Size = new System.Drawing.Size(109, 34);
             this.btnAddOrder.TabIndex = 28;
-            this.btnAddOrder.Text = "Add Order";
+            this.btnAddOrder.Text = "Create Order";
             this.btnAddOrder.UseVisualStyleBackColor = false;
             this.btnAddOrder.Click += new System.EventHandler(this.btnAddOrder_Click);
             // 
@@ -173,19 +159,19 @@
             this.dataGridOrders.Size = new System.Drawing.Size(643, 215);
             this.dataGridOrders.TabIndex = 25;
             // 
-            // btnSeeAllPreOrders
+            // btnSeeAlllPreOrders
             // 
-            this.btnSeeAllPreOrders.BackColor = System.Drawing.Color.SlateBlue;
-            this.btnSeeAllPreOrders.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSeeAllPreOrders.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSeeAllPreOrders.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnSeeAllPreOrders.Location = new System.Drawing.Point(435, 116);
-            this.btnSeeAllPreOrders.Name = "btnSeeAllPreOrders";
-            this.btnSeeAllPreOrders.Size = new System.Drawing.Size(153, 34);
-            this.btnSeeAllPreOrders.TabIndex = 29;
-            this.btnSeeAllPreOrders.Text = "See All Pre-Orders";
-            this.btnSeeAllPreOrders.UseVisualStyleBackColor = false;
-            this.btnSeeAllPreOrders.Click += new System.EventHandler(this.btnSeeAllPreOrders_Click);
+            this.btnSeeAlllPreOrders.BackColor = System.Drawing.Color.SlateBlue;
+            this.btnSeeAlllPreOrders.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSeeAlllPreOrders.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSeeAlllPreOrders.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnSeeAlllPreOrders.Location = new System.Drawing.Point(435, 116);
+            this.btnSeeAlllPreOrders.Name = "btnSeeAlllPreOrders";
+            this.btnSeeAlllPreOrders.Size = new System.Drawing.Size(153, 34);
+            this.btnSeeAlllPreOrders.TabIndex = 29;
+            this.btnSeeAlllPreOrders.Text = "See My Pre-Orders";
+            this.btnSeeAlllPreOrders.UseVisualStyleBackColor = false;
+            this.btnSeeAlllPreOrders.Click += new System.EventHandler(this.btnSeeAllPreOrders_Click);
             // 
             // UserControls
             // 
@@ -193,12 +179,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.Controls.Add(this.pnlSearch);
-            this.Controls.Add(this.btnModifyOrders);
-            this.Controls.Add(this.btnDeleteOrders);
+            this.Controls.Add(this.btnCancelOrders);
             this.Controls.Add(this.btnAddOrder);
             this.Controls.Add(this.btnResetOrders);
             this.Controls.Add(this.dataGridOrders);
-            this.Controls.Add(this.btnSeeAllPreOrders);
+            this.Controls.Add(this.btnSeeAlllPreOrders);
             this.Name = "UserControls";
             this.Size = new System.Drawing.Size(695, 408);
             this.Load += new System.EventHandler(this.UserControls_Load);
@@ -217,11 +202,10 @@
         private System.Windows.Forms.Label lblTable;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
-        private System.Windows.Forms.Button btnModifyOrders;
-        private System.Windows.Forms.Button btnDeleteOrders;
+        private System.Windows.Forms.Button btnCancelOrders;
         private System.Windows.Forms.Button btnAddOrder;
         private System.Windows.Forms.Button btnResetOrders;
         private System.Windows.Forms.DataGridView dataGridOrders;
-        private System.Windows.Forms.Button btnSeeAllPreOrders;
+        private System.Windows.Forms.Button btnSeeAlllPreOrders;
     }
 }

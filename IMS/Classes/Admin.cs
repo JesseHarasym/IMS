@@ -38,18 +38,5 @@ namespace IMS.Classes
 
             }
         }
-
-        public void AddProduct()
-        {
-
-        }
-        public void DeleteProduct()
-        {
-
-        }
-        public void EditProduct()
-        {
-
-        }
     }
 }

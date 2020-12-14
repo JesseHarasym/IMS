@@ -27,7 +27,7 @@ namespace IMS.CustomControls
             InitializeComponent();
             CustomerId = customerId;
             AccessLevel = accessLevel;
-            UserSetup();
+            ShowUserInfo();
         }
 
         public UserControls(AdminControls adminControls, int customerId, int accessLevel)
@@ -36,39 +36,36 @@ namespace IMS.CustomControls
             AdminControl = adminControls;
             CustomerId = customerId;
             AccessLevel = accessLevel;
-            UserSetup();
+            ShowUserInfo();
         }
 
         private void UserControls_Load(object sender, EventArgs e)
         {
+            //setup dropdown menu
             boxSearch.DropDownStyle = ComboBoxStyle.DropDownList;
             boxSearch.Items.Add("Orders");
             boxSearch.SelectedIndex = 0;
-        }
 
-        public void UserSetup()
-        {
             if (AccessLevel == 0)
             {
-                btnModifyOrders.Visible = false;
-                btnDeleteOrders.Visible = false;
+                btnAddOrder.Visible = true;
+                btnCancelOrders.Visible = true;
                 btnAddOrder.Text = "Place Order";
-                btnSeeAllPreOrders.Text = "See My Pre-Orders";
+                btnSeeAlllPreOrders.Text = "See My Pre-Orders";
                 boxSearch.Items.Remove("Inventory");
             }
             else if (AccessLevel == 1)
             {
-                btnModifyOrders.Visible = true;
-                btnDeleteOrders.Visible = true;
-                btnAddOrder.Text = "Add Order";
-                btnSeeAllPreOrders.Text = "See All Pre-Orders";
+                btnAddOrder.Visible = false;
+                btnCancelOrders.Visible = false;
+                btnSeeAlllPreOrders.Text = "See All Pre-Orders";
                 boxSearch.Items.Add("Inventory");
             }
-            ShowUserInfo();
         }
 
         public void ShowUserInfo()
         {
+            //load database information and apply to our data grid
             var db = new LoadDatabase();
             var inv = new Inventory(db.GetGameInformation(), db.GetOrderInformation(), AccessLevel, CustomerId);
 
@@ -80,6 +77,7 @@ namespace IMS.CustomControls
             dataGridOrders.ReadOnly = true;
         }
 
+        //basics of search which is queries in our inventory class
         public void Search()
         {
             var inv = new Inventory(ProductList, OrderList, AccessLevel, CustomerId);
@@ -102,6 +100,7 @@ namespace IMS.CustomControls
             Search();
         }
 
+        //show all items in datagrid that are pre orders
         private void btnSeeAllPreOrders_Click(object sender, EventArgs e)
         {
             var inv = new Inventory(ProductList, OrderList, AccessLevel, CustomerId);
@@ -110,21 +109,17 @@ namespace IMS.CustomControls
             dataGridOrders.DataSource = searchForPreOrder;
         }
 
+        //reset list after seeing preorders to default
         private void btnResetOrders_Click(object sender, EventArgs e)
         {
             dataGridOrders.DataSource = OrderList;
         }
 
+        //allow users to create a new order
         private void btnAddOrder_Click(object sender, EventArgs e)
         {
             var addOrderForm = new AddOrder(this, ProductList, OrderList, CustomerId);
             addOrderForm.Show();
-        }
-
-        public void AddNewOrder(List<Orders> orderList)
-        {
-            OrderList = orderList;
-            ShowUserInfo();
         }
     }
 }

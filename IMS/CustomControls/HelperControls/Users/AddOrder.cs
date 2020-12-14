@@ -27,11 +27,22 @@ namespace IMS.CustomControls.HelperControls.Users
 
         private void AddOrder_Load(object sender, System.EventArgs e)
         {
+            //which product dropdown setup
             boxWhichProduct.DropDownStyle = ComboBoxStyle.DropDownList;
             boxWhichProduct.Items.Add("Pick a game");
             boxWhichProduct.SelectedIndex = 0;
 
+            //which location dropdown setup
+            boxWhichLocation.DropDownStyle = ComboBoxStyle.DropDownList;
+            boxWhichLocation.Items.Add("Pickup location");
+            boxWhichLocation.SelectedIndex = 0;
 
+            //fake locations for pickup for ordering purposes
+            boxWhichLocation.Items.Add("415 19th Street SE, Calgary");
+            boxWhichLocation.Items.Add("2991 13th Avenue NE, Calgary");
+            boxWhichLocation.Items.Add("17-299 2nd Street NW, Calgary");
+
+            //find product in order list and add to dropdown
             foreach (var p in ProductList)
             {
                 int timeSinceRelease = (DateTime.Now.Year - p.ReleaseDate.Year) * 12 + DateTime.Now.Month - p.ReleaseDate.Month;
@@ -42,20 +53,82 @@ namespace IMS.CustomControls.HelperControls.Users
                 }
             }
 
-            boxWhichLocation.DropDownStyle = ComboBoxStyle.DropDownList;
-            boxWhichLocation.Items.Add("Pickup location");
-            boxWhichLocation.SelectedIndex = 0;
-
-            boxWhichLocation.Items.Add("415 19th Street SE, Calgary");
-            boxWhichLocation.Items.Add("2991 13th Avenue NE, Calgary");
-            boxWhichLocation.Items.Add("17-299 2nd Street NW, Calgary");
-
+            //don't allow user to edit these inputs
             txtEmail.Enabled = false;
             txtName.Enabled = false;
             txtPrice.Enabled = false;
+            //auto fill disabled inputs with users information
             GetCustomerInformation();
         }
 
+        //when the user selects an option from the dropdown
+        private void boxWhichProduct_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (boxWhichProduct.SelectedIndex != 0) //if the user selects an option
+            {
+                string[] productArr = boxWhichProduct.Text.Split(':');
+                string gameId = productArr[0].Trim();
+                string title = productArr[1].Trim();
+
+                foreach (var p in ProductList)
+                {
+                    if (p.GameID.ToString() == gameId && p.Title == title)
+                    {
+                        //track quantity for subtracting from later
+                        Quantity = p.Quantity;
+                        //add current available price
+                        txtPrice.Text = p.Price.ToString();
+
+                        //if the game is a preorder game, then make sure the user is aware the pickup time wont be until n date
+                        int timeSinceRelease = (DateTime.Now.Year - p.ReleaseDate.Year) * 12 + DateTime.Now.Month - p.ReleaseDate.Month;
+                        if (timeSinceRelease < 0)
+                        {
+                            MessageBox.Show(
+                                $"{p.Title} is a pre-order. Please note you will not be able to pickup until after {p.ReleaseDate.Date}.");
+
+                        }
+                    }
+                }
+            }
+            else
+            {
+                txtPrice.Text = ""; //reset price if user deselects a game option
+            }
+        }
+
+        private void btnOrder_Click(object sender, EventArgs e)
+        {
+            bool successInsert;
+            bool successUpdate;
+            bool successSelect;
+
+            string[] productArr = boxWhichProduct.Text.Split(':');
+            int gameId = Convert.ToInt32(productArr[0].Trim());
+            string title = productArr[1].Trim();
+            double price = Convert.ToDouble(txtPrice.Text);
+
+            string connectionString = Connection.ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                //database queries broken down into functions so they're easier to look at/edit separately as needed
+                successInsert = InsertIntoOrders(connection, CustomerID, gameId, price);
+                successUpdate = UpdateGameInfo(connection, gameId);
+                successSelect = SelectOrderID(connection);
+                connection.Close();
+            }
+
+            if (successInsert && successSelect && successUpdate)
+            {
+                OrderList.Add(new Orders(Convert.ToInt32(OrderID), CustomerID, Convert.ToInt32(gameId), Convert.ToDouble(price), Convert.ToDateTime(DateTime.Now)));
+                UserControls.ShowUserInfo(); //get newly entered information for our user
+
+                MessageBox.Show($"{txtName.Text} has ordered {title} for pickup at {boxWhichLocation.Text}. You will get recieve an email at {txtEmail.Text} when it's ready for pickup.");
+                Close();
+            }
+        }
+
+        //get customer information that we dont save locally so that we are able to fill it in our form
         public void GetCustomerInformation()
         {
             bool success = false;
@@ -93,73 +166,13 @@ namespace IMS.CustomControls.HelperControls.Users
             }
             if (success)
             {
+                //if you found the user in the db, then add to text boxes
                 txtName.Text = name;
                 txtEmail.Text = email;
             }
         }
-        private void boxWhichProduct_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            if (boxWhichProduct.SelectedIndex != 0)
-            {
-                string[] productArr = boxWhichProduct.Text.Split(':');
-                string gameId = productArr[0].Trim();
-                string title = productArr[1].Trim();
 
-                foreach (var p in ProductList)
-                {
-                    if (p.GameID.ToString() == gameId && p.Title == title)
-                    {
-                        Quantity = p.Quantity;
-                        txtPrice.Text = p.Price.ToString();
-
-                        int timeSinceRelease = (DateTime.Now.Year - p.ReleaseDate.Year) * 12 + DateTime.Now.Month - p.ReleaseDate.Month;
-                        if (timeSinceRelease < 0)
-                        {
-                            MessageBox.Show(
-                                $"{p.Title} is a pre-order. Please note you will not be able to pickup until after {p.ReleaseDate.ToString("YYYY-MM-DD")}.");
-
-                        }
-                    }
-                }
-            }
-            else
-            {
-                txtPrice.Text = "";
-            }
-        }
-
-        private void btnOrder_Click(object sender, EventArgs e)
-        {
-            bool successInsert;
-            bool successUpdate;
-            bool successSelect;
-
-            string[] productArr = boxWhichProduct.Text.Split(':');
-            int gameId = Convert.ToInt32(productArr[0].Trim());
-            string title = productArr[1].Trim();
-            double price = Convert.ToDouble(txtPrice.Text);
-
-            string connectionString = Connection.ConnectionString;
-
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                successInsert = InsertIntoOrders(connection, CustomerID, gameId, price);
-                successUpdate = UpdateGameInfo(connection, gameId);
-                successSelect = SelectOrderID(connection);
-                connection.Close();
-            }
-
-            if (successInsert && successSelect && successUpdate)
-            {
-                OrderList.Add(new Orders(Convert.ToInt32(OrderID), CustomerID, Convert.ToInt32(gameId), Convert.ToDouble(price), Convert.ToDateTime(DateTime.Now)));
-                UserControls.AddNewOrder(OrderList);
-
-                MessageBox.Show($"{txtName.Text} has ordered {title} for pickup at {boxWhichLocation.Text}. You will get recieve an email at {txtEmail.Text} when it's ready for pickup.");
-                Close();
-            }
-        }
-
+        //insert our new order made by user into the database
         public bool InsertIntoOrders(SqlConnection connection, int customerId, int gameId, double price)
         {
             bool successInsert = false;
@@ -188,6 +201,7 @@ namespace IMS.CustomControls.HelperControls.Users
             return successInsert;
         }
 
+        //update our game info with the new quantity after the game was ordered
         public bool UpdateGameInfo(SqlConnection connection, int gameId)
         {
             bool successUpdate = false;
@@ -207,10 +221,10 @@ namespace IMS.CustomControls.HelperControls.Users
                 }
 
             }
-
             return successUpdate;
         }
 
+        //get the orderId so that we ensure we track the id properly (as it's identity(1, 1) in db, so it may not be next number in sequence from last
         public bool SelectOrderID(SqlConnection connection)
         {
             bool successSelect = false;
@@ -238,7 +252,6 @@ namespace IMS.CustomControls.HelperControls.Users
                 }
 
             }
-
             return successSelect;
         }
     }
