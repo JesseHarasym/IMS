@@ -1,7 +1,6 @@
 ﻿using IMS.Database;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 using VideoGameInventoryApp.Classes;
 
@@ -75,12 +74,12 @@ namespace IMS.CustomControls.HelperControls
             else
             {
                 //if the user goes back to index 0 of dropdown (no choice) then take away all the filled data
-                txtTitle.Text = "";
-                txtQuantity.Text = "";
-                txtDescription.Text = "";
-                txtReleaseDate.Text = "";
-                txtPrice.Text = "";
-                txtConsole.Text = "";
+                txtTitle.Clear();
+                txtQuantity.Clear();
+                txtDescription.Clear();
+                txtReleaseDate.Clear();
+                txtPrice.Clear();
+                txtConsole.Clear();
 
                 //disable editing to textboxes if no choice selected
                 foreach (Control c in Controls)
@@ -95,20 +94,17 @@ namespace IMS.CustomControls.HelperControls
 
         private void bttEdit_Click(object sender, EventArgs e)
         {
-            string connectionString = Connection.ConnectionString;
-
-            bool success;
-
             string[] productArr = boxWhichProduct.Text.Split(':');
             string gameId = productArr[0].Trim();
             string title = txtTitle.Text;
+            int quantity = Convert.ToInt32(txtQuantity.Text);
+            DateTime releaseDate = Convert.ToDateTime(txtReleaseDate.Text);
+            string description = txtDescription.Text;
+            string console = txtConsole.Text;
+            double price = Convert.ToDouble(txtPrice.Text);
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                success = UpdateGameInfo(connection, gameId, title);
-                connection.Close();
-            }
+            var pd = new ProductDatabase();
+            bool success = pd.UpdateGameInfo(gameId, title, quantity, releaseDate, description, console, price);
 
             if (success)
             {
@@ -116,43 +112,10 @@ namespace IMS.CustomControls.HelperControls
                 MessageBox.Show($"{gameId}: {title} was edited successfully.");
                 Close();
             }
-        }
-
-        public bool UpdateGameInfo(SqlConnection connection, string gameId, string title)
-        {
-            bool success = false;
-
-            int quantity = Convert.ToInt32(txtQuantity.Text);
-            DateTime releaseDate = Convert.ToDateTime(txtReleaseDate.Text);
-            string description = txtDescription.Text;
-            string console = txtConsole.Text;
-            double price = Convert.ToDouble(txtPrice.Text);
-
-            //edit data from GameInformation database table
-            using (SqlCommand cmd = new SqlCommand(
-                $"UPDATE GameInformation " +
-                $"SET Title = @title, Quantity = @quantity, ReleaseDate = @releaseDate, Description = @description, Console = @console, Price = @price WHERE GameID = {gameId}",
-                connection))
+            else
             {
-                cmd.Parameters.AddWithValue("@title", title);
-                cmd.Parameters.AddWithValue("@quantity", quantity);
-                cmd.Parameters.AddWithValue("@releaseDate", releaseDate);
-                cmd.Parameters.AddWithValue("@description", description);
-                cmd.Parameters.AddWithValue("@console", console);
-                cmd.Parameters.AddWithValue("@price", price);
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                    success = true;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("There was an issue updating the new game information " + ex);
-                    MessageBox.Show("We are not able to update this product at this time.");
-                }
+                MessageBox.Show("We are not able to update this product at this time.");
             }
-            return success;
         }
 
         //handle basic data validation so that quantity can only be numbers

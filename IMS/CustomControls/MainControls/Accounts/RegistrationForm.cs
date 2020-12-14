@@ -26,27 +26,26 @@ namespace IMS.CustomControls
 
         private void btnAddUser_Click(object sender, EventArgs e)
         {
-            //validate all inputs. done this way so only one message box comes up at a time.
-            //function is quite verbose, so it made sense to separate it
+            //function to validate all user inputs when registering
             bool valid = ValidateUserInputs();
 
             if (valid)
             {
                 if (checkboxAdmin.Checked)
                 {
-                    Admin newAdmin = new Admin(txtName.Text, txtUsername.Text, txtPassword.Text, txtPassword2.Text);
+                    Admin newAdmin = new Admin(txtName.Text, txtUsername.Text, txtPassword.Text, txtEmail.Text);
                     newAdmin.AddAdminToDatabase();
                 }
                 else
                 {
-                    Users newUser = new Users(txtName.Text, txtUsername.Text, txtPassword.Text, txtPassword2.Text);
+                    Users newUser = new Users(txtName.Text, txtUsername.Text, txtPassword.Text, txtEmail.Text);
                     newUser.AddUserToDatabase();
                 }
 
-                txtName.Text = "";
-                txtPassword2.Text = "";
-                txtUsername.Text = "";
-                txtPassword.Text = "";
+                txtName.Clear();
+                txtPassword2.Clear();
+                txtUsername.Clear();
+                txtPassword.Clear();
                 checkboxAdmin.Checked = false;
 
                 MessageBox.Show("User created successfuly");

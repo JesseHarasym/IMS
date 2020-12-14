@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -26,6 +27,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -47,7 +50,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -62,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Admin.cs" />
+    <Compile Include="Classes\HashPassword.cs" />
     <Compile Include="Classes\Inventory.cs" />
     <Compile Include="Classes\Users.cs" />
     <Compile Include="CustomControls\HelperControls\Admin\AddProducts.cs">
@@ -94,34 +105,37 @@
     <Compile Include="CustomControls\HelperControls\Users\EditOrder.Designer.cs">
       <DependentUpon>EditOrder.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\MainControls\RegistrationForm.cs">
+    <Compile Include="CustomControls\MainControls\Accounts\RegistrationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CustomControls\MainControls\RegistrationForm.Designer.cs">
+    <Compile Include="CustomControls\MainControls\Accounts\RegistrationForm.Designer.cs">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\MainControls\AdminControls.cs">
+    <Compile Include="CustomControls\MainControls\MainInterface\AdminControls.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomControls\MainControls\AdminControls.Designer.cs">
+    <Compile Include="CustomControls\MainControls\MainInterface\AdminControls.Designer.cs">
       <DependentUpon>AdminControls.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\MainControls\LoginForm.cs">
+    <Compile Include="CustomControls\MainControls\Accounts\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CustomControls\MainControls\LoginForm.Designer.cs">
+    <Compile Include="CustomControls\MainControls\Accounts\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\MainControls\UserControls.cs">
+    <Compile Include="CustomControls\MainControls\MainInterface\UserControls.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomControls\MainControls\UserControls.Designer.cs">
+    <Compile Include="CustomControls\MainControls\MainInterface\UserControls.Designer.cs">
       <DependentUpon>UserControls.cs</DependentUpon>
     </Compile>
     <Compile Include="Database\Connection.cs" />
     <Compile Include="Database\LoadDatabase.cs" />
     <Compile Include="Classes\Orders.cs" />
     <Compile Include="Classes\Products.cs" />
+    <Compile Include="Database\LoginDatabase.cs" />
+    <Compile Include="Database\OrderDatabase.cs" />
+    <Compile Include="Database\ProductDatabase.cs" />
     <Compile Include="Database\RegistrationDatabase.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -147,16 +161,16 @@
     <EmbeddedResource Include="CustomControls\HelperControls\Users\EditOrder.resx">
       <DependentUpon>EditOrder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\MainControls\RegistrationForm.resx">
+    <EmbeddedResource Include="CustomControls\MainControls\Accounts\RegistrationForm.resx">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\MainControls\AdminControls.resx">
+    <EmbeddedResource Include="CustomControls\MainControls\MainInterface\AdminControls.resx">
       <DependentUpon>AdminControls.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\MainControls\LoginForm.resx">
+    <EmbeddedResource Include="CustomControls\MainControls\Accounts\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\MainControls\UserControls.resx">
+    <EmbeddedResource Include="CustomControls\MainControls\MainInterface\UserControls.resx">
       <DependentUpon>UserControls.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
@@ -171,6 +185,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -193,4 +208,12 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
 </Project>

@@ -6,6 +6,7 @@ namespace IMS.Database
     class RegistrationDatabase
     {
         readonly string connectionString = Connection.ConnectionString;
+
         public bool CheckForExistingEmail(string email)
         {
             bool success = false;
@@ -35,8 +36,6 @@ namespace IMS.Database
                         Console.WriteLine("There was an issue looking for this email" + ex);
                     }
                 }
-
-
             }
 
             return success;

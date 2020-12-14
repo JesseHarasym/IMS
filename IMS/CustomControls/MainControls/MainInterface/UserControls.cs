@@ -22,6 +22,7 @@ namespace IMS.CustomControls
             InitializeComponent();
         }
 
+        //for creating instance for regular users
         public UserControls(int customerId, int accessLevel)
         {
             InitializeComponent();
@@ -30,6 +31,7 @@ namespace IMS.CustomControls
             ShowUserInfo();
         }
 
+        //for creating instance for admin users
         public UserControls(AdminControls adminControls, int customerId, int accessLevel)
         {
             InitializeComponent();
@@ -46,6 +48,7 @@ namespace IMS.CustomControls
             boxSearch.Items.Add("Orders");
             boxSearch.SelectedIndex = 0;
 
+            //setup for regular users view
             if (AccessLevel == 0)
             {
                 btnAddOrder.Visible = true;
@@ -54,6 +57,7 @@ namespace IMS.CustomControls
                 btnSeeAlllPreOrders.Text = "See My Pre-Orders";
                 boxSearch.Items.Remove("Inventory");
             }
+            //setup for admins view
             else if (AccessLevel == 1)
             {
                 btnAddOrder.Visible = false;
@@ -118,7 +122,7 @@ namespace IMS.CustomControls
         //allow users to create a new order
         private void btnAddOrder_Click(object sender, EventArgs e)
         {
-            var addOrderForm = new AddOrder(this, ProductList, OrderList, CustomerId);
+            var addOrderForm = new AddOrder(this, ProductList, CustomerId);
             addOrderForm.Show();
         }
     }

@@ -23,7 +23,7 @@ namespace IMS.Validation
         public bool ValidateName(string name)
         {
             bool valid = false;
-            Regex reg = new Regex(@"^[a-zA-Z]+$");
+            Regex reg = new Regex(@"^[a-zA-Z]+\s?[a-zA-Z]+$");
 
             if (reg.IsMatch(name) && name.Length >= 3)
             {

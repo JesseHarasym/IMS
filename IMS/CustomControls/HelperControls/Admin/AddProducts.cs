@@ -1,6 +1,5 @@
 ﻿using IMS.Database;
 using System;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace IMS.CustomControls.HelperControls
@@ -17,61 +16,26 @@ namespace IMS.CustomControls.HelperControls
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            bool success;
-
             string title = txtTitle.Text;
             int quantity = Convert.ToInt32(txtQuantity.Text);
-
-            string connectionString = Connection.ConnectionString;
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                success = InsertGameInfo(connection, title, quantity);  //function to insert data
-                connection.Close();
-
-                if (success)
-                {
-                    AdminControls.AdminSetup(); //function that fills admin panel with newly updated data
-                    MessageBox.Show($"{quantity} of {title} added to the inventory.");
-                    Close();
-                }
-            }
-        }
-
-        public bool InsertGameInfo(SqlConnection connection, string title, int quantity)
-        {
-            bool success = false;
-
             DateTime releaseDate = Convert.ToDateTime(txtReleaseDate.Text);
             string description = txtDescription.Text;
             string console = txtConsole.Text;
             double price = Convert.ToDouble(txtPrice.Text);
 
-            //insert new product into the GameInformation database table
-            using (SqlCommand cmd = new SqlCommand(
-                $"INSERT INTO GameInformation (Title, Quantity, ReleaseDate, Description, Console, Price)" +
-                $"VALUES (@title, @quantity, @releaseDate, @description, @console, @price)", connection))
-            {
-                cmd.Parameters.AddWithValue("@title", title);
-                cmd.Parameters.AddWithValue("@quantity", quantity);
-                cmd.Parameters.AddWithValue("@releaseDate", releaseDate);
-                cmd.Parameters.AddWithValue("@description", description);
-                cmd.Parameters.AddWithValue("@console", console);
-                cmd.Parameters.AddWithValue("@price", price);
+            var pd = new ProductDatabase();
+            bool success = pd.InsertGameInfo(title, quantity, releaseDate, description, console, price);
 
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                    success = true;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("There was an issue inserting the new game information" + ex);
-                    MessageBox.Show("There was an issue adding this product."); //show user a message if there's an error.
-                }
+            if (success)
+            {
+                AdminControls.AdminSetup(); //function that fills admin panel with newly updated data
+                MessageBox.Show($"{quantity} of {title} added to the inventory.");
+                Close();
             }
-            return success;
+            else
+            {
+                MessageBox.Show("There was an issue adding this product."); //show user a message if there's an error.
+            }
         }
 
         //handle basic data validation so that quantity can only be numbers

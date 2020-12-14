@@ -21,6 +21,10 @@ namespace IMS.Classes
         {
             string connectionString = Connection.ConnectionString;
 
+            //hash password before entering it into the database
+            var hp = new HashPassword();
+            string hashedPassword = hp.HashAccountPassword(Password);
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(
@@ -29,7 +33,7 @@ namespace IMS.Classes
                 {
                     cmd.Parameters.AddWithValue("@name", Name);
                     cmd.Parameters.AddWithValue("@username", Username);
-                    cmd.Parameters.AddWithValue("@password", Password);
+                    cmd.Parameters.AddWithValue("@password", hashedPassword);
                     cmd.Parameters.AddWithValue("@email", Email);
                     connection.Open();
                     cmd.ExecuteNonQuery();
