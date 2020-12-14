@@ -1,6 +1,7 @@
 ﻿using IMS.Classes;
+using IMS.Database;
+using IMS.Validation;
 using System;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace IMS.CustomControls
@@ -25,26 +26,9 @@ namespace IMS.CustomControls
 
         private void btnAddUser_Click(object sender, EventArgs e)
         {
-            bool valid = false;
-
             //validate all inputs. done this way so only one message box comes up at a time.
-            bool nameValid = ValidateName(txtName.Text);
-            if (nameValid)
-            {
-                bool usernameValid = ValidateUsername(txtUsername.Text);
-                if (usernameValid)
-                {
-                    bool passwordValid = ValidatePassword(txtPassword.Text, txtPassword2.Text);
-                    if (passwordValid)
-                    {
-                        bool emailValid = ValidateEmail(txtEmail.Text);
-                        if (emailValid)
-                        {
-                            valid = true;
-                        }
-                    }
-                }
-            }
+            //function is quite verbose, so it made sense to separate it
+            bool valid = ValidateUserInputs();
 
             if (valid)
             {
@@ -70,80 +54,59 @@ namespace IMS.CustomControls
             }
         }
 
-        //ensure input is valid email
-        public bool ValidateEmail(string email)
+        public bool ValidateUserInputs()
         {
-            bool valid = false;
-            Regex reg = new Regex(@"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}$", RegexOptions.IgnoreCase);
+            //get access to database related functions for checking existing emails/usernames
+            var rd = new RegistrationDatabase();
+            //get access to validation functions
+            var uv = new UserValidation();
+            //get tuple of bools back so we can check for two bools: Item1 is password match, Item2 is password at least 6 chars long
+            var validatePassword = uv.ValidatePassword(txtPassword.Text, txtPassword2.Text);
 
-            if (reg.IsMatch(email))
-            {
-                valid = true;
-            }
-            else
-            {
-                MessageBox.Show("This is not a valid email. Please check it and try again.");
-            }
 
-            return valid;
-        }
-
-        //ensure input is a valid name
-        public bool ValidateName(string name)
-        {
-            bool valid = false;
-            Regex reg = new Regex(@"^[a-zA-Z]+$");
-
-            if (reg.IsMatch(name) && name.Length >= 3)
-            {
-                valid = true;
-            }
-            else
+            if (!uv.ValidateName(txtName.Text))
             {
                 MessageBox.Show("This is not a valid name. It must be at least three characters and no digits or symbols.");
+                return false;
             }
 
-            return valid;
-        }
-
-        //ensure input is a valid password
-        public bool ValidatePassword(string password, string password2)
-        {
-            bool valid = false;
-            var reg = new Regex(@".{6,}");
-
-            if (!password.Equals(password2))
-            {
-                MessageBox.Show("Your passwords do not match.");
-            }
-            else if (reg.IsMatch(password) && reg.IsMatch(password2))
-            {
-                valid = true;
-            }
-            else if (password.Length < 6)
-            {
-                MessageBox.Show("Password must be at least 6 characters long.");
-            }
-
-            return valid;
-        }
-
-        //ensure input is a valid name
-        public bool ValidateUsername(string username)
-        {
-            bool valid = false;
-            Regex reg = new Regex(@"^[a-zA-Z0-9]+$");
-
-            if (reg.IsMatch(username) && username.Length >= 3)
-            {
-                valid = true;
-            }
-            else
+            if (!uv.ValidateUsername(txtUsername.Text))
             {
                 MessageBox.Show("This is not a valid username. It must be at least three characters and no symbols.");
+                return false;
             }
 
-            return valid;
+            if (!rd.CheckForExistingUsername(txtUsername.Text))
+            {
+                MessageBox.Show("This username already exists. Please choose something else.");
+                return false;
+            }
+
+            if (!validatePassword.Item1)
+            {
+                MessageBox.Show("Your passwords do not match.");
+                return false;
+            }
+
+            if (!validatePassword.Item2)
+            {
+                MessageBox.Show("Password must be at least 6 characters long.");
+                return false;
+            }
+
+            if (!uv.ValidateEmail(txtEmail.Text))
+            {
+                MessageBox.Show("This is not a valid email. Please check it and try again.");
+                return false;
+            }
+
+            if (!rd.CheckForExistingEmail(txtEmail.Text))
+            {
+                MessageBox.Show("This email already has an account associated with it.");
+                return false;
+            }
+
+            return true;
         }
     }
 }
