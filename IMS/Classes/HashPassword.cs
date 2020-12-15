@@ -12,7 +12,7 @@ namespace IMS.Classes
             new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
 
             //create the Rfc2898DeriveBytes and get the hash value
-            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 100000);
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000);
             byte[] hash = pbkdf2.GetBytes(20);
 
             //combine the salt and password bytes to be used later 
@@ -41,7 +41,7 @@ namespace IMS.Classes
                 Array.Copy(hashBytes, 0, salt, 0, 16);
 
                 //apply hash on the user entered password
-                var pbkdf2 = new Rfc2898DeriveBytes(userEnteredPassword, salt, 100000);
+                var pbkdf2 = new Rfc2898DeriveBytes(userEnteredPassword, salt, 10000);
                 byte[] hash = pbkdf2.GetBytes(20);
 
                 //compare and see if they matched
