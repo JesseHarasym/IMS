@@ -118,10 +118,10 @@
     <Compile Include="Controls\MainControls\Accounts\RegistrationForm.Designer.cs">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MainControls\MainInterface\AdminControls.cs">
+    <Compile Include="Controls\MainControls\MainGUI\AdminControls.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\MainControls\MainInterface\AdminControls.Designer.cs">
+    <Compile Include="Controls\MainControls\MainGUI\AdminControls.Designer.cs">
       <DependentUpon>AdminControls.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\MainControls\Accounts\LoginForm.cs">
@@ -130,10 +130,10 @@
     <Compile Include="Controls\MainControls\Accounts\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MainControls\MainInterface\UserControls.cs">
+    <Compile Include="Controls\MainControls\MainGUI\UserControls.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\MainControls\MainInterface\UserControls.Designer.cs">
+    <Compile Include="Controls\MainControls\MainGUI\UserControls.Designer.cs">
       <DependentUpon>UserControls.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Database\Connection.cs" />
@@ -144,10 +144,10 @@
     <Compile Include="Classes\Database\Inventory\OrderDatabase.cs" />
     <Compile Include="Classes\Database\Inventory\ProductDatabase.cs" />
     <Compile Include="Classes\Database\Accounts\RegistrationDatabase.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="Controls\MainControls\MainGUI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Controls\MainControls\MainGUI\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -174,16 +174,16 @@
     <EmbeddedResource Include="Controls\MainControls\Accounts\RegistrationForm.resx">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MainControls\MainInterface\AdminControls.resx">
+    <EmbeddedResource Include="Controls\MainControls\MainGUI\AdminControls.resx">
       <DependentUpon>AdminControls.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MainControls\Accounts\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MainControls\MainInterface\UserControls.resx">
+    <EmbeddedResource Include="Controls\MainControls\MainGUI\UserControls.resx">
       <DependentUpon>UserControls.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Controls\MainControls\MainGUI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

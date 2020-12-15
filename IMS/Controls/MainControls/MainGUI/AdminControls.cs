@@ -58,6 +58,25 @@ namespace IMS.CustomControls
         public void SearchInventory(BindingList<Products> inventorySearch)
         {
             dataGridInventory.DataSource = inventorySearch;
+            ErrorSearching(dataGridInventory, "Inventory");
+        }
+
+        public void ErrorSearching(DataGridView dataGrid, string name)
+        {
+            if (dataGrid.Rows.Count == 0)
+            {
+                MessageBox.Show($"There was nothing found that matches your search criteria in {name}");
+            }
+        }
+
+        public ComboBox AddInventorySearchHeaders(ComboBox boxSearchHeader)
+        {
+            for (int i = 0; i < dataGridInventory.ColumnCount; i++)
+            {
+                boxSearchHeader.Items.Add(dataGridInventory.Columns[i].HeaderText);
+            }
+
+            return boxSearchHeader;
         }
 
         //highlight the pre ordered game when clicking button

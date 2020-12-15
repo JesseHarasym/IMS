@@ -19,11 +19,6 @@ namespace IMS.CustomControls
         public int CustomerId;
         public int AccessLevel;
 
-        public UserControls()
-        {
-            InitializeComponent();
-        }
-
         //for creating instance for regular users
         public UserControls(int customerId, int accessLevel)
         {
@@ -45,10 +40,21 @@ namespace IMS.CustomControls
 
         private void UserControls_Load(object sender, EventArgs e)
         {
-            //setup dropdown menu
-            boxSearch.DropDownStyle = ComboBoxStyle.DropDownList;
-            boxSearch.Items.Add("Orders");
-            boxSearch.SelectedIndex = 0;
+            //setup dropdown menu to search which table
+            boxSearchTable.DropDownStyle = ComboBoxStyle.DropDownList;
+            boxSearchTable.Items.Add("Orders");
+            boxSearchTable.SelectedIndex = 0;
+
+            //setup dropdown menu to search which headers
+            boxSearchHeader.DropDownStyle = ComboBoxStyle.DropDownList;
+            boxSearchHeader.Items.Add("Any");
+            boxSearchHeader.SelectedIndex = 0;
+
+            //fill loaded dropdown menu with the first index's header info (orders)
+            for (int i = 0; i < dataGridOrders.ColumnCount; i++)
+            {
+                boxSearchHeader.Items.Add(dataGridOrders.Columns[i].HeaderText);
+            }
 
             //setup for regular users view
             if (AccessLevel == 0)
@@ -56,7 +62,7 @@ namespace IMS.CustomControls
                 btnOrderPickups.Visible = false;
                 btnAddOrder.Visible = true;
                 btnSeeAlllPreOrders.Text = "See My Pre-Orders";
-                boxSearch.Items.Remove("Inventory");
+                boxSearchTable.Items.Remove("Inventory");
             }
             //setup for admins view
             else if (AccessLevel == 1)
@@ -65,7 +71,32 @@ namespace IMS.CustomControls
                 btnAddOrder.Visible = false;
                 btnCancelOrders.Location = new Point(161, 116);
                 btnSeeAlllPreOrders.Text = "See All Pre-Orders";
-                boxSearch.Items.Add("Inventory");
+                boxSearchTable.Items.Add("Inventory");
+            }
+        }
+
+        private void boxSearchTable_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (boxSearchTable.SelectedIndex == 0)
+            {
+                //clear previous options added and reset up combo box
+                boxSearchHeader.Items.Clear();
+                boxSearchHeader.Items.Add("Any");
+                boxSearchHeader.SelectedIndex = 0;
+                //if the first choice i chosen, fill properties for orders
+                for (int i = 0; i < dataGridOrders.ColumnCount; i++)
+                {
+                    boxSearchHeader.Items.Add(dataGridOrders.Columns[i].HeaderText);
+                }
+            }
+            else if (boxSearchTable.SelectedIndex == 1 && AccessLevel == 1)
+            {
+                //clear previous options added and reset up combo box
+                boxSearchHeader.Items.Clear();
+                boxSearchHeader.Items.Add("Any");
+                boxSearchHeader.SelectedIndex = 0;
+                //if second property is chosen, pass to admin panel to get header names and return filled combo box
+                boxSearchHeader = AdminControl.AddInventorySearchHeaders(boxSearchHeader);
             }
         }
 
@@ -89,17 +120,44 @@ namespace IMS.CustomControls
         public void Search()
         {
             var search = new Search(ProductList, OrderList);
+            string searchVal = txtSearch.Text;
 
-            switch (boxSearch.Text)
+            //if header index 0 is chosen ('Any' header) then search all available headers in the table
+            if (boxSearchHeader.SelectedIndex == 0)
             {
-                case "Inventory":
-                    var inventorySearch = search.SearchProducts(txtSearch.Text);
-                    AdminControl.SearchInventory(inventorySearch);
-                    break;
-                case "Orders":
-                    var orderSearch = search.SearchOrders(txtSearch.Text);
-                    dataGridOrders.DataSource = orderSearch;
-                    break;
+                switch (boxSearchTable.Text)
+                {
+                    case "Inventory":
+                        var inventorySearch = search.SearchProductsAll(searchVal);
+                        AdminControl.SearchInventory(inventorySearch);
+                        //inventories error checking is supplied directly at SearchInventory() func
+                        break;
+                    case "Orders":
+                        var orderSearch = search.SearchOrdersAll(searchVal);
+                        dataGridOrders.DataSource = orderSearch;
+                        AdminControl.ErrorSearching(dataGridOrders, "Orders");   //check if search was empty for orders and if so give error
+                        break;
+                }
+            }
+            //if any other index, assume they chose a header and search as appropriate
+            else
+            {
+                //get text for currently selected item of header combo box
+                string headerSelected = boxSearchHeader.GetItemText(boxSearchHeader.SelectedItem);
+                switch (boxSearchTable.Text)
+                {
+                    case "Inventory":
+                        var inventorySearch =
+                            search.SearchProductsSpecifyHeader(searchVal, headerSelected);
+                        AdminControl.SearchInventory(inventorySearch);
+                        break;
+                    case "Orders":
+                        var orderSearch =
+                            search.SearchOrdersSpecifyHeader(searchVal, headerSelected);
+                        dataGridOrders.DataSource = orderSearch;
+                        AdminControl.ErrorSearching(dataGridOrders, "Orders");
+                        break;
+                }
             }
         }
 

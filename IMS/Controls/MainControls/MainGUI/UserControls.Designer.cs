@@ -38,9 +38,9 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.lblTable = new System.Windows.Forms.Label();
             this.lblSearch = new System.Windows.Forms.Label();
-            this.boxSearch = new System.Windows.Forms.ComboBox();
+            this.boxSearchTable = new System.Windows.Forms.ComboBox();
             this.pnlSearch = new System.Windows.Forms.Panel();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.boxSearchHeader = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridOrders)).BeginInit();
             this.pnlSearch.SuspendLayout();
@@ -128,7 +128,7 @@
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(171, 41);
+            this.txtSearch.Location = new System.Drawing.Point(387, 6);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(239, 29);
             this.txtSearch.TabIndex = 7;
@@ -139,7 +139,7 @@
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnSearch.Location = new System.Drawing.Point(489, 41);
+            this.btnSearch.Location = new System.Drawing.Point(453, 45);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(99, 35);
             this.btnSearch.TabIndex = 3;
@@ -151,7 +151,7 @@
             // 
             this.lblTable.AutoSize = true;
             this.lblTable.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTable.Location = new System.Drawing.Point(10, 9);
+            this.lblTable.Location = new System.Drawing.Point(18, 9);
             this.lblTable.Name = "lblTable";
             this.lblTable.Size = new System.Drawing.Size(115, 21);
             this.lblTable.TabIndex = 5;
@@ -161,57 +161,58 @@
             // 
             this.lblSearch.AutoSize = true;
             this.lblSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSearch.Location = new System.Drawing.Point(10, 44);
+            this.lblSearch.Location = new System.Drawing.Point(306, 9);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(155, 21);
+            this.lblSearch.Size = new System.Drawing.Size(81, 21);
             this.lblSearch.TabIndex = 18;
-            this.lblSearch.Text = "Enter Search Word:";
+            this.lblSearch.Text = "Keyword:";
             // 
-            // boxSearch
+            // boxSearchTable
             // 
-            this.boxSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.boxSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.boxSearch.FormattingEnabled = true;
-            this.boxSearch.Location = new System.Drawing.Point(131, 6);
-            this.boxSearch.Name = "boxSearch";
-            this.boxSearch.Size = new System.Drawing.Size(163, 29);
-            this.boxSearch.TabIndex = 6;
+            this.boxSearchTable.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.boxSearchTable.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.boxSearchTable.FormattingEnabled = true;
+            this.boxSearchTable.Location = new System.Drawing.Point(131, 6);
+            this.boxSearchTable.Name = "boxSearchTable";
+            this.boxSearchTable.Size = new System.Drawing.Size(153, 29);
+            this.boxSearchTable.TabIndex = 6;
+            this.boxSearchTable.SelectionChangeCommitted += new System.EventHandler(this.boxSearchTable_SelectionChangeCommitted);
             // 
             // pnlSearch
             // 
             this.pnlSearch.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.pnlSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlSearch.Controls.Add(this.comboBox1);
-            this.pnlSearch.Controls.Add(this.boxSearch);
+            this.pnlSearch.Controls.Add(this.boxSearchHeader);
+            this.pnlSearch.Controls.Add(this.boxSearchTable);
             this.pnlSearch.Controls.Add(this.lblSearch);
-            this.pnlSearch.Controls.Add(this.label1);
             this.pnlSearch.Controls.Add(this.lblTable);
+            this.pnlSearch.Controls.Add(this.label1);
             this.pnlSearch.Controls.Add(this.btnSearch);
             this.pnlSearch.Controls.Add(this.txtSearch);
             this.pnlSearch.Location = new System.Drawing.Point(25, 3);
             this.pnlSearch.Name = "pnlSearch";
-            this.pnlSearch.Size = new System.Drawing.Size(642, 84);
+            this.pnlSearch.Size = new System.Drawing.Size(642, 88);
             this.pnlSearch.TabIndex = 30;
             // 
-            // comboBox1
+            // boxSearchHeader
             // 
-            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(459, 9);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(163, 29);
-            this.comboBox1.TabIndex = 22;
+            this.boxSearchHeader.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.boxSearchHeader.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.boxSearchHeader.FormattingEnabled = true;
+            this.boxSearchHeader.Location = new System.Drawing.Point(131, 45);
+            this.boxSearchHeader.Name = "boxSearchHeader";
+            this.boxSearchHeader.Size = new System.Drawing.Size(153, 29);
+            this.boxSearchHeader.TabIndex = 22;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(312, 12);
+            this.label1.Location = new System.Drawing.Point(3, 48);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(141, 21);
+            this.label1.Size = new System.Drawing.Size(130, 21);
             this.label1.TabIndex = 21;
-            this.label1.Text = "Choose Columns:";
+            this.label1.Text = "Choose Header:";
             // 
             // UserControls
             // 
@@ -246,9 +247,9 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label lblTable;
         private System.Windows.Forms.Label lblSearch;
-        private System.Windows.Forms.ComboBox boxSearch;
+        private System.Windows.Forms.ComboBox boxSearchTable;
         private System.Windows.Forms.Panel pnlSearch;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox boxSearchHeader;
         private System.Windows.Forms.Label label1;
     }
 }

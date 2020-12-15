@@ -14,11 +14,11 @@ namespace VideoGameInventoryApp
 
         public Inventory(List<Products> productList, List<Orders> orderList, int accessLevel, int customerId)
         {
-            getData(productList, orderList, accessLevel, customerId);
+            GetData(productList, orderList, accessLevel, customerId);
         }
 
         //only apply data needed for a specific user, if admin give access to everything, otherwise give according to their customerId
-        public void getData(List<Products> productList, List<Orders> orderList, int accessLevel, int customerId)
+        public void GetData(List<Products> productList, List<Orders> orderList, int accessLevel, int customerId)
         {
             if (accessLevel == 1)
             {
