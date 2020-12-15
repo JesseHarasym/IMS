@@ -70,39 +70,44 @@ namespace IMS.CustomControls.HelperControls.Users
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            var od = new OrderDatabase();
-
-            string[] boxArr = boxWhichOrder.Text.Split('-');
-            string[] orderArr = boxArr[0].Split('#');
-            int orderId = Convert.ToInt32(orderArr[1].Trim());
-            bool successUpdate = false;
-            bool successDelete = false;
-
-            if (boxWhichOrder.SelectedIndex != 0)
+            try
             {
-                successUpdate = od.UpdateGameInfo(GameID, Quantity, "+");
-                successDelete = od.DeleteUserOrder(orderId);
+                var od = new OrderDatabase();
+
+                string[] boxArr = boxWhichOrder.Text.Split('-');
+                string[] orderArr = boxArr[0].Split('#');
+                int orderId = Convert.ToInt32(orderArr[1].Trim());
+                bool successUpdate = false;
+                bool successDelete = false;
+
+                if (boxWhichOrder.SelectedIndex != 0)
+                {
+                    successUpdate = od.UpdateGameInfo(GameID, Quantity, "+");
+                    successDelete = od.DeleteUserOrder(orderId);
+                }
+                else
+                {
+                    MessageBox.Show("You must select an order to cancel it.");
+                }
+
+                if (successUpdate && successDelete)
+                {
+                    UserControls.ShowUserInfo();
+
+                    MessageBox.Show(
+                        $"Order #{orderId} has been cancelled for pickup.");
+
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("There was an issue while attempting to cancel this order.");
+                }
             }
-            else
+            catch
             {
-                MessageBox.Show("You must select an order to cancel it.");
-            }
-
-            if (successUpdate && successDelete)
-            {
-                UserControls.ShowUserInfo();
-
-                MessageBox.Show(
-                    $"Order #{orderId} has been cancelled for pickup.");
-
-                Close();
-            }
-            else
-            {
-                MessageBox.Show("There was an issue while attempting to cancel this order.");
+                MessageBox.Show("You must choose a product to be cancelled.");
             }
         }
-
-
     }
 }

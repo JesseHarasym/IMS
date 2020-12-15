@@ -25,6 +25,7 @@ namespace IMS.CustomControls.HelperControls
             bool validPrice = Double.TryParse(txtPrice.Text, out var price);
             bool success = false;
 
+            //validate product input and get any error messages that may be relevant
             var pv = new ProductValidation();
             bool validateInput = pv.ValidationMessages(title, validQuantity, validDate, console, validPrice);
 
@@ -45,8 +46,6 @@ namespace IMS.CustomControls.HelperControls
                 MessageBox.Show("There was an issue adding this product."); //show user a message if there's an error.
             }
         }
-
-
 
         //handle basic data validation so that quantity can only be numbers
         private void txtQuantity_KeyPress(object sender, KeyPressEventArgs e)

@@ -105,18 +105,15 @@ namespace IMS.CustomControls.HelperControls
             bool validPrice = Double.TryParse(txtPrice.Text, out var price);
             bool success = false;
 
+            //validate product input and get any error messages that may be relevant
             var pv = new ProductValidation();
             bool validateInput = pv.ValidationMessages(title, validQuantity, validDate, console, validPrice);
 
-
-            if (boxWhichProduct.SelectedIndex != 0 && validateInput)
+            //if all inputs are valid and a product was chosen
+            if (validateInput)
             {
                 var pd = new ProductDatabase();
                 success = pd.UpdateGameInfo(gameId, title, quantity, releaseDate, description, console, price);
-            }
-            else
-            {
-                MessageBox.Show("You must select a product to edit.");
             }
 
             if (success)
@@ -125,7 +122,7 @@ namespace IMS.CustomControls.HelperControls
                 MessageBox.Show($"{gameId} ~ {title} was edited successfully.");
                 Close();
             }
-            else
+            else if (!success && validateInput)
             {
                 MessageBox.Show("We are not able to update this product at this time.");
             }

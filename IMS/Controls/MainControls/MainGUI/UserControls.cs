@@ -185,19 +185,19 @@ namespace IMS.CustomControls
         private void btnAddOrder_Click(object sender, EventArgs e)
         {
             var addOrderForm = new AddOrder(this, ProductList, CustomerId);
-            addOrderForm.Show();
+            addOrderForm.ShowDialog();
         }
 
         private void btnCancelOrders_Click(object sender, EventArgs e)
         {
             var cancelOrderForm = new CancelOrders(this, ProductList, OrderList);
-            cancelOrderForm.Show();
+            cancelOrderForm.ShowDialog();
         }
 
         private void btnOrderPickups_Click(object sender, EventArgs e)
         {
             var setOrderPickedUp = new OrderPickup(this, OrderList);
-            setOrderPickedUp.Show();
+            setOrderPickedUp.ShowDialog();
         }
     }
 }

@@ -33,31 +33,39 @@ namespace IMS.CustomControls.HelperControls.Admin
 
         private void bttDelete_Click(object sender, EventArgs e)
         {
-            string[] productArr = boxWhichProduct.Text.Split('~');
-            string gameId = productArr[0].Trim();
-            string title = productArr[1].Trim();
-            bool success = false;
+            try
+            {
+                string[] productArr = boxWhichProduct.Text.Split('~');
+                string gameId = productArr[0].Trim();
+                string title = productArr[1].Trim();
+                bool success = false;
 
-            var pd = new ProductDatabase();
-            if (boxWhichProduct.SelectedIndex != 0)
-            {
-                success = pd.DeleteGameInfo(Convert.ToInt32(gameId));
+                var pd = new ProductDatabase();
+                if (boxWhichProduct.SelectedIndex != 0)
+                {
+                    success = pd.DeleteGameInfo(Convert.ToInt32(gameId));
+                }
+                else
+                {
+                    MessageBox.Show("You must select a product to remove.");
+                }
+
+                if (success)
+                {
+                    AdminControls.AdminSetup(); //function that fills admin panel with newly updated data
+                    MessageBox.Show($"{gameId}: {title} was deleted successfully.");
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("There was an issue while trying to delete this product.");
+                }
             }
-            else
+            catch
             {
-                MessageBox.Show("You must select a product to remove.");
+                MessageBox.Show("You must choose a product to delete.");
             }
 
-            if (success)
-            {
-                AdminControls.AdminSetup(); //function that fills admin panel with newly updated data
-                MessageBox.Show($"{gameId}: {title} was deleted successfully.");
-                Close();
-            }
-            else
-            {
-                MessageBox.Show("There was an issue while trying to delete this product.");
-            }
         }
     }
 }

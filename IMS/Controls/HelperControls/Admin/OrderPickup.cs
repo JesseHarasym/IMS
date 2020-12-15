@@ -37,29 +37,36 @@ namespace IMS.CustomControls.HelperControls.Admin
 
         private void btnPickedUp_Click(object sender, EventArgs e)
         {
-            string[] orderArr = boxOrderPickups.Text.Split('~');
-            Int32.TryParse(orderArr[0].Trim(), out int orderId);
-            string title = orderArr[1].Trim();
-            bool success = false;
-
-            if (boxOrderPickups.SelectedIndex != 0)
+            try
             {
-                var od = new OrderDatabase();
-                success = od.SetOrderAsPickedUp(orderId);
+                string[] orderArr = boxOrderPickups.Text.Split('~');
+                Int32.TryParse(orderArr[0].Trim(), out int orderId);
+                string title = orderArr[1].Trim();
+                bool success = false;
+
+                if (boxOrderPickups.SelectedIndex != 0)
+                {
+                    var od = new OrderDatabase();
+                    success = od.SetOrderAsPickedUp(orderId);
+                }
+                else
+                {
+                    MessageBox.Show("You must choose an order to set it as picked up.");
+                }
+
+                if (success)
+                {
+                    UserControls.ShowUserInfo();
+                    MessageBox.Show($"{orderId} has been picked up successfully.");
+
+                    Close();
+                }
             }
-            else
+            catch
             {
-                MessageBox.Show("You must choose an order to set it as picked up.");
+                MessageBox.Show("You must choose a product to be picked up.");
             }
 
-
-            if (success)
-            {
-                UserControls.ShowUserInfo();
-                MessageBox.Show($"{orderId} has been picked up successfully.");
-
-                Close();
-            }
         }
     }
 }

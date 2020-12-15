@@ -19,14 +19,14 @@ namespace IMS
         private void btnLogin_Click(object sender, System.EventArgs e)
         {
             var logInForm = new LogInForm(this);
-            logInForm.Show();
+            logInForm.ShowDialog();
 
         }
 
         private void btnCreateUser_Click(object sender, System.EventArgs e)
         {
             var userForm = new RegistrationForm(AccessLevel);
-            userForm.Show();
+            userForm.ShowDialog();
         }
 
         public void SetUserName(string username, string accessLevel, string currentUserId)

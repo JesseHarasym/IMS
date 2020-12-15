@@ -17,11 +17,6 @@ namespace IMS.CustomControls
         public int CustomerId;
         public int AccessLevel;
 
-        public AdminControls()
-        {
-            InitializeComponent();
-        }
-
         public AdminControls(int customerId, int accessLevel)
         {
             InitializeComponent();
@@ -102,21 +97,21 @@ namespace IMS.CustomControls
         private void btnAddProducts_Click(object sender, EventArgs e)
         {
             var addProductForm = new AddProducts(this);
-            addProductForm.Show();
+            addProductForm.ShowDialog();
         }
 
         //edit new product through form
         private void btnEditProducts_Click(object sender, EventArgs e)
         {
             var editProductForm = new EditProducts(this, ProductList);
-            editProductForm.Show();
+            editProductForm.ShowDialog();
         }
 
         //delete new product through form
         private void btnDeleteProducts_Click(object sender, EventArgs e)
         {
             var deleteProductForm = new DeleteProducts(this, ProductList);
-            deleteProductForm.Show();
+            deleteProductForm.ShowDialog();
         }
     }
 }

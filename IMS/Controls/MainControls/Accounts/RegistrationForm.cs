@@ -1,5 +1,4 @@
 ﻿using IMS.Classes;
-using IMS.Database;
 using IMS.Validation;
 using System;
 using System.Windows.Forms;
@@ -26,8 +25,9 @@ namespace IMS.CustomControls
 
         private void btnAddUser_Click(object sender, EventArgs e)
         {
-            //function to validate all user inputs when registering
-            bool valid = ValidateUserInputs();
+            //function to validate all user inputs when registering and give error messages if invalid
+            var uv = new UserValidation();
+            bool valid = uv.ValidationMessages(txtName.Text, txtUsername.Text, txtPassword.Text, txtPassword2.Text, txtEmail.Text);
 
             if (valid)
             {
@@ -51,61 +51,6 @@ namespace IMS.CustomControls
                 MessageBox.Show("User created successfuly");
                 Close();
             }
-        }
-
-        public bool ValidateUserInputs()
-        {
-            //get access to database related functions for checking existing emails/usernames
-            var rd = new RegistrationDatabase();
-            //get access to validation functions
-            var uv = new UserValidation();
-            //get tuple of bools back so we can check for two bools: Item1 is password match, Item2 is password at least 6 chars long
-            var validatePassword = uv.ValidatePassword(txtPassword.Text, txtPassword2.Text);
-
-
-            if (!uv.ValidateName(txtName.Text))
-            {
-                MessageBox.Show("This is not a valid name. It must be at least three characters and no digits or symbols.");
-                return false;
-            }
-
-            if (!uv.ValidateUsername(txtUsername.Text))
-            {
-                MessageBox.Show("This is not a valid username. It must be at least three characters and no symbols.");
-                return false;
-            }
-
-            if (!rd.CheckForExistingUsername(txtUsername.Text))
-            {
-                MessageBox.Show("This username already exists. Please choose something else.");
-                return false;
-            }
-
-            if (!validatePassword.Item1)
-            {
-                MessageBox.Show("Your passwords do not match.");
-                return false;
-            }
-
-            if (!validatePassword.Item2)
-            {
-                MessageBox.Show("Password must be at least 6 characters long.");
-                return false;
-            }
-
-            if (!uv.ValidateEmail(txtEmail.Text))
-            {
-                MessageBox.Show("This is not a valid email. Please check it and try again.");
-                return false;
-            }
-
-            if (!rd.CheckForExistingEmail(txtEmail.Text))
-            {
-                MessageBox.Show("This email already has an account associated with it.");
-                return false;
-            }
-
-            return true;
         }
     }
 }
