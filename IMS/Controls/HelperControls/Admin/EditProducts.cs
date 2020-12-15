@@ -1,4 +1,5 @@
-﻿using IMS.Database;
+﻿using IMS.Classes.Validation;
+using IMS.Database;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -97,16 +98,20 @@ namespace IMS.CustomControls.HelperControls
             string[] productArr = boxWhichProduct.Text.Split('~');
             string gameId = productArr[0].Trim();
             string title = txtTitle.Text;
-            int quantity = Convert.ToInt32(txtQuantity.Text);
-            DateTime releaseDate = Convert.ToDateTime(txtReleaseDate.Text);
+            bool validQuantity = Int32.TryParse(txtQuantity.Text, out var quantity);
+            bool validDate = DateTime.TryParse(txtReleaseDate.Text, out var releaseDate);
             string description = txtDescription.Text;
             string console = txtConsole.Text;
-            double price = Convert.ToDouble(txtPrice.Text);
+            bool validPrice = Double.TryParse(txtPrice.Text, out var price);
             bool success = false;
 
-            var pd = new ProductDatabase();
-            if (boxWhichProduct.SelectedIndex != 0)
+            var pv = new ProductValidation();
+            bool validateInput = pv.ValidationMessages(title, validQuantity, validDate, console, validPrice);
+
+
+            if (boxWhichProduct.SelectedIndex != 0 && validateInput)
             {
+                var pd = new ProductDatabase();
                 success = pd.UpdateGameInfo(gameId, title, quantity, releaseDate, description, console, price);
             }
             else

@@ -1,4 +1,5 @@
-﻿using IMS.Database;
+﻿using IMS.Classes.Validation;
+using IMS.Database;
 using System;
 using System.Windows.Forms;
 
@@ -17,14 +18,21 @@ namespace IMS.CustomControls.HelperControls
         private void btnAdd_Click(object sender, EventArgs e)
         {
             string title = txtTitle.Text;
-            int quantity = Convert.ToInt32(txtQuantity.Text);
-            DateTime releaseDate = Convert.ToDateTime(txtReleaseDate.Text);
+            bool validQuantity = Int32.TryParse(txtQuantity.Text, out var quantity);
+            bool validDate = DateTime.TryParse(txtReleaseDate.Text, out var releaseDate);
             string description = txtDescription.Text;
             string console = txtConsole.Text;
-            double price = Convert.ToDouble(txtPrice.Text);
+            bool validPrice = Double.TryParse(txtPrice.Text, out var price);
+            bool success = false;
 
-            var pd = new ProductDatabase();
-            bool success = pd.InsertGameInfo(title, quantity, releaseDate, description, console, price);
+            var pv = new ProductValidation();
+            bool validateInput = pv.ValidationMessages(title, validQuantity, validDate, console, validPrice);
+
+            if (validateInput)
+            {
+                var pd = new ProductDatabase();
+                success = pd.InsertGameInfo(title, quantity, releaseDate, description, console, price);
+            }
 
             if (success)
             {
@@ -32,11 +40,13 @@ namespace IMS.CustomControls.HelperControls
                 MessageBox.Show($"{quantity} of {title} added to the inventory.");
                 Close();
             }
-            else
+            else if (!success && validateInput)
             {
                 MessageBox.Show("There was an issue adding this product."); //show user a message if there's an error.
             }
         }
+
+
 
         //handle basic data validation so that quantity can only be numbers
         private void txtQuantity_KeyPress(object sender, KeyPressEventArgs e)

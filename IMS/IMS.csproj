@@ -76,6 +76,7 @@
     <Compile Include="Classes\MainClasses\Inventory\Inventory.cs" />
     <Compile Include="Classes\MainClasses\Inventory\Search.cs" />
     <Compile Include="Classes\MainClasses\Accounts\Users.cs" />
+    <Compile Include="Classes\Validation\ProductValidation.cs" />
     <Compile Include="Controls\HelperControls\Admin\AddProducts.cs">
       <SubType>Form</SubType>
     </Compile>
