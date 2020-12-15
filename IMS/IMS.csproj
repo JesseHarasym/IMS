@@ -93,17 +93,23 @@
     <Compile Include="CustomControls\HelperControls\Admin\EditProducts.Designer.cs">
       <DependentUpon>EditProducts.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\HelperControls\Admin\OrderPickup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomControls\HelperControls\Admin\OrderPickup.Designer.cs">
+      <DependentUpon>OrderPickup.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\HelperControls\Users\AddOrder.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CustomControls\HelperControls\Users\AddOrder.Designer.cs">
       <DependentUpon>AddOrder.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\HelperControls\Users\EditOrder.cs">
+    <Compile Include="CustomControls\HelperControls\Users\CancelOrders.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CustomControls\HelperControls\Users\EditOrder.Designer.cs">
-      <DependentUpon>EditOrder.cs</DependentUpon>
+    <Compile Include="CustomControls\HelperControls\Users\CancelOrders.Designer.cs">
+      <DependentUpon>CancelOrders.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\MainControls\Accounts\RegistrationForm.cs">
       <SubType>Form</SubType>
@@ -155,11 +161,14 @@
     <EmbeddedResource Include="CustomControls\HelperControls\Admin\EditProducts.resx">
       <DependentUpon>EditProducts.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\HelperControls\Admin\OrderPickup.resx">
+      <DependentUpon>OrderPickup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\HelperControls\Users\AddOrder.resx">
       <DependentUpon>AddOrder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\HelperControls\Users\EditOrder.resx">
-      <DependentUpon>EditOrder.cs</DependentUpon>
+    <EmbeddedResource Include="CustomControls\HelperControls\Users\CancelOrders.resx">
+      <DependentUpon>CancelOrders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\MainControls\Accounts\RegistrationForm.resx">
       <DependentUpon>RegistrationForm.cs</DependentUpon>

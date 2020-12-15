@@ -103,7 +103,7 @@ namespace VideoGameInventoryApp
             {
                 foreach (var p in productSearch)
                 {
-                    if (p.GameID == o.ProductIDPurchased)
+                    if (p.GameID == o.ProductID)
                     {
                         o.PreOrder = true;
                     }
@@ -162,7 +162,7 @@ namespace VideoGameInventoryApp
                 orderSearch = new BindingList<Orders>(OrderList
                     .Where(o =>
                         o.OrderID == numbSearchVal || o.CustomerID == numbSearchVal ||
-                        o.PurchasePrice == numbSearchVal || o.ProductIDPurchased == numbSearchVal).ToList());
+                        o.OrderPrice == numbSearchVal || o.ProductID == numbSearchVal).ToList());
             }
             else
             {
@@ -170,7 +170,7 @@ namespace VideoGameInventoryApp
                 {
                     orderSearch = new BindingList<Orders>(OrderList
                         .Where(o =>
-                            o.PurchaseDate.ToString() == searchValue).ToList());
+                            o.OrderDate.ToString() == searchValue).ToList());
                 }
             }
 

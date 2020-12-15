@@ -27,18 +27,26 @@ namespace IMS.CustomControls.HelperControls.Admin
             //add each product to dropdown box
             foreach (var p in ProductList)
             {
-                boxWhichProduct.Items.Add($"{p.GameID}: {p.Title}");
+                boxWhichProduct.Items.Add($"{p.GameID} ~ {p.Title}");
             }
         }
 
         private void bttDelete_Click(object sender, EventArgs e)
         {
-            string[] productArr = boxWhichProduct.Text.Split(':');
+            string[] productArr = boxWhichProduct.Text.Split('~');
             string gameId = productArr[0].Trim();
             string title = productArr[1].Trim();
+            bool success = false;
 
             var pd = new ProductDatabase();
-            bool success = pd.DeleteGameInfo(Convert.ToInt32(gameId));
+            if (boxWhichProduct.SelectedIndex != 0)
+            {
+                success = pd.DeleteGameInfo(Convert.ToInt32(gameId));
+            }
+            else
+            {
+                MessageBox.Show("You must select a product to remove.");
+            }
 
             if (success)
             {

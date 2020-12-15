@@ -39,6 +39,7 @@
             this.btnResetOrders = new System.Windows.Forms.Button();
             this.dataGridOrders = new System.Windows.Forms.DataGridView();
             this.btnSeeAlllPreOrders = new System.Windows.Forms.Button();
+            this.btnOrderPickups = new System.Windows.Forms.Button();
             this.pnlSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridOrders)).BeginInit();
             this.SuspendLayout();
@@ -115,12 +116,13 @@
             this.btnCancelOrders.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCancelOrders.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelOrders.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnCancelOrders.Location = new System.Drawing.Point(150, 116);
+            this.btnCancelOrders.Location = new System.Drawing.Point(141, 116);
             this.btnCancelOrders.Name = "btnCancelOrders";
             this.btnCancelOrders.Size = new System.Drawing.Size(109, 34);
             this.btnCancelOrders.TabIndex = 27;
             this.btnCancelOrders.Text = "Cancel Order";
             this.btnCancelOrders.UseVisualStyleBackColor = false;
+            this.btnCancelOrders.Click += new System.EventHandler(this.btnCancelOrders_Click);
             // 
             // btnAddOrder
             // 
@@ -154,9 +156,9 @@
             // 
             this.dataGridOrders.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dataGridOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridOrders.Location = new System.Drawing.Point(25, 168);
+            this.dataGridOrders.Location = new System.Drawing.Point(25, 170);
             this.dataGridOrders.Name = "dataGridOrders";
-            this.dataGridOrders.Size = new System.Drawing.Size(643, 215);
+            this.dataGridOrders.Size = new System.Drawing.Size(652, 215);
             this.dataGridOrders.TabIndex = 25;
             // 
             // btnSeeAlllPreOrders
@@ -173,11 +175,26 @@
             this.btnSeeAlllPreOrders.UseVisualStyleBackColor = false;
             this.btnSeeAlllPreOrders.Click += new System.EventHandler(this.btnSeeAllPreOrders_Click);
             // 
+            // btnOrderPickups
+            // 
+            this.btnOrderPickups.BackColor = System.Drawing.SystemColors.GrayText;
+            this.btnOrderPickups.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnOrderPickups.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOrderPickups.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnOrderPickups.Location = new System.Drawing.Point(25, 116);
+            this.btnOrderPickups.Name = "btnOrderPickups";
+            this.btnOrderPickups.Size = new System.Drawing.Size(128, 34);
+            this.btnOrderPickups.TabIndex = 32;
+            this.btnOrderPickups.Text = "Confirm Pickup";
+            this.btnOrderPickups.UseVisualStyleBackColor = false;
+            this.btnOrderPickups.Click += new System.EventHandler(this.btnOrderPickups_Click);
+            // 
             // UserControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Controls.Add(this.btnOrderPickups);
             this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.btnCancelOrders);
             this.Controls.Add(this.btnAddOrder);
@@ -207,5 +224,6 @@
         private System.Windows.Forms.Button btnResetOrders;
         private System.Windows.Forms.DataGridView dataGridOrders;
         private System.Windows.Forms.Button btnSeeAlllPreOrders;
+        private System.Windows.Forms.Button btnOrderPickups;
     }
 }

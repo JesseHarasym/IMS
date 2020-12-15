@@ -30,7 +30,7 @@ namespace IMS.CustomControls
             AdminSetup();
         }
 
-        //load database and get all relavent admin information for gui
+        //load database and get all relevant admin information for gui
         public void AdminSetup()
         {
             var db = new LoadDatabase();
@@ -51,6 +51,7 @@ namespace IMS.CustomControls
             var productData = new BindingList<Products>(inv.ProductList);
             dataGridInventory.DataSource = productData;
             dataGridInventory.ReadOnly = true;
+            dataGridInventory.ScrollBars = ScrollBars.Vertical;
         }
 
         //apply search to data grid inventory that you receive from the user control and inventory class

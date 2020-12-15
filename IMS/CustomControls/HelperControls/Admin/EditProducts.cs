@@ -36,7 +36,7 @@ namespace IMS.CustomControls.HelperControls
             //at each product to dropdown box
             foreach (var p in ProductList)
             {
-                boxWhichProduct.Items.Add($"{p.GameID}: {p.Title}");
+                boxWhichProduct.Items.Add($"{p.GameID} ~ {p.Title}");
             }
         }
 
@@ -44,7 +44,7 @@ namespace IMS.CustomControls.HelperControls
         {
             if (boxWhichProduct.SelectedIndex != 0) //if a product is selected
             {
-                string[] productArr = boxWhichProduct.Text.Split(':');
+                string[] productArr = boxWhichProduct.Text.Split('~');
                 string gameId = productArr[0].Trim();
                 string title = productArr[1].Trim();
 
@@ -94,7 +94,7 @@ namespace IMS.CustomControls.HelperControls
 
         private void bttEdit_Click(object sender, EventArgs e)
         {
-            string[] productArr = boxWhichProduct.Text.Split(':');
+            string[] productArr = boxWhichProduct.Text.Split('~');
             string gameId = productArr[0].Trim();
             string title = txtTitle.Text;
             int quantity = Convert.ToInt32(txtQuantity.Text);
@@ -102,14 +102,22 @@ namespace IMS.CustomControls.HelperControls
             string description = txtDescription.Text;
             string console = txtConsole.Text;
             double price = Convert.ToDouble(txtPrice.Text);
+            bool success = false;
 
             var pd = new ProductDatabase();
-            bool success = pd.UpdateGameInfo(gameId, title, quantity, releaseDate, description, console, price);
+            if (boxWhichProduct.SelectedIndex != 0)
+            {
+                success = pd.UpdateGameInfo(gameId, title, quantity, releaseDate, description, console, price);
+            }
+            else
+            {
+                MessageBox.Show("You must select a product to edit.");
+            }
 
             if (success)
             {
                 AdminControls.AdminSetup();
-                MessageBox.Show($"{gameId}: {title} was edited successfully.");
+                MessageBox.Show($"{gameId} ~ {title} was edited successfully.");
                 Close();
             }
             else

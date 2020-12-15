@@ -1,8 +1,10 @@
 ﻿using IMS.Classes;
+using IMS.CustomControls.HelperControls.Admin;
 using IMS.CustomControls.HelperControls.Users;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 using VideoGameInventoryApp;
 using VideoGameInventoryApp.Classes;
@@ -51,17 +53,17 @@ namespace IMS.CustomControls
             //setup for regular users view
             if (AccessLevel == 0)
             {
+                btnOrderPickups.Visible = false;
                 btnAddOrder.Visible = true;
-                btnCancelOrders.Visible = true;
-                btnAddOrder.Text = "Place Order";
                 btnSeeAlllPreOrders.Text = "See My Pre-Orders";
                 boxSearch.Items.Remove("Inventory");
             }
             //setup for admins view
             else if (AccessLevel == 1)
             {
+                btnOrderPickups.Visible = true;
                 btnAddOrder.Visible = false;
-                btnCancelOrders.Visible = false;
+                btnCancelOrders.Location = new Point(161, 116);
                 btnSeeAlllPreOrders.Text = "See All Pre-Orders";
                 boxSearch.Items.Add("Inventory");
             }
@@ -79,6 +81,8 @@ namespace IMS.CustomControls
             var orderData = new BindingList<Orders>(inv.OrderList);
             dataGridOrders.DataSource = orderData;
             dataGridOrders.ReadOnly = true;
+
+            dataGridOrders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
         }
 
         //basics of search which is queries in our inventory class
@@ -124,6 +128,18 @@ namespace IMS.CustomControls
         {
             var addOrderForm = new AddOrder(this, ProductList, CustomerId);
             addOrderForm.Show();
+        }
+
+        private void btnCancelOrders_Click(object sender, EventArgs e)
+        {
+            var cancelOrderForm = new CancelOrders(this, ProductList, OrderList);
+            cancelOrderForm.Show();
+        }
+
+        private void btnOrderPickups_Click(object sender, EventArgs e)
+        {
+            var setOrderPickedUp = new OrderPickup(this, OrderList);
+            setOrderPickedUp.Show();
         }
     }
 }

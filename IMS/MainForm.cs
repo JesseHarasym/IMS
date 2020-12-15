@@ -38,7 +38,7 @@ namespace IMS
 
             if (accessLevel == "0")
             {
-                Size = new Size(706, 535);
+                Size = new Size(706, 550);
                 var userControls = new UserControls(CustomerId, AccessLevel);
 
                 txtAccessLevel.Text = "User";
@@ -55,7 +55,7 @@ namespace IMS
             }
             else if (accessLevel == "1")
             {
-                Size = new Size(1606, 535);
+                Size = new Size(1606, 550);
                 var adminControls = new AdminControls(CustomerId, AccessLevel);
                 var userControls = new UserControls(adminControls, CustomerId, AccessLevel);
 

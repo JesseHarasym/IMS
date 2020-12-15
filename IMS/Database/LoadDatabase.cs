@@ -61,14 +61,17 @@ namespace IMS.Classes
                     DataRow drow = gameRecords.Rows[i];
                     string orderID = (drow["OrderID"].ToString());
                     string customerID = (drow["CustomerID"].ToString());
-                    string productIDPurchased = (drow["ProductID"].ToString());
+                    string productId = (drow["ProductID"].ToString());
+                    string productName = (drow["ProductName"].ToString());
                     string tempPrice = (drow["OrderPrice"].ToString());
-                    string purchaseDate = (drow["OrderDate"].ToString());
+                    string orderDate = (drow["OrderDate"].ToString());
+                    string pickupAddress = (drow["PickupAddress"].ToString());
+                    string pickedUp = (drow["PickedUp"].ToString());
 
                     double purchasePrice = Convert.ToDouble(tempPrice);
                     purchasePrice = Math.Round(purchasePrice, 2);
 
-                    OrderList.Add(new Orders(Convert.ToInt32(orderID), Convert.ToInt32(customerID), Convert.ToInt32(productIDPurchased), purchasePrice, Convert.ToDateTime(purchaseDate)));
+                    OrderList.Add(new Orders(Convert.ToInt32(orderID), Convert.ToInt32(customerID), Convert.ToInt32(productId), productName, purchasePrice, Convert.ToDateTime(orderDate), pickupAddress, Convert.ToBoolean(pickedUp)));
                 }
             }
             return OrderList;

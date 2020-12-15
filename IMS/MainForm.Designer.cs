@@ -46,7 +46,7 @@
             this.pnlAdmin.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlAdmin.Location = new System.Drawing.Point(704, 0);
             this.pnlAdmin.Name = "pnlAdmin";
-            this.pnlAdmin.Size = new System.Drawing.Size(888, 473);
+            this.pnlAdmin.Size = new System.Drawing.Size(888, 492);
             this.pnlAdmin.TabIndex = 25;
             this.pnlAdmin.Visible = false;
             // 
@@ -141,7 +141,7 @@
             this.pnlUser.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlUser.Location = new System.Drawing.Point(0, 100);
             this.pnlUser.Name = "pnlUser";
-            this.pnlUser.Size = new System.Drawing.Size(706, 373);
+            this.pnlUser.Size = new System.Drawing.Size(706, 392);
             this.pnlUser.TabIndex = 30;
             this.pnlUser.Visible = false;
             // 
@@ -168,7 +168,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1590, 474);
+            this.ClientSize = new System.Drawing.Size(1590, 493);
             this.Controls.Add(this.pnlLogIn);
             this.Controls.Add(this.pnlUser);
             this.Controls.Add(this.pnlAdmin);
