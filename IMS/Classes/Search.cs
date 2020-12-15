@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using VideoGameInventoryApp.Classes;
@@ -17,61 +16,27 @@ namespace IMS.Classes
         }
 
         //Basic search function to check if input search value matches lists values exactly
-        //would be better to change to not affected by capitals and use contains instead of exact match -- product table
         public BindingList<Products> SearchProducts(string searchValue)
         {
-            var inventorySearch = new BindingList<Products>(ProductList.Select(p => p).ToList());
-            bool parsable = double.TryParse(searchValue, out var numbSearchVal);    //check if the input is a number value
-            searchValue = searchValue.Trim();
+            searchValue = searchValue.Trim().ToLower();
 
-            //if parsable then search number related inventories
-            if (parsable)
-            {
-                inventorySearch = new BindingList<Products>(ProductList
-                    .Where(p =>
-                        p.GameID == numbSearchVal || p.Quantity == numbSearchVal || p.Price == numbSearchVal)
-                    .ToList());
-            }
-            else   //if not then ensure no empty string and search string based values
-            {
-                if (!String.IsNullOrEmpty(searchValue))
-                {
-                    inventorySearch = new BindingList<Products>(ProductList
-                        .Where(p =>
-                            p.Title == searchValue || p.ReleaseDate.ToString() == searchValue ||
-                            p.Console == searchValue || p.Description == searchValue ||
-                            p.Clearance.ToString() == searchValue).ToList());
-                }
-            }
+            var productSearch = ProductList.Where(p => p.GetType().GetProperties()
+                .Any(prop => prop.GetValue(p, null) != null && prop.GetValue(p, null).ToString().ToLower()
+                    .Contains(searchValue))).ToList();
 
-            return inventorySearch;
+            return new BindingList<Products>(productSearch);
         }
 
         //same as above method except for searching order table
         public BindingList<Orders> SearchOrders(string searchValue)
         {
-            var orderSearch = new BindingList<Orders>(OrderList.Select(o => o).ToList());
-            bool parsable = double.TryParse(searchValue, out var numbSearchVal);
-            searchValue = searchValue.Trim();
+            searchValue = searchValue.Trim().ToLower();
 
-            if (parsable)
-            {
-                orderSearch = new BindingList<Orders>(OrderList
-                    .Where(o =>
-                        o.OrderID == numbSearchVal || o.CustomerID == numbSearchVal ||
-                        o.OrderPrice == numbSearchVal || o.ProductID == numbSearchVal).ToList());
-            }
-            else
-            {
-                if (searchValue != "")
-                {
-                    orderSearch = new BindingList<Orders>(OrderList
-                        .Where(o =>
-                            o.OrderDate.ToString() == searchValue).ToList());
-                }
-            }
+            var orderSearch = OrderList.Where(o => o.GetType().GetProperties()
+                .Any(prop => prop.GetValue(o, null) != null && prop.GetValue(o, null).ToString().ToLower()
+                    .Contains(searchValue))).ToList();
 
-            return orderSearch;
+            return new BindingList<Orders>(orderSearch);
         }
     }
 }

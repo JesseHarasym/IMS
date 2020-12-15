@@ -50,7 +50,7 @@ namespace IMS.CustomControls.HelperControls
         //handle basic data validation so that price can only be a number with decimal
         private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!int.TryParse(e.KeyChar.ToString(), out var i) && e.KeyChar != '.' && e.KeyChar != (char)Keys.Back)
+            if (!int.TryParse(e.KeyChar.ToString(), out var i) && e.KeyChar != '.' && e.KeyChar != (char)Keys.Back && e.KeyChar != '-')
             {
                 e.Handled = true;
             }
