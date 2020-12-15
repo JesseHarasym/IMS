@@ -74,6 +74,7 @@
     <Compile Include="Classes\Admin.cs" />
     <Compile Include="Classes\HashPassword.cs" />
     <Compile Include="Classes\Inventory.cs" />
+    <Compile Include="Classes\Search.cs" />
     <Compile Include="Classes\Users.cs" />
     <Compile Include="CustomControls\HelperControls\Admin\AddProducts.cs">
       <SubType>Form</SubType>

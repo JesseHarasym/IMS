@@ -88,16 +88,16 @@ namespace IMS.CustomControls
         //basics of search which is queries in our inventory class
         public void Search()
         {
-            var inv = new Inventory(ProductList, OrderList, AccessLevel, CustomerId);
+            var search = new Search(ProductList, OrderList);
 
             switch (boxSearch.Text)
             {
                 case "Inventory":
-                    var inventorySearch = inv.SearchProducts(txtSearch.Text);
+                    var inventorySearch = search.SearchProducts(txtSearch.Text);
                     AdminControl.SearchInventory(inventorySearch);
                     break;
                 case "Orders":
-                    var orderSearch = inv.SearchOrders(txtSearch.Text);
+                    var orderSearch = search.SearchOrders(txtSearch.Text);
                     dataGridOrders.DataSource = orderSearch;
                     break;
             }
