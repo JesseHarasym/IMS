@@ -25,7 +25,7 @@ namespace IMS.Classes
             string connectionString = Connection.ConnectionString;
 
             //hash password before entering it into the database
-            var hp = new HashPassword();
+            var hp = new HashPasswords();
             string hashedPassword = hp.HashAccountPassword(Password);
 
             using (SqlConnection connection = new SqlConnection(connectionString))

@@ -19,7 +19,7 @@ namespace IMS.CustomControls
             string username = txtUserName.Text;
             string passwordEntered = txtPassword.Text;
 
-            var hp = new HashPassword();
+            var hp = new HashPasswords();
             var ld = new LoginDatabase();
 
             //get relevant user information needed to log in

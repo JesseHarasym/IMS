@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 
 namespace IMS.Classes
 {
-    class HashPassword
+    class HashPasswords
     {
         public string HashAccountPassword(string password)
         {
