@@ -103,7 +103,7 @@ namespace IMS.CustomControls
         public void ShowUserInfo()
         {
             //load database information and apply to our data grid
-            var db = new LoadDatabase();
+            var db = new InventoryLoad();
             var inv = new Inventory(db.GetGameInformation(), db.GetOrderInformation(), AccessLevel, CustomerId);
 
             ProductList = inv.ProductList;

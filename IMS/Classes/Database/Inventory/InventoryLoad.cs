@@ -7,7 +7,7 @@ using VideoGameInventoryApp.Classes;
 
 namespace IMS.Classes
 {
-    class LoadDatabase
+    class InventoryLoad
     {
         string connectionString = Connection.ConnectionString;
 

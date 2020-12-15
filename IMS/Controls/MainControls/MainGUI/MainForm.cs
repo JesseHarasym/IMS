@@ -77,6 +77,9 @@ namespace IMS
         {
             Size = new Size(688, 130);
 
+            AccessLevel = 0;
+            CustomerId = 0;
+
             txtAccessLevel.Text = "Not Logged In";
             txtUserName.Text = "Not Logged In";
 

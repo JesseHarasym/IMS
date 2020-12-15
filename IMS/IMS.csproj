@@ -138,7 +138,7 @@
       <DependentUpon>UserControls.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Database\Connection.cs" />
-    <Compile Include="Classes\Database\Inventory\LoadDatabase.cs" />
+    <Compile Include="Classes\Database\Inventory\InventoryLoad.cs" />
     <Compile Include="Classes\MainClasses\Inventory\Orders.cs" />
     <Compile Include="Classes\MainClasses\Inventory\Products.cs" />
     <Compile Include="Classes\Database\Accounts\LoginDatabase.cs" />

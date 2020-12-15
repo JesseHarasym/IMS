@@ -28,7 +28,7 @@ namespace IMS.CustomControls
         //load database and get all relevant admin information for gui
         public void AdminSetup()
         {
-            var db = new LoadDatabase();
+            var db = new InventoryLoad();
             var inv = new Inventory(db.GetGameInformation(), db.GetOrderInformation(), AccessLevel, CustomerId);
 
             ProductList = inv.ProductList;
