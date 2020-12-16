@@ -1,4 +1,6 @@
-﻿namespace IMS.Database
+﻿using System.Configuration;
+
+namespace IMS.Database
 {
     //this class is just used to hold our main connection string.
     //since there are so many places connection strings are used, it seemed simpler to supply one central one
@@ -6,9 +8,6 @@
     static class Connection
     {
         //stopped working after creating executable?
-        //public static string ConnectionString = ConfigurationManager.ConnectionStrings["IMS_DatabaseConnectionString"].ConnectionString;
-
-        public static string ConnectionString =
-            "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\jghar\\source\\repos\\IMS\\IMS\\bin\\Debug\\Database\\IMS_Database.mdf;Integrated Security=True;Connect Timeout=30";
+        public static string ConnectionString = ConfigurationManager.ConnectionStrings["IMS_DatabaseConnectionString"].ConnectionString;
     }
 }
