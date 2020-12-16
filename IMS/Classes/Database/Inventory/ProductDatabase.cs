@@ -15,8 +15,8 @@ namespace IMS.Database
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(
-                    $"INSERT INTO GameInformation (Title, QuantityInStock, QuantitySold, ReleaseDate, Console, Price)" +
-                    $"VALUES (@title, @quantityInStock, @quantitySold, @releaseDate, @console, @price)", connection))
+                    $"INSERT INTO GameInformation (Title, QuantityInStock, QuantitySold, ReleaseDate, Console, Price, Clearance)" +
+                    $"VALUES (@title, @quantityInStock, @quantitySold, @releaseDate, @console, @price, @clearance)", connection))
                 {
                     cmd.Parameters.AddWithValue("@title", title);
                     cmd.Parameters.AddWithValue("@quantityInStock", quantityInStock);
@@ -24,6 +24,7 @@ namespace IMS.Database
                     cmd.Parameters.AddWithValue("@releaseDate", releaseDate);
                     cmd.Parameters.AddWithValue("@console", console);
                     cmd.Parameters.AddWithValue("@price", price);
+                    cmd.Parameters.AddWithValue("@clearance", false);
 
                     try
                     {
@@ -139,12 +140,12 @@ namespace IMS.Database
 
         //update our game info with the new quantity after the game was ordered or cancelled
         //AddToSold is true if a game quantity is to be added and false if a game quantity is to be removed
-        public bool UpdateGameStockAfterOrder(int gameId, int quantityInStock, int quantitySold, bool AddToSold)
+        public bool UpdateGameStockAfterOrder(int gameId, int quantityInStock, int quantitySold, bool addToSold)
         {
             bool successUpdate = false;
 
             //remove from stock and sold columns according to supplied bool
-            if (AddToSold)
+            if (addToSold)
             {
                 quantityInStock = quantityInStock - 1;
                 quantitySold = quantitySold + 1;
@@ -158,7 +159,8 @@ namespace IMS.Database
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand cmd =
-                    new SqlCommand($"UPDATE GameInformation SET QuantityInStock = @quantityInStock WHERE GameID = @gameId", connection))
+                    new SqlCommand($"UPDATE GameInformation " +
+                                   $"SET QuantityInStock = @quantityInStock, QuantitySold = @quantitySold WHERE GameID = @gameId", connection))
                 {
                     try
                     {

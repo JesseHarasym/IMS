@@ -69,6 +69,13 @@ namespace IMS.CustomControls.HelperControls
                                 c.Enabled = true;
                             }
                         }
+
+                        //take away the ability to edit the price of any clearance games.
+                        if (p.Clearance)
+                        {
+                            txtPrice.Enabled = false;
+                            MessageBox.Show("Please note you cannot edit the price of a game on clearance");
+                        }
                     }
                 }
             }

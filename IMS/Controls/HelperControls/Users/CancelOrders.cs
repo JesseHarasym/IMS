@@ -8,24 +8,28 @@ namespace IMS.CustomControls.HelperControls.Users
 {
     public partial class CancelOrders : Form
     {
+        private AdminControls AdminControls;
         UserControls UserControls;
         List<Products> ProductList;
         List<Orders> OrderList;
         int GameID;
         int QuantityInStock;
         int QuantitySold;
+        private int AccessLevel;
 
         public CancelOrders()
         {
             InitializeComponent();
         }
 
-        public CancelOrders(UserControls userControls, List<Products> productList, List<Orders> orderList)
+        public CancelOrders(UserControls userControls, AdminControls adminControls, List<Products> productList, List<Orders> orderList, int accessLevel)
         {
             InitializeComponent();
             UserControls = userControls;
+            AdminControls = adminControls;
             ProductList = productList;
             OrderList = orderList;
+            AccessLevel = accessLevel;
         }
 
         private void CancelOrders_Load(object sender, EventArgs e)
@@ -100,6 +104,13 @@ namespace IMS.CustomControls.HelperControls.Users
                 if (successUpdate && successDelete)
                 {
                     UserControls.ShowUserInfo();
+
+                    //refresh inventory also if they are an admin
+                    if (AccessLevel == 1)
+                    {
+                        AdminControls.AdminSetup();
+                    }
+
 
                     MessageBox.Show(
                         $"Order #{orderId} has been cancelled for pickup.");

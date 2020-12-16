@@ -199,7 +199,7 @@ namespace IMS.CustomControls
         //allow user to cancel orders not yet picked up
         private void btnCancelOrders_Click(object sender, EventArgs e)
         {
-            var cancelOrderForm = new CancelOrders(this, ProductList, OrderList);
+            var cancelOrderForm = new CancelOrders(this, AdminControl, ProductList, OrderList, AccessLevel);
             cancelOrderForm.ShowDialog();
         }
 

@@ -1,4 +1,5 @@
 ﻿using IMS.Classes.Database.Accounts;
+using IMS.Validation;
 using System;
 using System.Windows.Forms;
 
@@ -18,24 +19,33 @@ namespace IMS.CustomControls
             string username = txtUserName.Text;
             string password = txtPassword.Text;
 
-            var ad = new AccountsDatabase();
+            var uv = new UserValidation();
+            bool validated = uv.ValidateUsername(username);
 
-            //get relevant user information needed to log in
-            var userInformation = ad.GetAccountPassword(username, password);
-            bool passwordMatch = userInformation.Item1;     //does password match hashed password in database
-            string currentUserId = userInformation.Item2;
-            string accessLevel = userInformation.Item3;
-
-            if (passwordMatch)
+            if (validated)
             {
-                MessageBox.Show("Log in Successful");
-                Close();
+                var ad = new AccountsDatabase();
+                //get relevant user information needed to log in
+                var userInformation = ad.GetAccountPassword(username, password);
+                bool passwordMatch = userInformation.Item1;     //does password match hashed password in database
+                string currentUserId = userInformation.Item2;
+                string accessLevel = userInformation.Item3;
 
-                myForm.SetUserName(username, accessLevel, currentUserId);
+                if (passwordMatch)
+                {
+                    MessageBox.Show("Log in Successful");
+                    Close();
+
+                    myForm.SetUserName(username, accessLevel, currentUserId);
+                }
+                else if (string.IsNullOrEmpty(currentUserId) || string.IsNullOrEmpty(accessLevel) || string.IsNullOrEmpty(password))
+                {
+                    MessageBox.Show("Username was not found or the wrong password was entered");
+                }
             }
-            else if (string.IsNullOrEmpty(currentUserId) || string.IsNullOrEmpty(accessLevel))
+            else
             {
-                MessageBox.Show("Username was not found or the wrong password was entered");
+                MessageBox.Show("Username entered is not valid");
             }
         }
     }

@@ -42,7 +42,8 @@ namespace IMS.CustomControls
             //setup admins notification table
             foreach (var n in NotificationList)
             {
-                if (!n.Dismissed)   //if an admin has not yet dismissed notification, then display it
+                //if an admin has not yet dismissed notification or duplicate, then display it
+                if (!lbNotifications.Items.Contains(n.Message) && !n.Dismissed)
                 {
                     lbNotifications.Items.Add(n.Message);
                 }
@@ -67,10 +68,14 @@ namespace IMS.CustomControls
             var ad = new AccountsDatabase();
             bool success = ad.UpdateNotificationsDismissed(message, true);
 
-            if (success)
+            if (success && lbNotifications.SelectedIndex >= 0)
             {
                 lbNotifications.Items.Remove(message);
                 MessageBox.Show("Notification has been dismissed.");
+            }
+            else if (lbNotifications.SelectedIndex <= -1)
+            {
+                MessageBox.Show("There was no notification selected");
             }
             else
             {
