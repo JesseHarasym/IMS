@@ -52,15 +52,7 @@ namespace IMS.CustomControls.HelperControls
         //handle basic data validation so that quantity can only be entered as numbers
         private void txtQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!int.TryParse(e.KeyChar.ToString(), out var i) && e.KeyChar != (char)Keys.Back && e.KeyChar != '-') //also allow backspace
-            {
-                e.Handled = true;
-            }
-            else if (e.KeyChar == '-' && ((sender as MaskedTextBox).Text.IndexOf('-') > -1))    //only allow a single negative
-            {
-                e.Handled = true;
-            }
-            else if ((e.KeyChar == '-') && ((sender as MaskedTextBox).Text.Length == 1))    //only allow negative as first digit
+            if (!int.TryParse(e.KeyChar.ToString(), out var i) && e.KeyChar != (char)Keys.Back) //also allow backspace
             {
                 e.Handled = true;
             }

@@ -135,18 +135,10 @@ namespace IMS.CustomControls.HelperControls
             }
         }
 
-        //handle basic data validation so that quantity can only be numbers
+        //only allow numbers and backspace 
         private void txtQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!int.TryParse(e.KeyChar.ToString(), out var i) && e.KeyChar != (char)Keys.Back)
-            {
-                e.Handled = true;
-            }
-            else if (e.KeyChar == '-' && ((sender as MaskedTextBox).Text.IndexOf('-') > -1))    //only allow a single negative
-            {
-                e.Handled = true;
-            }
-            else if ((e.KeyChar == '-') && ((sender as MaskedTextBox).Text.Length == 1))    //only allow negative as first digit
             {
                 e.Handled = true;
             }
@@ -155,7 +147,7 @@ namespace IMS.CustomControls.HelperControls
         //handle basic data validation so that price can only be a number with decimal
         private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!int.TryParse(e.KeyChar.ToString(), out var i) && e.KeyChar != '.' && e.KeyChar != (char)Keys.Back && e.KeyChar != '-')
+            if (!int.TryParse(e.KeyChar.ToString(), out var i) && e.KeyChar != '.' && e.KeyChar != (char)Keys.Back)
             {
                 e.Handled = true;
             }

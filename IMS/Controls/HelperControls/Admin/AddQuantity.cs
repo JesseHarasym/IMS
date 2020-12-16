@@ -105,18 +105,10 @@ namespace IMS.Controls.HelperControls.Admin
             }
         }
 
-        //only allow numbers, backspace and negatives for quantity (if admin wanted to say, take 10 away for current stock, they could enter -10)
+        //only allow numbers and backspace 
         private void txtQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!int.TryParse(e.KeyChar.ToString(), out var i) && e.KeyChar != (char)Keys.Back && e.KeyChar != '-')
-            {
-                e.Handled = true;
-            }
-            else if (e.KeyChar == '-' && ((sender as MaskedTextBox).Text.IndexOf('-') > -1))    //only allow a single negative
-            {
-                e.Handled = true;
-            }
-            else if ((e.KeyChar == '-') && ((sender as MaskedTextBox).Text.Length == 1))    //only allow negative as first digit
+            if (!int.TryParse(e.KeyChar.ToString(), out var i) && e.KeyChar != (char)Keys.Back)
             {
                 e.Handled = true;
             }
