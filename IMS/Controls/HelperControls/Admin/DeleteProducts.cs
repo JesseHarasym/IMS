@@ -23,6 +23,7 @@ namespace IMS.CustomControls.HelperControls.Admin
             boxWhichProduct.DropDownStyle = ComboBoxStyle.DropDownList;
             boxWhichProduct.Items.Add("Pick a product");
             boxWhichProduct.SelectedIndex = 0;
+            boxWhichProduct.DropDownHeight = boxWhichProduct.Font.Height * 10;  //only allow 10 items at a time while looking
 
             //add each product to dropdown box
             foreach (var p in ProductList)
@@ -40,19 +41,17 @@ namespace IMS.CustomControls.HelperControls.Admin
                 string title = productArr[1].Trim();
                 bool success = false;
 
+                //if a product has been selected from combo box, try to delete from database
                 var pd = new ProductDatabase();
                 if (boxWhichProduct.SelectedIndex != 0)
                 {
                     success = pd.DeleteGameInfo(Convert.ToInt32(gameId));
                 }
-                else
-                {
-                    MessageBox.Show("You must select a product to remove.");
-                }
 
+                //if removed successfully from database, then update data and inform admin
                 if (success)
                 {
-                    AdminControls.AdminSetup(); //function that fills admin panel with newly updated data
+                    AdminControls.AdminSetup();
                     MessageBox.Show($"{gameId}: {title} was deleted successfully.");
                     Close();
                 }

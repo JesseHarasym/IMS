@@ -5,12 +5,13 @@ namespace IMS.Classes.Validation
 {
     class ProductValidation
     {
+        //used to validate product title when admin is adding a new product or editing a product
         public bool ValidateTitle(string title)
         {
             bool valid = false;
             Regex reg = new Regex(@"^[a-zA-Z0-9]{3}");  //at least three alphabetic characters for title
 
-            //don't allow # or ~ since they are our separating characters in some functions
+            //don't allow # or ~ since they are our separating characters in some functions related to products
             if (reg.IsMatch(title) && !title.Contains("~") && !title.Contains("#"))
             {
                 valid = true;
@@ -19,6 +20,7 @@ namespace IMS.Classes.Validation
             return valid;
         }
 
+        //used to validate product console when admin is adding a new product or editing a product
         public bool ValidateConsole(string console)
         {
             bool valid = false;
@@ -32,8 +34,11 @@ namespace IMS.Classes.Validation
             return valid;
         }
 
+        //used to check all validation pertaining to products and give user an error message if something does not pass validation
+        //all the supplied booleans are from TryParses in the add/edit components of AddProduct or EditProduct
         public bool ValidationMessages(string title, bool validQuantity, bool validDate, string console, bool validPrice)
         {
+            //didn't want to use Message.Show() in a non component class, but wanted to re use it in several components without complicating return type
             if (!ValidateTitle(title))
             {
                 MessageBox.Show("This is not a valid title. It must be at least three characters and no # or ~.");

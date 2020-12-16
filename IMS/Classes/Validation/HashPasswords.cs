@@ -5,6 +5,7 @@ namespace IMS.Classes
 {
     class HashPasswords
     {
+        //used to hash passwords before inserting a new account into the database
         public string HashAccountPassword(string password)
         {
             //create salt value with cryptographic PRNG
@@ -24,16 +25,16 @@ namespace IMS.Classes
             string savedPasswordHash = Convert.ToBase64String(hashBytes);
 
             return savedPasswordHash;
-
         }
 
+        //used for comparing a user entered password with a password hashed and stored in the database when logging in
         public bool UnHashAccountPassword(string userEnteredPassword, string savedPasswordHashed)
         {
             bool matched = false;
 
             try
             {
-                //extract bytes from password
+                //extract bytes from saved password
                 byte[] hashBytes = Convert.FromBase64String(savedPasswordHashed);
 
                 //get salt for password
@@ -57,8 +58,6 @@ namespace IMS.Classes
             {
                 Console.WriteLine("There was an issue while trying to unhash the users password" + ex);
             }
-
-
             return matched;
         }
     }

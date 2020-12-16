@@ -9,6 +9,7 @@ namespace IMS.Classes
     {
         public List<Products> ProductList = new List<Products>();
         public List<Orders> OrderList = new List<Orders>();
+
         public Search(List<Products> productList, List<Orders> orderList)
         {
             ProductList = productList;
@@ -39,7 +40,7 @@ namespace IMS.Classes
             return new BindingList<Orders>(orderSearch);
         }
 
-        //search properties specific by users for the product table
+        //search properties specific by users for the product table using reflection to dynamically search a user given property
         public BindingList<Products> SearchProductsSpecifyHeader(string searchValue, string searchProperty)
         {
             searchValue = searchValue.Trim().ToLower();

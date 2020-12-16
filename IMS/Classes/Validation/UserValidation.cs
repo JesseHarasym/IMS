@@ -7,10 +7,11 @@ namespace IMS.Validation
 {
     class UserValidation
     {
-        //ensure input is valid email
+        //used to validate account emails when a user is registering
         public bool ValidateEmail(string email)
         {
             bool valid = false;
+            //ensure the input follows pattern of an email string
             Regex reg = new Regex(@"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}$", RegexOptions.IgnoreCase);
 
             if (reg.IsMatch(email))
@@ -21,13 +22,14 @@ namespace IMS.Validation
             return valid;
         }
 
-        //ensure input is a valid name
+        //used to validate name when a user is registering
         public bool ValidateName(string name)
         {
             bool valid = false;
-            Regex reg = new Regex(@"^[a-zA-Z]+\s?[a-zA-Z]+$");
+            //ensures only upper and low alphabetical characters and a space is used when entering names and minimum three characters
+            Regex reg = new Regex(@"^[a-zA-Z]+\s?[a-zA-Z]{2}");
 
-            if (reg.IsMatch(name) && name.Length >= 3)
+            if (reg.IsMatch(name))
             {
                 valid = true;
             }
@@ -35,16 +37,33 @@ namespace IMS.Validation
             return valid;
         }
 
-        //ensure input is a valid password
+        //used to validate usernames when a user is registering
+        public bool ValidateUsername(string username)
+        {
+            bool valid = false;
+            //ensure only letters and numbers are used as usernames, minimum three characters
+            Regex reg = new Regex(@"^[a-zA-Z0-9]{2}");
+
+            if (reg.IsMatch(username))
+            {
+                valid = true;
+            }
+
+            return valid;
+        }
+
+        //used to validate passwords when a user is registering
         public Tuple<bool, bool> ValidatePassword(string password, string password2)
         {
             bool validMatch = false;
             bool validLength = false;
 
+            //check if the two entered passwords match
             if (password.Equals(password2))
             {
                 validMatch = true;
             }
+            //ensure password length is at least 6 characters
             if (password.Length >= 6)
             {
                 validLength = true;
@@ -53,25 +72,13 @@ namespace IMS.Validation
             return Tuple.Create(validMatch, validLength);
         }
 
-        //ensure input is a valid name
-        public bool ValidateUsername(string username)
-        {
-            bool valid = false;
-            Regex reg = new Regex(@"^[a-zA-Z0-9]+$");
-
-            if (reg.IsMatch(username) && username.Length >= 3)
-            {
-                valid = true;
-            }
-
-            return valid;
-        }
-
+        //used to check all validation pertaining to registration and supply a user an error message if something went wrong
+        //i used this central function because I also wanted to combine it with my registration database validation checks, and return a single bool
         public bool ValidationMessages(string name, string username, string password, string password2, string email)
         {
             //get access to database related functions for checking existing emails/usernames
             var rd = new RegistrationDatabase();
-            //get tuple of bools back so we can check for two bools: Item1 is password match, Item2 is password at least 6 chars long
+            //get tuple of booleans back so we can check for two booleans: Item1 is password match, Item2 is password at least 6 chars long
             var validatePassword = ValidatePassword(password, password2);
 
             if (!ValidateName(name))

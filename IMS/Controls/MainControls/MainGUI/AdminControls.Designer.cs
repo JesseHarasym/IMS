@@ -36,6 +36,8 @@
             this.btnEditProducts = new System.Windows.Forms.Button();
             this.btnPreOrderInv = new System.Windows.Forms.Button();
             this.btnDeleteProducts = new System.Windows.Forms.Button();
+            this.btnQuantity = new System.Windows.Forms.Button();
+            this.btnDismissNotification = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInventory)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,7 +48,7 @@
             this.txtNotification.ForeColor = System.Drawing.Color.Black;
             this.txtNotification.Location = new System.Drawing.Point(19, 24);
             this.txtNotification.Name = "txtNotification";
-            this.txtNotification.Size = new System.Drawing.Size(846, 29);
+            this.txtNotification.Size = new System.Drawing.Size(684, 29);
             this.txtNotification.TabIndex = 30;
             this.txtNotification.Text = "  Notification Center: ";
             this.txtNotification.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -141,11 +143,41 @@
             this.btnDeleteProducts.UseVisualStyleBackColor = false;
             this.btnDeleteProducts.Click += new System.EventHandler(this.btnDeleteProducts_Click);
             // 
+            // btnQuantity
+            // 
+            this.btnQuantity.BackColor = System.Drawing.SystemColors.GrayText;
+            this.btnQuantity.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnQuantity.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuantity.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnQuantity.Location = new System.Drawing.Point(399, 214);
+            this.btnQuantity.Name = "btnQuantity";
+            this.btnQuantity.Size = new System.Drawing.Size(151, 34);
+            this.btnQuantity.TabIndex = 32;
+            this.btnQuantity.Text = "Add Stock Quantity";
+            this.btnQuantity.UseVisualStyleBackColor = false;
+            this.btnQuantity.Click += new System.EventHandler(this.btnQuantity_Click);
+            // 
+            // btnDismissNotification
+            // 
+            this.btnDismissNotification.BackColor = System.Drawing.Color.SlateBlue;
+            this.btnDismissNotification.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDismissNotification.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDismissNotification.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnDismissNotification.Location = new System.Drawing.Point(709, 24);
+            this.btnDismissNotification.Name = "btnDismissNotification";
+            this.btnDismissNotification.Size = new System.Drawing.Size(153, 29);
+            this.btnDismissNotification.TabIndex = 33;
+            this.btnDismissNotification.Text = "Dimiss Notification";
+            this.btnDismissNotification.UseVisualStyleBackColor = false;
+            this.btnDismissNotification.Click += new System.EventHandler(this.btnDismissNotification_Click);
+            // 
             // AdminControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Controls.Add(this.btnDismissNotification);
+            this.Controls.Add(this.btnQuantity);
             this.Controls.Add(this.txtNotification);
             this.Controls.Add(this.lbNotifications);
             this.Controls.Add(this.btnReset);
@@ -172,5 +204,7 @@
         private System.Windows.Forms.Button btnEditProducts;
         private System.Windows.Forms.Button btnPreOrderInv;
         private System.Windows.Forms.Button btnDeleteProducts;
+        private System.Windows.Forms.Button btnQuantity;
+        private System.Windows.Forms.Button btnDismissNotification;
     }
 }

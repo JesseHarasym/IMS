@@ -1,5 +1,4 @@
-﻿using IMS.Classes;
-using IMS.Database;
+﻿using IMS.Classes.Database.Accounts;
 using System;
 using System.Windows.Forms;
 
@@ -17,35 +16,27 @@ namespace IMS.CustomControls
         private void btnLogIn_Click(object sender, EventArgs e)
         {
             string username = txtUserName.Text;
-            string passwordEntered = txtPassword.Text;
+            string password = txtPassword.Text;
 
-            var hp = new HashPasswords();
-            var ld = new LoginDatabase();
+            var ad = new AccountsDatabase();
 
             //get relevant user information needed to log in
-            var userInformation = ld.GetUsersPassword(username);
-            string hashedPassword = userInformation.Item1;
+            var userInformation = ad.GetAccountPassword(username, password);
+            bool passwordMatch = userInformation.Item1;     //does password match hashed password in database
             string currentUserId = userInformation.Item2;
             string accessLevel = userInformation.Item3;
 
-            if (hp.UnHashAccountPassword(passwordEntered, hashedPassword))
+            if (passwordMatch)
             {
                 MessageBox.Show("Log in Successful");
                 Close();
 
                 myForm.SetUserName(username, accessLevel, currentUserId);
             }
-            else if (string.IsNullOrEmpty(hashedPassword) || string.IsNullOrEmpty(currentUserId) || string.IsNullOrEmpty(accessLevel))
+            else if (string.IsNullOrEmpty(currentUserId) || string.IsNullOrEmpty(accessLevel))
             {
-                MessageBox.Show("Username was not found");
+                MessageBox.Show("Username was not found or the wrong password was entered");
             }
-            else if (!hp.UnHashAccountPassword(passwordEntered, hashedPassword))
-            {
-                MessageBox.Show("Wrong password was entered for this username.");
-            }
-
-
-
         }
     }
 }

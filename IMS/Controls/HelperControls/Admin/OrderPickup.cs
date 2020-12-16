@@ -35,6 +35,7 @@ namespace IMS.CustomControls.HelperControls.Admin
             }
         }
 
+        //if admin chooses an order, then update as picked up in database, and reload admins viewed data
         private void btnPickedUp_Click(object sender, EventArgs e)
         {
             try
@@ -44,6 +45,7 @@ namespace IMS.CustomControls.HelperControls.Admin
                 string title = orderArr[1].Trim();
                 bool success = false;
 
+                //if a product was selected then send to database
                 if (boxOrderPickups.SelectedIndex != 0)
                 {
                     var od = new OrderDatabase();
@@ -54,10 +56,11 @@ namespace IMS.CustomControls.HelperControls.Admin
                     MessageBox.Show("You must choose an order to set it as picked up.");
                 }
 
+                //if updated in database successfully, then update admins data and inform him of success
                 if (success)
                 {
                     UserControls.ShowUserInfo();
-                    MessageBox.Show($"{orderId} has been picked up successfully.");
+                    MessageBox.Show($"#{orderId}: {title} has been picked up successfully.");
 
                     Close();
                 }

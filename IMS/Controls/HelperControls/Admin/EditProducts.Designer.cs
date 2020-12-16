@@ -31,14 +31,12 @@
             this.bttEdit = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.boxWhichProduct = new System.Windows.Forms.ComboBox();
             this.txtPrice = new System.Windows.Forms.MaskedTextBox();
             this.txtConsole = new System.Windows.Forms.MaskedTextBox();
-            this.txtDescription = new System.Windows.Forms.MaskedTextBox();
             this.txtReleaseDate = new System.Windows.Forms.MaskedTextBox();
             this.txtQuantity = new System.Windows.Forms.MaskedTextBox();
             this.txtTitle = new System.Windows.Forms.MaskedTextBox();
@@ -50,7 +48,7 @@
             this.bttEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bttEdit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bttEdit.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.bttEdit.Location = new System.Drawing.Point(163, 373);
+            this.bttEdit.Location = new System.Drawing.Point(151, 332);
             this.bttEdit.Name = "bttEdit";
             this.bttEdit.Size = new System.Drawing.Size(113, 34);
             this.bttEdit.TabIndex = 25;
@@ -62,7 +60,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(26, 321);
+            this.label6.Location = new System.Drawing.Point(26, 278);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(54, 25);
             this.label6.TabIndex = 18;
@@ -72,21 +70,11 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(26, 274);
+            this.label5.Location = new System.Drawing.Point(26, 231);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(80, 25);
             this.label5.TabIndex = 17;
             this.label5.Text = "Console";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(26, 226);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(108, 25);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "Description";
             // 
             // label3
             // 
@@ -104,9 +92,9 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(26, 136);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 25);
+            this.label2.Size = new System.Drawing.Size(158, 25);
             this.label2.TabIndex = 14;
-            this.label2.Text = "Quantity";
+            this.label2.Text = "Quantity in Stock:";
             // 
             // label1
             // 
@@ -131,7 +119,7 @@
             // txtPrice
             // 
             this.txtPrice.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrice.Location = new System.Drawing.Point(86, 317);
+            this.txtPrice.Location = new System.Drawing.Point(86, 274);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(297, 29);
             this.txtPrice.TabIndex = 33;
@@ -140,18 +128,10 @@
             // txtConsole
             // 
             this.txtConsole.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConsole.Location = new System.Drawing.Point(112, 270);
+            this.txtConsole.Location = new System.Drawing.Point(112, 227);
             this.txtConsole.Name = "txtConsole";
             this.txtConsole.Size = new System.Drawing.Size(270, 29);
             this.txtConsole.TabIndex = 32;
-            // 
-            // txtDescription
-            // 
-            this.txtDescription.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescription.Location = new System.Drawing.Point(140, 222);
-            this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(242, 29);
-            this.txtDescription.TabIndex = 31;
             // 
             // txtReleaseDate
             // 
@@ -167,9 +147,9 @@
             // txtQuantity
             // 
             this.txtQuantity.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtQuantity.Location = new System.Drawing.Point(112, 132);
+            this.txtQuantity.Location = new System.Drawing.Point(183, 132);
             this.txtQuantity.Name = "txtQuantity";
-            this.txtQuantity.Size = new System.Drawing.Size(270, 29);
+            this.txtQuantity.Size = new System.Drawing.Size(199, 29);
             this.txtQuantity.TabIndex = 29;
             this.txtQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQuantity_KeyPress);
             // 
@@ -183,13 +163,13 @@
             // 
             // EditProducts
             // 
+            this.AcceptButton = this.bttEdit;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(432, 426);
+            this.ClientSize = new System.Drawing.Size(432, 391);
             this.Controls.Add(this.txtPrice);
             this.Controls.Add(this.txtConsole);
-            this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.txtReleaseDate);
             this.Controls.Add(this.txtQuantity);
             this.Controls.Add(this.txtTitle);
@@ -197,10 +177,10 @@
             this.Controls.Add(this.bttEdit);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EditProducts";
@@ -218,14 +198,12 @@
         private System.Windows.Forms.Button bttEdit;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox boxWhichProduct;
         private System.Windows.Forms.MaskedTextBox txtPrice;
         private System.Windows.Forms.MaskedTextBox txtConsole;
-        private System.Windows.Forms.MaskedTextBox txtDescription;
         private System.Windows.Forms.MaskedTextBox txtReleaseDate;
         private System.Windows.Forms.MaskedTextBox txtQuantity;
         private System.Windows.Forms.MaskedTextBox txtTitle;

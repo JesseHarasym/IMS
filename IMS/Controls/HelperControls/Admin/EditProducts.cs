@@ -33,30 +33,30 @@ namespace IMS.CustomControls.HelperControls
             boxWhichProduct.DropDownStyle = ComboBoxStyle.DropDownList;
             boxWhichProduct.Items.Add("Pick a product");
             boxWhichProduct.SelectedIndex = 0;
+            boxWhichProduct.DropDownHeight = boxWhichProduct.Font.Height * 10;  //only allow 10 items at a time while viewing
 
-            //at each product to dropdown box
+            //fill each product to dropdown box
             foreach (var p in ProductList)
             {
                 boxWhichProduct.Items.Add($"{p.GameID} ~ {p.Title}");
             }
         }
 
+        //if a product selection was made, then fill the text boxes information with info of the product chosen, to be edited
         private void boxWhichProduct_SelectionChangeCommitted(object sender, EventArgs e)
         {
             if (boxWhichProduct.SelectedIndex != 0) //if a product is selected
             {
                 string[] productArr = boxWhichProduct.Text.Split('~');
                 string gameId = productArr[0].Trim();
-                string title = productArr[1].Trim();
 
                 foreach (var p in ProductList)
                 {
-                    if (p.GameID.ToString() == gameId && p.Title == title)
+                    if (p.GameID.ToString() == gameId)
                     {
                         //fill all textboxes with the product information chosen by the user
                         txtTitle.Text = p.Title;
-                        txtQuantity.Text = p.Quantity.ToString();
-                        txtDescription.Text = p.Description;
+                        txtQuantity.Text = p.QuantityInStock.ToString();
                         txtReleaseDate.Text = p.ReleaseDate.ToString();
                         txtPrice.Text = p.Price.ToString();
                         txtConsole.Text = p.Console;
@@ -77,7 +77,6 @@ namespace IMS.CustomControls.HelperControls
                 //if the user goes back to index 0 of dropdown (no choice) then take away all the filled data
                 txtTitle.Clear();
                 txtQuantity.Clear();
-                txtDescription.Clear();
                 txtReleaseDate.Clear();
                 txtPrice.Clear();
                 txtConsole.Clear();
@@ -93,6 +92,7 @@ namespace IMS.CustomControls.HelperControls
             }
         }
 
+        //if admin decides to edit, then validate the inputs, update in database and update data seen by admin
         private void bttEdit_Click(object sender, EventArgs e)
         {
             string[] productArr = boxWhichProduct.Text.Split('~');
@@ -100,7 +100,6 @@ namespace IMS.CustomControls.HelperControls
             string title = txtTitle.Text;
             bool validQuantity = Int32.TryParse(txtQuantity.Text, out var quantity);
             bool validDate = DateTime.TryParse(txtReleaseDate.Text, out var releaseDate);
-            string description = txtDescription.Text;
             string console = txtConsole.Text;
             bool validPrice = Double.TryParse(txtPrice.Text, out var price);
             bool success = false;
@@ -109,13 +108,14 @@ namespace IMS.CustomControls.HelperControls
             var pv = new ProductValidation();
             bool validateInput = pv.ValidationMessages(title, validQuantity, validDate, console, validPrice);
 
-            //if all inputs are valid and a product was chosen
+            //if inputs are valid then update the database
             if (validateInput)
             {
                 var pd = new ProductDatabase();
-                success = pd.UpdateGameInfo(gameId, title, quantity, releaseDate, description, console, price);
+                success = pd.UpdateGameInfo(gameId, title, quantity, releaseDate, console, price);
             }
 
+            //if the database has successfully updated then update admins data
             if (success)
             {
                 AdminControls.AdminSetup();
@@ -132,6 +132,14 @@ namespace IMS.CustomControls.HelperControls
         private void txtQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!int.TryParse(e.KeyChar.ToString(), out var i) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true;
+            }
+            else if (e.KeyChar == '-' && ((sender as MaskedTextBox).Text.IndexOf('-') > -1))    //only allow a single negative
+            {
+                e.Handled = true;
+            }
+            else if ((e.KeyChar == '-') && ((sender as MaskedTextBox).Text.Length == 1))    //only allow negative as first digit
             {
                 e.Handled = true;
             }

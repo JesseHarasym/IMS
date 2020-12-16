@@ -58,12 +58,14 @@
             // 
             // CancelOrders
             // 
+            this.AcceptButton = this.btnCancel;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(349, 150);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.boxWhichOrder);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CancelOrders";

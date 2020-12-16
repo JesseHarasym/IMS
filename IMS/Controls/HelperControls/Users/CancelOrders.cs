@@ -12,7 +12,8 @@ namespace IMS.CustomControls.HelperControls.Users
         List<Products> ProductList;
         List<Orders> OrderList;
         int GameID;
-        int Quantity;
+        int QuantityInStock;
+        int QuantitySold;
 
         public CancelOrders()
         {
@@ -29,12 +30,13 @@ namespace IMS.CustomControls.HelperControls.Users
 
         private void CancelOrders_Load(object sender, EventArgs e)
         {
-            //which product dropdown setup
+            //which order dropdown setup
             boxWhichOrder.DropDownStyle = ComboBoxStyle.DropDownList;
             boxWhichOrder.Items.Add("Chose an order to cancel");
             boxWhichOrder.SelectedIndex = 0;
+            boxWhichOrder.DropDownHeight = boxWhichOrder.Font.Height * 10;  //only allow 10 items at a time while viewing
 
-            //find product in order list and add to dropdown
+            //find product information for each item in order list and add to dropdown
             foreach (var o in OrderList)
             {
                 foreach (var p in ProductList)
@@ -47,49 +49,54 @@ namespace IMS.CustomControls.HelperControls.Users
             }
         }
 
+        //if a selection is made then extract that information to use for cancellation
         private void boxWhichOrder_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            if (boxWhichOrder.SelectedIndex != 0) //if the user selects an option
+            if (boxWhichOrder.SelectedIndex != 0) //if the user selects a valid combobox option
             {
                 string[] boxArr = boxWhichOrder.Text.Split('-');
                 string[] gameArr = boxArr[1].Split('~');
                 int gameId = Convert.ToInt32(gameArr[0].Trim());
-                string title = gameArr[1].Trim();
 
                 foreach (var p in ProductList)
                 {
-                    if (p.GameID == gameId && p.Title == title)
+                    if (p.GameID == gameId)
                     {
                         //track quantity for subtracting from later
-                        Quantity = p.Quantity;
+                        QuantityInStock = p.QuantityInStock;
+                        QuantitySold = p.QuantitySold;
+                        //get gameId of selection for updating
                         GameID = p.GameID;
                     }
                 }
             }
         }
 
+        //if the order is cancelled by the user then remove the order from the database and update the stock quantities accordingly
         private void btnCancel_Click(object sender, EventArgs e)
         {
             try
             {
-                var od = new OrderDatabase();
-
                 string[] boxArr = boxWhichOrder.Text.Split('-');
                 string[] orderArr = boxArr[0].Split('#');
                 int orderId = Convert.ToInt32(orderArr[1].Trim());
                 bool successUpdate = false;
                 bool successDelete = false;
 
+                //if a valid option has been selected from the combo box
                 if (boxWhichOrder.SelectedIndex != 0)
                 {
-                    successUpdate = od.UpdateGameInfo(GameID, Quantity, "+");
-                    successDelete = od.DeleteUserOrder(orderId);
+                    var od = new OrderDatabase();
+                    var pd = new ProductDatabase();
+                    successDelete = od.DeleteUserOrder(orderId);    //remove the users order
+                    successUpdate = pd.UpdateGameStockAfterOrder(GameID, QuantityInStock, QuantitySold, false); //add back to stock and remove from sold
                 }
                 else
                 {
                     MessageBox.Show("You must select an order to cancel it.");
                 }
 
+                //if database operations are successful then let the user know and update their data information viewed
                 if (successUpdate && successDelete)
                 {
                     UserControls.ShowUserInfo();

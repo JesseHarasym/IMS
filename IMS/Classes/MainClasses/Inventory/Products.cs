@@ -2,27 +2,28 @@
 
 namespace VideoGameInventoryApp.Classes
 {
+    //just a basic class setup so that we can store instances of this class in a ProductList
     public class Products
     {
         public int GameID { get; set; }
         public string Title { get; set; }
-        public int Quantity { get; set; }
+        public int QuantityInStock { get; set; }
+        public int QuantitySold { get; set; }
         public DateTime ReleaseDate { get; set; }
-        public string Description { get; set; }
         public string Console { get; set; }
         public double Price { get; set; }
         public bool Clearance { get; set; }
 
-        public Products(int gameID, string title, int quantity, DateTime releaseDate, string description, string console,
-            double price)
+        public Products(int gameID, string title, int quantityInStock, int quantitySold, DateTime releaseDate, string console, double price, bool clearance)
         {
             GameID = gameID;
             Title = title;
-            Quantity = quantity;
+            QuantityInStock = quantityInStock;
+            QuantitySold = quantitySold;
             ReleaseDate = releaseDate;
-            Description = description;
             Console = console;
             Price = price;
+            Clearance = clearance;
         }
     }
 }

@@ -128,6 +128,7 @@
             // 
             // AddOrder
             // 
+            this.AcceptButton = this.btnOrder;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -141,6 +142,7 @@
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.btnOrder);
             this.Controls.Add(this.boxWhichProduct);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddOrder";

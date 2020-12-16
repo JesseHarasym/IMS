@@ -2,6 +2,7 @@ using System;
 
 namespace VideoGameInventoryApp.Classes
 {
+    //just a basic class setup so that we can store instances of this class in an OrderList
     public class Orders
     {
         public int OrderID { get; set; }

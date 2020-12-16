@@ -1,4 +1,5 @@
 ﻿using IMS.Classes;
+using IMS.Classes.MainClasses.Accounts;
 using IMS.CustomControls.HelperControls.Admin;
 using IMS.CustomControls.HelperControls.Users;
 using System;
@@ -16,6 +17,7 @@ namespace IMS.CustomControls
         private AdminControls AdminControl;
         List<Products> ProductList = new List<Products>();
         List<Orders> OrderList = new List<Orders>();
+        List<Notifications> NotificationList = new List<Notifications>();
         public int CustomerId;
         public int AccessLevel;
 
@@ -50,7 +52,7 @@ namespace IMS.CustomControls
             boxSearchHeader.Items.Add("Any");
             boxSearchHeader.SelectedIndex = 0;
 
-            //fill loaded dropdown menu with the first index's header info (orders)
+            //add all properties of orders class to be used as 'header search' criteria for orders table
             for (int i = 0; i < dataGridOrders.ColumnCount; i++)
             {
                 boxSearchHeader.Items.Add(dataGridOrders.Columns[i].HeaderText);
@@ -75,6 +77,23 @@ namespace IMS.CustomControls
             }
         }
 
+        public void ShowUserInfo()
+        {
+            //load database information for the logged in user and apply to our data grid
+            var db = new InventoryLoad();
+            var inv = new Inventory(db.GetGameInformation(), db.GetOrderInformation(), db.GetNotificationInformation(), AccessLevel, CustomerId);
+
+            ProductList = inv.ProductList;
+            OrderList = inv.OrderList;
+
+            var orderData = new BindingList<Orders>(inv.OrderList);
+            dataGridOrders.DataSource = orderData;
+            dataGridOrders.ReadOnly = true;
+
+            dataGridOrders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+        }
+
+        //if a user changed the search table from inventory/orders then refill the options as appropriate
         private void boxSearchTable_SelectionChangeCommitted(object sender, EventArgs e)
         {
             if (boxSearchTable.SelectedIndex == 0)
@@ -83,7 +102,7 @@ namespace IMS.CustomControls
                 boxSearchHeader.Items.Clear();
                 boxSearchHeader.Items.Add("Any");
                 boxSearchHeader.SelectedIndex = 0;
-                //if the first choice i chosen, fill properties for orders
+                //if the first choice is chosen, fill properties for orders
                 for (int i = 0; i < dataGridOrders.ColumnCount; i++)
                 {
                     boxSearchHeader.Items.Add(dataGridOrders.Columns[i].HeaderText);
@@ -100,23 +119,8 @@ namespace IMS.CustomControls
             }
         }
 
-        public void ShowUserInfo()
-        {
-            //load database information and apply to our data grid
-            var db = new InventoryLoad();
-            var inv = new Inventory(db.GetGameInformation(), db.GetOrderInformation(), AccessLevel, CustomerId);
-
-            ProductList = inv.ProductList;
-            OrderList = inv.OrderList;
-
-            var orderData = new BindingList<Orders>(inv.OrderList);
-            dataGridOrders.DataSource = orderData;
-            dataGridOrders.ReadOnly = true;
-
-            dataGridOrders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-        }
-
-        //basics of search which is queries in our inventory class
+        //basics of search which is queries in our search class
+        //get all search criteria and send it to the search class to be searched and a binding list returned to be displayed
         public void Search()
         {
             var search = new Search(ProductList, OrderList);
@@ -135,7 +139,7 @@ namespace IMS.CustomControls
                     case "Orders":
                         var orderSearch = search.SearchOrdersAll(searchVal);
                         dataGridOrders.DataSource = orderSearch;
-                        AdminControl.ErrorSearching(dataGridOrders, "Orders");   //check if search was empty for orders and if so give error
+                        ErrorSearching();   //check if search was empty for orders and if so give error
                         break;
                 }
             }
@@ -155,27 +159,31 @@ namespace IMS.CustomControls
                         var orderSearch =
                             search.SearchOrdersSpecifyHeader(searchVal, headerSelected);
                         dataGridOrders.DataSource = orderSearch;
-                        AdminControl.ErrorSearching(dataGridOrders, "Orders");
+                        ErrorSearching();
                         break;
                 }
             }
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        //if no results are found from a search, let user know
+        public void ErrorSearching()
         {
-            Search();
+            if (dataGridOrders.Rows.Count == 0)
+            {
+                MessageBox.Show($"There was nothing found that matches your search criteria in Orders");
+            }
         }
 
-        //show all items in datagrid that are pre orders
+        //show all items in DataGrid that are pre orders
         private void btnSeeAllPreOrders_Click(object sender, EventArgs e)
         {
-            var inv = new Inventory(ProductList, OrderList, AccessLevel, CustomerId);
+            var inv = new Inventory(ProductList, OrderList, NotificationList, AccessLevel, CustomerId);
             var searchForPreOrder = inv.CheckIfPreOrderOrders();
 
             dataGridOrders.DataSource = searchForPreOrder;
         }
 
-        //reset list after seeing preorders to default
+        //reset list after seeing Pre Orders to default
         private void btnResetOrders_Click(object sender, EventArgs e)
         {
             dataGridOrders.DataSource = OrderList;
@@ -188,16 +196,31 @@ namespace IMS.CustomControls
             addOrderForm.ShowDialog();
         }
 
+        //allow user to cancel orders not yet picked up
         private void btnCancelOrders_Click(object sender, EventArgs e)
         {
             var cancelOrderForm = new CancelOrders(this, ProductList, OrderList);
             cancelOrderForm.ShowDialog();
         }
 
+        //allow admins to set orders users come and pay for as picked up
         private void btnOrderPickups_Click(object sender, EventArgs e)
         {
             var setOrderPickedUp = new OrderPickup(this, OrderList);
             setOrderPickedUp.ShowDialog();
+        }
+
+        //so search can be used with enter and button click
+        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                Search();
+            }
+        }
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            Search();
         }
     }
 }

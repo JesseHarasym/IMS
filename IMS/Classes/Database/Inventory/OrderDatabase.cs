@@ -7,48 +7,6 @@ namespace IMS.Database
     {
         string connectionString = Connection.ConnectionString;
 
-        //get customer information that we dont save locally so that we are able to fill it in our form
-        public Tuple<bool, string, string> GetCustomerInformation(int customerId)
-        {
-            bool success = false;
-
-            string name = "";
-            string email = "";
-
-            string connectionString = Connection.ConnectionString;
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                using (SqlCommand cmd = new SqlCommand($"SELECT * FROM Accounts WHERE Id = @customerId", connection))
-                {
-                    connection.Open();
-                    cmd.Parameters.AddWithValue("@customerId", customerId);
-
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            try
-                            {
-                                name = reader["Name"].ToString();
-                                email = reader["Email"].ToString();
-
-                                success = true;
-                            }
-                            catch (Exception ex)
-                            {
-                                Console.WriteLine("There was an issue retrieving the user information." + ex);
-                            }
-                        }
-                    }
-                    connection.Close();
-                }
-            }
-
-            return Tuple.Create(success, name, email);
-        }
-
-
         //insert our new order made by user into the database
         public bool InsertIntoOrders(int customerId, int gameId, string title, double price, string pickupAddress)
         {
@@ -84,43 +42,7 @@ namespace IMS.Database
             return successInsert;
         }
 
-        //update our game info with the new quantity after the game was ordered or cancelled
-        public bool UpdateGameInfo(int gameId, int quantity, string addOrSubtract)
-        {
-            bool successUpdate = false;
-
-            if (addOrSubtract == "-")
-            {
-                quantity = quantity - 1;
-            }
-            else if (addOrSubtract == "+")
-            {
-                quantity = quantity + 1;
-            }
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                using (SqlCommand cmd =
-                    new SqlCommand($"UPDATE GameInformation SET Quantity = @quantity WHERE GameID = @gameId", connection))
-                {
-                    try
-                    {
-                        connection.Open();
-                        cmd.Parameters.AddWithValue("@quantity", quantity);
-                        cmd.Parameters.AddWithValue("@gameId", gameId);
-                        cmd.ExecuteNonQuery();
-                        connection.Close();
-                        successUpdate = true;
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("There was an issue updating the quantity in the game information." + ex);
-                    }
-                }
-            }
-            return successUpdate;
-        }
-
+        //delete the order from the database according to user supplied information
         public bool DeleteUserOrder(int orderId)
         {
             bool success = false;
@@ -149,6 +71,7 @@ namespace IMS.Database
             return success;
         }
 
+        //so admins can set any order as picked up when a user has came and paid/picked up the game
         public bool SetOrderAsPickedUp(int orderId)
         {
             bool successUpdate = false;
@@ -173,7 +96,6 @@ namespace IMS.Database
                     }
                 }
             }
-
             return successUpdate;
         }
     }
